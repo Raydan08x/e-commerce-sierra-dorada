@@ -11,8 +11,8 @@
     --fuente-destacados: 'Barlow Condensed', Arial, Helvetica, sans-serif;
 
     /* inventa valeria inventa*/
-    --nav-bg: rgba(34, 34, 35, 0.55);
-    --nav-border: rgba(229, 225, 230, 0.28);
+    --nav-bg: rgba(34, 34, 35, 0.65);
+    --nav-border: rgba(179, 162, 105, 0.25);
     --nav-text: var(--color-blanco-hueso);
     --nav-primary: var(--color-dorado);
     --nav-secondary: var(--color-blanco-hueso);
@@ -23,10 +23,10 @@ body {
     margin: 0;
     padding: 100px 32px 32px;
     font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at top left, #B3A269, transparent 30%),
-        radial-gradient(circle at bottom right, #222223, transparent 36%),
-        linear-gradient(135deg, #222223, #B3A269);
+    background-color: var(--color-negro);
+    background-image:
+        radial-gradient(circle at 0% 0%, rgba(179, 162, 105, 0.18), transparent 32%),
+        radial-gradient(circle at 100% 100%, rgba(3, 70, 56, 0.12), transparent 32%);
 }
 
 .nav-link {
@@ -51,7 +51,7 @@ body {
     background: var(--nav-bg);
     color: var(--nav-text);
     backdrop-filter: blur(20px);
-    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.28);
+    box-shadow: 0 24px 50px rgba(34, 34, 35, 0.45);
 }
 
 .brand,
@@ -75,15 +75,15 @@ body {
     place-items: center;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary));
-    color: #ffffff;
+    color: var(--color-negro);
 }
 
 .nav-link,
 .icon-button,
 .dropdown__menu button {
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(229, 225, 230, 0.12);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(229, 225, 230, 0.06);
     color: inherit;
     text-decoration: none;
     padding: 10px 14px;
@@ -95,13 +95,14 @@ body {
 .icon-button:hover,
 .dropdown__menu button:hover {
     transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.14);
+    background: rgba(179, 162, 105, 0.14);
+    border-color: rgba(179, 162, 105, 0.25);
 }
 
 .nav-link.is-active {
     border-color: transparent;
     background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary));
-    box-shadow: 0 12px 24px rgba(79, 70, 229, 0.28);
+    box-shadow: 0 12px 24px rgba(179, 162, 105, 0.35);
 }
 
 .icon-button--label {
@@ -122,8 +123,8 @@ body {
     padding: 12px;
     border-radius: 18px;
     border: 1px solid var(--nav-border);
-    background: rgba(15, 23, 42, 0.92);
-    box-shadow: 0 18px 34px rgba(15, 23, 42, 0.34);
+    background: rgba(34, 34, 35, 0.96);
+    box-shadow: 0 18px 34px rgba(34, 34, 35, 0.45);
 }
 
 
@@ -140,7 +141,7 @@ body {
     background: var(--nav-bg);
     color: var(--nav-text);
     backdrop-filter: blur(20px);
-    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.28);
+    box-shadow: 0 24px 50px rgba(34, 34, 35, 0.45);
     text-align: center;
 }
 
@@ -161,7 +162,7 @@ body {
     place-items: center;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary));
-    color: #ffffff;
+    color: var(--color-negro);
     font-weight: 800;
 }
 
@@ -187,10 +188,15 @@ body {
     display: grid;
     place-items: center;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(229, 225, 230, 0.12);
+    background: rgba(229, 225, 230, 0.06);
     font-size: 0.8rem;
     font-weight: 700;
+}
+
+.site-footer__social-link:hover {
+    background: rgba(179, 162, 105, 0.14);
+    border-color: rgba(179, 162, 105, 0.25);
 }
 
 .site-footer__copy {
