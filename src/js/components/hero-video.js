@@ -4,7 +4,7 @@ export class HeroVideo {
    */
   constructor() {
     this.video = document.querySelector('.hero-nosotros__video');
-    this.pauseDuration = 30000;
+    this.pauseDuration = 0;
   }
 
   /**
