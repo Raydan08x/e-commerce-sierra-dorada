@@ -23,6 +23,7 @@ body {
     margin: 0;
     padding: 100px 32px 32px;
     font-family: var(--fuente-parrafos);
+    color: var(--color-blanco-hueso);
     background-color: var(--color-negro);
     background-image:
         radial-gradient(circle at 0% 0%, rgba(179, 162, 105, 0.18), transparent 32%),
