@@ -76,6 +76,68 @@ p {
     line-height: 1.6;
 }
 
+/* ============================= */
+/* SECCIONES EMPRESARIALES */
+/* ============================= */
+
+.empresa-section {
+    width: min(1120px, 100%);
+    margin: 0 auto 2rem auto;
+}
+
+/* Card con efecto vidrio */
+.glass-panel {
+    background: rgba(34, 34, 35, 0.72);
+    border: 1px solid rgba(179, 162, 105, 0.28);
+    border-radius: 28px;
+    padding: 2rem;
+    box-shadow: 0 24px 50px rgba(34, 34, 35, 0.45);
+    backdrop-filter: blur(18px);
+}
+
+/* Card de contenido empresarial */
+.empresa-card {
+    color: var(--color-blanco-hueso);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efecto al pasar el mouse */
+.empresa-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-dorado);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* Título de la card */
+.empresa-card h2 {
+    margin: 0 0 1rem 0;
+    color: var(--color-dorado);
+    font-family: var(--fuente-titulos);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Texto de la card */
+.empresa-card p {
+    margin: 0;
+    color: var(--color-blanco-hueso);
+    font-family: var(--fuente-parrafos);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+
+.empresa-grid {
+    width: min(1120px, 100%);
+    margin: 0 auto 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    align-items: stretch;
+}
+
 .nav-link {
   text-decoration: none;
 }
@@ -253,6 +315,7 @@ p {
 }
 
 
+
 /*RESPONSIVE*/
 @media (max-width: 860px) {
     .glass-navbar {
@@ -269,5 +332,9 @@ p {
     .navbar-actions {
         width: 100%;
         justify-content: center;
+    }
+
+    .empresa-grid {
+        grid-template-columns: 1fr;
     }
 }
