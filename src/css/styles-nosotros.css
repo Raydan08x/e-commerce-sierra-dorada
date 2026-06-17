@@ -1,3 +1,4 @@
+/* Variables de marca */
 :root {
     --color-dorado: #B3A269;
     --color-negro: #222223;
@@ -10,7 +11,6 @@
     --fuente-parrafos: 'Barlow', Arial, Helvetica, sans-serif;
     --fuente-destacados: 'Barlow Condensed', Arial, Helvetica, sans-serif;
 
-    /* inventa valeria inventa*/
     --nav-bg: rgba(34, 34, 35, 0.65);
     --nav-border: rgba(179, 162, 105, 0.25);
     --nav-text: var(--color-blanco-hueso);
@@ -18,6 +18,7 @@
     --nav-secondary: var(--color-blanco-hueso);
 }
 
+/* Base: fondo, tipografía y color general del body */
 body {
     min-height: 100vh;
     margin: 0;
@@ -30,6 +31,7 @@ body {
         radial-gradient(circle at 100% 100%, rgba(3, 70, 56, 0.12), transparent 32%);
 }
 
+/* Titular muy grande para pantallas de inicio */
 .titular-pantalla {
     font-family: var(--fuente-titulos);
     font-size: clamp(4rem, 12vw, 10.9rem);
@@ -38,6 +40,7 @@ body {
     margin: 0;
 }
 
+/* Títulos principales de sección */
 h1 {
     font-family: var(--fuente-titulos);
     font-size: clamp(2.5rem, 6vw, 4.2rem);
@@ -45,11 +48,13 @@ h1 {
     line-height: 1.1;
 }
 
+/* Subtítulos con fuente Dorsa */
 h2,
 h3 {
     font-family: var(--fuente-titulos);
 }
 
+/* Títulos secundarios */
 h2 {
     font-size: clamp(2rem, 5vw, 3rem);
     letter-spacing: 0.05em;
@@ -62,6 +67,7 @@ h3 {
     line-height: 1.2;
 }
 
+/* Textos destacados con Barlow Condensed */
 .subtitulo {
     font-family: var(--fuente-destacados);
     font-size: 1.25rem;
@@ -69,6 +75,7 @@ h3 {
     font-weight: 600;
 }
 
+/* Párrafos con fuente Barlow */
 p {
     font-family: var(--fuente-parrafos);
     font-size: 1.125rem;
@@ -76,6 +83,7 @@ p {
     line-height: 1.6;
 }
 
+/* Hero: contenedor principal con video de fondo */
 .hero-nosotros {
     position: relative;
     overflow: hidden;
@@ -93,6 +101,7 @@ p {
     box-sizing: border-box;
 }
 
+/* Video posicionado para cubrir todo el hero */
 .hero-nosotros__video {
     position: absolute;
     top: 50%;
@@ -106,6 +115,7 @@ p {
     z-index: 0;
 }
 
+/* Capa oscura encima del video para mejorar legibilidad del texto */
 .hero-nosotros::after {
     content: '';
     position: absolute;
@@ -117,12 +127,14 @@ p {
     z-index: 1;
 }
 
+/* Contenedor del título y eslogan del hero */
 .hero-nosotros__content {
     position: relative;
     z-index: 2;
     max-width: 900px;
 }
 
+/* Título principal del hero */
 .hero-nosotros__title {
     font-family: var(--fuente-titulos);
     font-size: clamp(3rem, 10vw, 8rem);
@@ -133,6 +145,7 @@ p {
     line-height: 1;
 }
 
+/* Eslogan debajo del título del hero */
 .hero-nosotros__slogan {
     font-family: var(--fuente-parrafos);
     font-size: clamp(1.1rem, 2.5vw, 1.5rem);
@@ -142,17 +155,14 @@ p {
     line-height: 1.6;
 }
 
-/* ============================= */
-/* SECCIONES EMPRESARIALES */
-/* ============================= */
-
+/* Misión y Visión: contenedor flexible para alinear cards */
 .empresa-section {
     width: min(1120px, 100%);
     margin: 0 auto 2rem auto;
     display: flex;
 }
 
-/* Card con efecto vidrio */
+/* Estilo glassmorphism para todas las cards */
 .glass-panel {
     background: rgba(34, 34, 35, 0.72);
     border: 1px solid rgba(179, 162, 105, 0.28);
@@ -162,7 +172,7 @@ p {
     backdrop-filter: blur(18px);
 }
 
-/* Card de contenido empresarial */
+/* Cards de Misión, Visión e Historia con altura uniforme */
 .empresa-card {
     color: var(--color-blanco-hueso);
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -171,14 +181,14 @@ p {
     flex-direction: column;
 }
 
-/* Efecto al pasar el mouse */
+/* Efecto hover: levanta la card y cambia el borde a dorado */
 .empresa-card:hover {
     transform: translateY(-4px);
     border-color: var(--color-dorado);
     box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
 }
 
-/* Título de la card */
+/* Títulos de las cards en color dorado */
 .empresa-card h2 {
     margin: 0 0 1rem 0;
     color: var(--color-dorado);
@@ -188,7 +198,7 @@ p {
     text-transform: uppercase;
 }
 
-/* Texto de la card */
+/* Texto de las cards justificado y ocupando el alto disponible */
 .empresa-card p {
     margin: 0;
     color: var(--color-blanco-hueso);
@@ -200,6 +210,7 @@ p {
 }
 
 
+/* Grid de dos columnas para Misión y Visión */
 .empresa-grid {
     width: 100%;
     margin: 0 auto 7rem auto;
@@ -213,10 +224,7 @@ p {
     margin-bottom: 0;
 }
 
-/* ============================= */
-/* SECCION HISTORIA */
-/* ============================= */
-
+/* Historia: sección de ancho completo */
 .historia-section {
     width: 100%;
     margin: 0 auto 3rem auto;
@@ -226,6 +234,7 @@ p {
     color: var(--color-blanco-hueso);
 }
 
+/* Título de Historia centrado */
 .historia-card h2 {
     margin: 0 0 1.5rem 0;
     color: var(--color-dorado);
@@ -236,6 +245,7 @@ p {
     text-align: center;
 }
 
+/* Texto de Historia distribuido en dos columnas */
 .historia-card p {
     margin: 0;
     color: var(--color-blanco-hueso);
@@ -247,6 +257,7 @@ p {
     column-gap: 2.5rem;
 }
 
+/* Navbar fija con efecto glass */
 .nav-link {
   text-decoration: none;
 }
@@ -286,6 +297,7 @@ p {
     font-weight: 800;
 }
 
+/* Círculo del logo con gradiente dorado */
 .brand__mark {
     width: 42px;
     height: 42px;
@@ -346,6 +358,7 @@ p {
 }
 
 
+/* Footer con estilo glassmorphism */
 .site-footer {
     width: min(1120px, 100%);
     margin: 48px auto 0;
@@ -425,7 +438,7 @@ p {
 
 
 
-/*RESPONSIVE*/
+/* Responsive */
 @media (max-width: 860px) {
     .glass-navbar {
         border-radius: 28px;

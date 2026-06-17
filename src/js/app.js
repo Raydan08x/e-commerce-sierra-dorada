@@ -1,6 +1,6 @@
 import { Navbar } from './components/navbar.js';
 import { Footer } from './components/footer.js';
-import { HeroVideo } from './components/heroVideo.js';
+import { HeroVideo } from './components/hero-video.js';
 
 const navbar = new Navbar();
 navbar.render();
