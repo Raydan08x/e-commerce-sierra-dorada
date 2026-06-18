@@ -7,35 +7,27 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;600;700&family=Dorsa&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;600;700&family=Dorsa&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../src/css/styles-contacto.css">
 </head>
 
 <body>
     <main>
-        <section id="section-nosotros">
-            <h2 id="titulo-nosotros">NOSOTROS</h2>
-            <p id="parrafo-nosotros"> bla bla bla bla bla bla bla </p>
-        </section>
+        <form id="contactForm" novalidate class="demo-form">
+            <input id="contactName" type="text" placeholder="Nombre" required minlength="3">
+            <small class="field-error" data-error="contactName"></small>
 
-        <section id="section-mision">
-            <card id="card-mision">
-                <h2 id="card-titulo-mision">MISION</h2>
-                <p id="card-parrafo-mision"> bla bla bla bla bla bla bla </p>
-            </card>
-        </section>
+            <input id="contactEmail" type="email" placeholder="Correo" required>
+            <small class="field-error" data-error="contactEmail"></small>
 
-        <section id="section-vision">
-            <card id="card-vision">
-                <h2 id="card-titulo-vision">VISION </h2>
-                <p id="card-parrafo-vision"> bla bla bla bla bla bla bla </p>
-            </card>
-        </section>
+            <textarea id="contactMessage" placeholder="Mensaje" required minlength="10"></textarea>
+            <small class="field-error" data-error="contactMessage"></small>
 
-        <section id="section-historia">
-            <h2 id="titulo-historia">HISTORIA</h2>
-            <p id="parrafo-historia"> bla bla bla bla bla bla bla </p>
-        </section>
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="toastContainer"></div>
 
 
 

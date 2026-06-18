@@ -248,6 +248,30 @@ p {
     opacity: 0.7;
 }
 
+.demo-form {
+    display: grid;
+    gap: 10px;
+    max-width: 420px;
+}
+.demo-form input,
+.demo-form textarea,
+.demo-form button {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+}
+.field-error {
+    min-height: 18px;
+    color: #ef4444;
+    font-size: 0.875rem;
+}
+.toast {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #0f172a;
+    color: #ffffff;
+}
+
 
 /*RESPONSIVE*/
 @media (max-width: 860px) {

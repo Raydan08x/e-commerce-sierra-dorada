@@ -78,7 +78,7 @@ h3 {
 /* Párrafos con fuente Barlow */
 p {
     font-family: var(--fuente-parrafos);
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     letter-spacing: 0;
     line-height: 1.6;
 }
@@ -149,7 +149,7 @@ p {
 /* Eslogan debajo del título del hero */
 .hero-nosotros__slogan {
     font-family: var(--fuente-parrafos);
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-size: clamp(1,5rem, 2.5vw, 1.5rem);
     color: var(--color-blanco-hueso);
     max-width: 700px;
     margin: 0 auto;
@@ -204,7 +204,7 @@ p {
     margin: 0;
     color: var(--color-blanco-hueso);
     font-family: var(--fuente-parrafos);
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     line-height: 1.8;
     text-align: justify;
     flex-grow: 1;
@@ -251,7 +251,7 @@ p {
     margin: 0;
     color: var(--color-blanco-hueso);
     font-family: var(--fuente-parrafos);
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     line-height: 1.8;
     text-align: justify;
     column-count: 2;

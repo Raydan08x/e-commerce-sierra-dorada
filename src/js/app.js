@@ -6,3 +6,5 @@ navbar.render();
 
 const footer = new Footer();
 footer.render();
+
+
