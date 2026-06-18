@@ -93,7 +93,8 @@ p {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 80px 2rem 4rem;
+    margin-top: -90px;
     margin-bottom: 3rem;
     border-radius: 28px;
     background-color: var(--color-negro);
