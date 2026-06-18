@@ -23,18 +23,20 @@ export class Navbar {
   }
 
   getTemplate() {
+    const logoSrc = `${this.basePath}src/assets/videos/assets/icons/isotipo-dorado y blanco.png`;
+
     return `
       <header class="glass-navbar">
         <a href="#inicio" class="brand">
-          <span class="brand__mark">SD</span>
+          <img src="${logoSrc}" alt="Logo Sierra Nevada" class="brand__logo" />
           <span class="brand__text">Sierra Dorada</span>
         </a>
         <nav class="navbar-links" aria-label="Navegacion principal">
           ${this.getLinksHTML()}
         </nav>
         <div class="navbar-actions">
-          <button class="icon-button icon-button--label" type="button">Carrito</button>
-          <button class="icon-button icon-button--label" type="button">Login</button>
+          <button class="icon-button icon-button--outline" type="button"><i class="bi bi-cart"></i> Carrito</button>
+          <button class="icon-button icon-button--primary" type="button"><i class="bi bi-person"></i> Login</button>
         </div>
       </header>
     `;
