@@ -23,12 +23,12 @@ export class Navbar {
   }
 
   getTemplate() {
-    const logoSrc = `${this.basePath}src/assets/videos/assets/icons/isotipo-dorado y blanco.png`;
+    const logoSrc = `${this.basePath}src/assets/videos/assets/icons/isotipo-dorado-y-blanco.png`;
 
     return `
       <header class="glass-navbar">
         <a href="#inicio" class="brand">
-          <img src="${logoSrc}" alt="Logo Sierra Nevada" class="brand__logo" />
+          <img src="${logoSrc}" alt="Logo Sierra Dorada" class="brand__logo" />
           <span class="brand__text">Sierra Dorada</span>
         </a>
         <nav class="navbar-links" aria-label="Navegacion principal">
