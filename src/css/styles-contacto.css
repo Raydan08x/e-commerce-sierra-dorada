@@ -321,84 +321,104 @@ p {
     }
 }
 
+/*empieza style de contacto*/
+
 .contacto-main {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 80vh;
-    padding: 20px;
+    padding: 80px 20px 40px;
 }
 
 .contacto-card {
-    background-color: rgba(34, 34, 35, 0.85);
-    border: 1px solid rgba(179, 162, 105, 0.3);
-    border-radius: 16px;
-    padding: 40px;
-    max-width: 500px;
-    width: 100%;
-    box-shadow: 0 10px 30px rgba(179, 162, 105, 0.15);
+    width: min(720px, 100%);
+    padding: 36px 28px;
+    border: 1px solid var(--nav-border);
+    border-radius: 28px;
+    background: var(--nav-bg);
+    color: var(--color-blanco-hueso);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 24px 50px rgba(34, 34, 35, 0.45);
 }
 
 .contacto-titulo {
-    font-family: var(--fuente-titulos);
-    color: var(--color-dorado);
-    font-size: 48px;
+    margin: 0 0 12px;
     text-align: center;
-    letter-spacing: 3px;
-    margin-bottom: 24px;
+    color: var(--color-dorado);
+    font-family: var(--fuente-titulos);
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    letter-spacing: 0.05em;
+    line-height: 1;
 }
 
 .input-group-custom {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .input-group-custom label {
     display: block;
-    font-family: var(--fuente-destacados);
-    color: var(--color-blanco-hueso);
     margin-bottom: 8px;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-family: var(--fuente-destacados);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-blanco-hueso);
+    text-transform: none;
+    letter-spacing: 0;
 }
 
 .input-group-custom input,
 .input-group-custom textarea {
     width: 100%;
-    padding: 12px 16px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(229, 225, 230, 0.2);
-    border-radius: 8px;
-    color: var(--color-blancox);
-    font-family: var(--fuente-parrafos);
-    transition: all 0.3s ease;
     box-sizing: border-box;
+    padding: 14px 16px;
+    border: 1px solid rgba(229, 225, 230, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-blanco-hueso);
+    font-family: var(--fuente-parrafos);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group-custom input::placeholder,
+.input-group-custom textarea::placeholder {
+    color: rgba(229, 225, 230, 0.58);
 }
 
 .input-group-custom input:focus,
 .input-group-custom textarea:focus {
-    outline: none;
-    border-color: var(--color-dorado);
-    background-color: rgba(179, 162, 105, 0.05);
-    box-shadow: 0 0 8px rgba(179, 162, 105, 0.2);
+    border-color: rgba(179, 162, 105, 0.7);
+    box-shadow: 0 0 0 4px rgba(179, 162, 105, 0.12);
+}
+
+.input-group-custom textarea {
+    min-height: 130px;
+    resize: vertical;
+    border-radius: 22px;
 }
 
 .btn-contacto-enviar {
-    width: 100%;
-    padding: 14px;
-    background-color: var(--color-dorado);
+    display: block;
+    width: fit-content;
+    min-width: 160px;
+    margin: 8px auto 0;
+    padding: 12px 26px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary));
     color: var(--color-negro);
-    border: none;
-    border-radius: 8px;
     font-family: var(--fuente-destacados);
-    font-weight: bold;
-    font-size: 16px;
-    letter-spacing: 1px;
+    font-size: 1.05rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-contacto-enviar:hover {
-    background-color: #d1be7e;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(179, 162, 105, 0.35);
 }
+
+/*fin style contacto*/
