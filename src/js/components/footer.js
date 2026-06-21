@@ -25,7 +25,7 @@ export class Footer {
 
             <!-- Marca -->
             <div class="col-12 col-md-3">
-              <a href="${this.getPath('index.html')}" class="d-flex align-items-center mb-3 text-decoration-none">
+              <a href="${this.getPath('index.html')}" class="footer-brand-link d-flex align-items-center mb-3 text-decoration-none">
                 <img src="${logoSrc}" alt="Sierra Dorada" class="footer-logo me-3">
                 <h3 class="footer-title-text mb-0">Sierra<br>Dorada</h3>
               </a>
@@ -63,15 +63,16 @@ export class Footer {
               <span class="footer-line-decor d-block mb-4"></span>
               <ul class="list-unstyled small footer-contact-info p-0 m-0">
                 <li class="mb-3 pb-3 border-bottom footer-border-main d-flex align-items-center gap-2">
-                  <i class="bi bi-geo-alt"></i> Bogotá, Colombia
+                  <i class="bi bi-geo-alt"></i>
+                  <span>Zipaquirá, Cundinamarca</span>
                 </li>
                 <li class="mb-3 pb-3 border-bottom footer-border-main d-flex align-items-center gap-2">
                   <i class="bi bi-telephone"></i>
-                  <a href="tel:+573001234567">+57 300 123 4567</a>
+                  <a href="tel:+573138718154">+57 313 871 8154</a>
                 </li>
                 <li class="mb-0 d-flex align-items-center gap-2">
                   <i class="bi bi-envelope"></i>
-                  <a href="mailto:contacto@sierradorada.com">contacto@sierradorada.com</a>
+                  <a href="mailto:contacto@sierradorada.co">contacto@sierradorada.co</a>
                 </li>
               </ul>
             </div>
