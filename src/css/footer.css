@@ -17,6 +17,7 @@
     box-sizing: border-box;
 }
 
+/* montañas detras */
 .footer-custom::before {
     content: '';
     position: absolute;
