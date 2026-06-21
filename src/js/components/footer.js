@@ -97,7 +97,7 @@ export class Footer {
 
             <span class="mb-3 mb-md-0">&copy; ${this.currentYear} Sierra Dorada. Todos los derechos reservados.</span> 
             <span> Prohíbase el expendio de bebidas embriagantes a menores de edad. El exceso de alcohol es perjudicial para la salud.</span>
-            </div>
+            
           </div>
 
         </div>
