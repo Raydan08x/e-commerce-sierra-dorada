@@ -15,7 +15,7 @@ export class Footer {
   }
 
   getTemplate() {
-    const logoSrc = `${this.basePath}src/assets/videos/assets/icons/isotipo-dorado-y-blanco.png`;
+    const logoSrc = `${this.basePath}src/assets/icons/isotipo-dorado-y-blanco.png`;
 
     return `
       <footer class="footer-custom py-5 px-4 mt-5">

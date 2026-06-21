@@ -23,7 +23,7 @@ export class Navbar {
   }
 
   getTemplate() {
-    const logoSrc = `${this.basePath}src/assets/videos/assets/icons/isotipo-dorado-y-blanco.png`;
+    const logoSrc = `${this.basePath}src/assets/icons/isotipo-dorado-y-blanco.png`;
 
     return `
       <header class="glass-navbar">
