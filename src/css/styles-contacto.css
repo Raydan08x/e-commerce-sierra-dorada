@@ -6,7 +6,7 @@
     --color-verde: #034638;
     --color-gris: #75787B;
     --color-magenta: #6C1D45;
-    --fuente-titulos: 'Dorsa' ,'sans-serif';
+    --fuente-titulos: 'Dorsa', 'sans-serif';
     --fuente-parrafos: 'Barlow', Arial, Helvetica, sans-serif;
     --fuente-destacados: 'Barlow Condensed', Arial, Helvetica, sans-serif;
 
@@ -320,3 +320,105 @@ p {
         justify-content: center;
     }
 }
+
+/*empieza style de contacto*/
+
+.contacto-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 80px 20px 40px;
+}
+
+.contacto-card {
+    width: min(720px, 100%);
+    padding: 36px 28px;
+    border: 1px solid var(--nav-border);
+    border-radius: 28px;
+    background: var(--nav-bg);
+    color: var(--color-blanco-hueso);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 24px 50px rgba(34, 34, 35, 0.45);
+}
+
+.contacto-titulo {
+    margin: 0 0 12px;
+    text-align: center;
+    color: var(--color-dorado);
+    font-family: var(--fuente-titulos);
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+.input-group-custom {
+    margin-bottom: 18px;
+}
+
+.input-group-custom label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--fuente-destacados);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-blanco-hueso);
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.input-group-custom input,
+.input-group-custom textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border: 1px solid rgba(229, 225, 230, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-blanco-hueso);
+    font-family: var(--fuente-parrafos);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group-custom input::placeholder,
+.input-group-custom textarea::placeholder {
+    color: rgba(229, 225, 230, 0.58);
+}
+
+.input-group-custom input:focus,
+.input-group-custom textarea:focus {
+    border-color: rgba(179, 162, 105, 0.7);
+    box-shadow: 0 0 0 4px rgba(179, 162, 105, 0.12);
+}
+
+.input-group-custom textarea {
+    min-height: 130px;
+    resize: vertical;
+    border-radius: 22px;
+}
+
+.btn-contacto-enviar {
+    display: block;
+    width: fit-content;
+    min-width: 160px;
+    margin: 8px auto 0;
+    padding: 12px 26px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary));
+    color: var(--color-negro);
+    font-family: var(--fuente-destacados);
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-contacto-enviar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(179, 162, 105, 0.35);
+}
+
+/*fin style contacto*/
