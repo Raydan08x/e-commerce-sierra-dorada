@@ -30,6 +30,10 @@ body, html {
     color: var(--color-blanco-hueso);
     overflow-x: hidden;
     scroll-behavior: smooth;
+    background-color: var(--color-negro);
+    background-image:
+        radial-gradient(circle at 0% 0%, rgba(179, 162, 105, 0.18), transparent 32%),
+        radial-gradient(circle at 100% 100%, rgba(3, 70, 56, 0.12), transparent 32%);
 }
 
 /* Contenedor global de textos alineados al centro */
