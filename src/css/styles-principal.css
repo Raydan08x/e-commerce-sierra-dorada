@@ -1,0 +1,331 @@
+/* ESTILOS BASE*/
+:root {
+    --color-dorado: #B3A269;
+    --color-negro: #222223;
+    --color-blanco-hueso: #E5E1E6;
+    --color-blancox: #FFF8F8;
+    --color-verde: #034638;
+    --color-gris: #75787B;
+    --color-magenta: #6C1D45;
+    --fuente-titulos: 'Dorsa', 'sans-serif';
+    --fuente-parrafos: 'Barlow', Arial, Helvetica, sans-serif;
+    --fuente-destacados: 'Barlow Condensed', Arial, Helvetica, sans-serif;
+
+    --nav-bg: rgba(34, 34, 35, 0.65);
+    --nav-border: rgba(179, 162, 105, 0.25);
+    --nav-text: var(--color-blanco-hueso);
+    --nav-primary: var(--color-dorado);
+    --nav-secondary: var(--color-blanco-hueso);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: var(--fuente-parrafos);
+    color: var(--color-blanco-hueso);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Contenedor global de textos alineados al centro */
+.content-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+
+/* SECCIÓN 1 */
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 0;
+}
+
+.logo-wrapper {
+    margin-bottom: 2.5rem;
+}
+
+.main-logo {
+    max-width: 180px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.25)); 
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+}
+
+/* Efecto al pasar el cursor */
+.main-logo:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)) 
+            drop-shadow(0 0 40px rgba(212, 175, 55, 0.2));
+}
+
+.titles {
+    margin-bottom: 3rem;
+}
+
+.brand-title {
+    font-family: var(--fuente-titulos);
+    font-size: 6.5rem;
+    font-weight: 400;
+    letter-spacing: 8px;
+    color: var(--color-blanco-hueso);
+    line-height: 1.1;
+    margin-bottom: 0rem;
+}
+
+.sub-title {
+    font-family: var(--fuente-titulos);
+    font-size: 7.5rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--color-dorado);
+}
+
+.description {
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--color-blanco-hueso);
+    max-width: 900px;
+    margin: 0 auto;
+    letter-spacing: 1px;
+}
+
+
+/* SECCIÓN 2 */
+.process-intro-section {
+    position: relative;
+    width: 100%;
+    min-height: 80hv;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.section-titles {
+    margin-bottom: 1.5rem;
+}
+
+.section-main-title {
+    font-family: var(--fuente-titulos);
+    font-size: 4.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: var(--color-blanco-hueso);
+}
+
+.section-description {
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--color-blanco-hueso);
+    max-width: 900px;
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+}
+
+/* Tercera Sección */
+.features-section {
+    position: relative;
+    width: 100%;
+    padding: 20px 20px 80px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Contenedor que alinea las 3 tarjetas de forma horizontal */
+.cards-container {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(280px, 360px)); /* Tres columnas balanceadas */
+    gap: 40px 30px; /* Espacio entre tarjetas */
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+/* Estilo individual de cada tarjeta */
+.feature-card {
+    background: var(--nav-bg);
+    border: 1px solid var(--nav-border);
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                border-color 0.4s ease, 
+                box-shadow 0.4s ease;
+}
+
+/* Efecto interactivo sutil al pasar el mouse */
+.feature-card:hover {
+    border-color: var(--color-dorado);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 
+                0 0 20px rgba(212, 175, 55, 0.08);
+}
+
+/* El círculo contenedor del icono */
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    background-color: var(--color-dorado);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+/* Estilo del icono interno */
+.icon-circle .material-symbols-outlined {
+    color: var(--color-blanco-hueso);
+    font-size: 32px;
+}
+
+/* Títulos de las tarjetas */
+.card-title {
+    font-family: var(--fuente-titulos);
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--color-blanco-hueso);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Textos de las tarjetas */
+.card-text {
+    font-family: var(--fuente-parrafos);;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--color-blancox);
+}
+
+/* Cuarta Sección */
+.cta-section {
+    position: relative;
+    width: 100%;
+    padding: 60px 20px 90px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cta-list {
+    list-style: none;
+    max-width: 755px;
+    margin: 0 auto 2.5rem auto;
+    padding: 0;
+}
+
+.cta-list li {
+    font-family: var(--fuente-destacados);
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--color-dorado);
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+}
+
+/* Contenedor del botón */
+.cta-button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* El Botón Dorado */
+.btn-gold {
+    display: inline-block;
+    font-family: var(--fuente-destacados);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-negro);
+    background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary));
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Efectos sutiles al pasar el cursor */
+.btn-gold:hover {
+    background-color: var(--color-dorado);
+    transform: scale(1.02);
+    box-shadow: var(--color-negro);
+}
+
+.cta-final-phrase {
+    font-family: var(--fuente-titulos);
+    font-size: 4.5rem;
+    font-weight: 400;
+    color: var(--color-blanco-hueso);
+    margin-top: 2.5rem;
+    letter-spacing: 1px;
+}
+
+
+/* ADAPTABILIDAD  */
+@media (max-width: 768px) {
+    /* Ajustes Sección 1 */
+    .brand-title {
+        font-size: 2.4rem;
+    }
+    .sub-title {
+        font-size: 1.8rem;
+    }
+    .description {
+        font-size: 1rem;
+    }
+    .main-logo {
+        max-width: 75px;
+    }
+
+    /* Ajustes Sección 2 */
+    .process-intro-section {
+        min-height: 50vh;
+        padding: 20px 0;
+    }
+    .section-main-title {
+        font-size: 1.8rem;
+    }
+    .section-description {
+        font-size: 0.95rem;
+    }
+
+/* Adaptabilidad Móvil para las Tarjetas*/
+
+    @media (max-width: 992px) {
+    .cards-container {
+        grid-template-columns: minmax(280px, 450px);
+        gap: 20px;
+    }
+    
+    .feature-card {
+        padding: 35px 25px;
+    }
+}
+}
