@@ -1,0 +1,168 @@
+#sdAgeModal .modal-body {
+    position: relative;
+    background-color: #222223;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 100vh;
+    height: auto;
+    overflow: auto;
+}
+
+
+.sd-modal-logo{
+    max-width: 250px;
+    width: auto;
+    margin-left: -30px;
+}
+
+.sd-card{
+    position: relative;
+    z-index: 2;
+    background-color: rgba(34, 34, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 30px !important;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sd-main-questions {
+    font-family: 'Dorsa', sans-serif;
+    font-size: 100px;
+    line-height: 1;
+    color: #e0e0e0;
+    text-transform: uppercase;
+}
+.divider{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.divider::before,
+.divider::after{
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(179,162,105,.5);
+}
+
+.divider span{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #b3a269;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b3a269;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+}
+
+.sd-brand-title {
+    color: #b3a269;
+    font-family: 'Dorsa', sans-serif;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+}
+
+.sd-brand-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 3px;
+    color: #b3a269 !important;
+    font-size: 19px;
+}
+.sd-description{
+    text-align: center;
+    font-family: 'Barlow',sans-serif;
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+}
+
+.btn-outline-warning{
+    background: transparent;
+    border: 1px solid #b3a269 ;
+    color: #b3a269;
+    width: 220px;
+    height: 60px;
+    border-radius: 50px;
+    transition: 0.3ms;
+}
+
+.btn-outline-warning:hover{
+    background: #b3a269;
+    color: #e0e0e0;
+    transform: translate(-2px);
+}
+
+.btn-outline-light{
+     background: transparent;
+    border: 1px solid #b3a269 ;
+    color: #b3a269;
+    width: 220px;
+    height: 60px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.btn-outline-light:hover{
+    background: #e0e0e0;
+    color: #222223;
+    transform: translate(-2px);
+}
+
+.sd-disclaimer {
+    font-family: 'Barlow', sans-serif;
+    color: #e0e0e0 !important;
+    max-width: 500px;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.sd-modal-img{
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+    width: 100%;
+    max-height: 700vh;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(179,162,105,.15))
+        drop-shadow(0 0 50px rgba(179,162,105,.08));;
+    margin-left: 40px;
+       
+}
+.col-md-6.text-center{
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.sd-btn-yes{
+    color: #b3a269 !important;
+}
+
+@media(max-width: 768px){
+    #sdAgeModal .modal-body{
+        height: auto;
+        min-height: 100vh;
+        overflow: auto;
+        padding: 20px !important;
+    }
+    .col-md-6.text-center::before{
+        width: 300px;
+        height: 300px;
+    }
+    .sd-modal-img{
+        max-width: 40vh;
+        margin: 0;
+    }
+}
