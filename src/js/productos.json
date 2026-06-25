@@ -1,0 +1,221 @@
+[
+    {
+        "id": "S1000",
+        "name": "Barley Wine",
+        "inspiration": "Inspirada en Bochica, héroe civilizador",
+        "description": "Sabiduría líquida. Potente como las enseñanzas de Bochica, guía eterno de los Muiscas.",
+        "price": 18000,
+        "abv": "10.0",
+        "ibu": "50",
+        "image": "https://images.unsplash.com/photo-1584225064785-c62a8b43d148?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#8B4513",
+        "colorName": "Ámbar profundo",
+        "temperature": "12-14°C",
+        "legend": "Una cerveza de guarda que encarna la sabiduría y la paciencia, con un carácter complejo y notas a frutos secos y caramelo.",
+        "fullDescription": "Nuestra Barley Wine es una cerveza robusta y compleja, de color ámbar profundo. En boca, despliega una sinfonía de sabores a caramelo, toffee, y frutos oscuros como pasas e higos, con un final cálido y licoroso que invita a la contemplación.",
+        "characteristics": {
+            "color": "Ámbar profundo a marrón rubí.",
+            "aroma": "Intenso a malta, caramelo, frutos oscuros y notas de jerez.",
+            "sabor": "Complejo, dulce, con final licoroso y amargor equilibrado.",
+            "maridaje": "Ideal con quesos curados, postres a base de caramelo o chocolate, y carnes de caza."
+        },
+        "process": "Elaborada con una alta densidad de maltas y un largo periodo de maduración para desarrollar su complejidad.",
+        "maridaje": [
+            { "emoji": "🧀", "name": "Quesos añejos" },
+            { "emoji": "🍮", "name": "Postres de caramelo" },
+            { "emoji": "🍫", "name": "Chocolate negro" }
+        ],
+        "activo": true
+    },
+    {
+        "id": "S1001",
+        "name": "American Pale Ale",
+        "inspiration": "El espíritu del guerrero Muisca",
+        "description": "Un tributo a la valentía de los Güecha. Cítrica y refrescante, ideal para el guerrero moderno.",
+        "price": 14000,
+        "abv": "5.5",
+        "ibu": "38",
+        "image": "https://images.unsplash.com/photo-1618045241413-615f19803b7b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#F5B327",
+        "colorName": "Dorado intenso",
+        "temperature": "6-8°C",
+        "legend": "Una cerveza que captura la audacia y el vigor de los guerreros Güecha, con un perfil lupulado y refrescante.",
+        "fullDescription": "Nuestra APA es un estallido de aromas cítricos y tropicales gracias a una generosa adición de lúpulos americanos. De cuerpo medio y final seco, es la compañera perfecta para cualquier aventura.",
+        "characteristics": {
+            "color": "Dorado pálido a ámbar claro.",
+            "aroma": "Cítrico (pomelo, naranja) y floral, proveniente del lúpulo.",
+            "sabor": "Amargor moderado y refrescante, con una base de malta que equilibra.",
+            "maridaje": "Perfecta con hamburguesas, comidas picantes y platos frescos."
+        },
+        "process": "Fermentación limpia con levadura ale americana y un dry-hopping para potenciar los aromas del lúpulo.",
+        "maridaje": [
+            { "emoji": "🍔", "name": "Hamburguesas" },
+            { "emoji": "🌮", "name": "Comida picante" },
+            { "emoji": "🥗", "name": "Ensaladas frescas" }
+        ],
+        "activo": true
+    },
+    {
+        "id": "S1002",
+        "name": "Stout",
+        "inspiration": "El misterio de la laguna sagrada",
+        "description": "Oscura y profunda como la noche en la laguna sagrada de Guatavita. Notas de café y cacao.",
+        "price": 16000,
+        "abv": "6.8",
+        "ibu": "45",
+        "image": "https://images.unsplash.com/photo-1575441226245-3251a0426966?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#222223",
+        "colorName": "Negro profundo",
+        "temperature": "10-12°C",
+        "legend": "Una cerveza que evoca la profundidad y el misterio de la laguna de Guatavita, con un cuerpo sedoso y sabores tostados.",
+        "fullDescription": "Nuestra Stout es una cerveza oscura y cremosa, con intensas notas a café recién tostado, chocolate amargo y un toque de avena que le aporta una textura suave y sedosa. Un verdadero tesoro líquido.",
+        "characteristics": {
+            "color": "Negro opaco con espuma densa y cremosa de color canela.",
+            "aroma": "Café, chocolate negro, maltas tostadas.",
+            "sabor": "Tostado y complejo, con un amargor moderado y final suave.",
+            "maridaje": "Excelente con carnes asadas, ostras y postres de chocolate."
+        },
+        "process": "Elaborada con una mezcla de maltas tostadas y avena en copos para lograr su color oscuro y cuerpo cremoso.",
+        "maridaje": [
+            { "emoji": "🥩", "name": "Carnes asadas" },
+            { "emoji": "🦪", "name": "Ostras" },
+            { "emoji": "🍰", "name": "Torta de chocolate" }
+        ],
+        "activo": true
+    },
+    {
+        "id": "S1003",
+        "name": "Corozo Golden Ale",
+        "inspiration": "El brillo del sol Muisca",
+        "description": "Ligera y dorada como el sol Muisca. El toque exótico del corozo te transporta al corazón de Colombia.",
+        "price": 15000,
+        "abv": "4.8",
+        "ibu": "20",
+        "image": "https://images.unsplash.com/photo-1608219999332-f4820535ad1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#FFD700",
+        "colorName": "Dorado brillante",
+        "temperature": "4-7°C",
+        "legend": "Una cerveza refrescante y fácil de beber, que celebra la biodiversidad colombiana con el sabor único del corozo.",
+        "fullDescription": "Esta Golden Ale es nuestra oda a los sabores de Colombia. Ligera, refrescante y con un sutil toque ácido y frutal del corozo, es una cerveza perfecta para un día soleado.",
+        "characteristics": {
+            "color": "Dorado brillante y cristalino.",
+            "aroma": "Ligeramente afrutado, con notas de malta y un toque exótico de corozo.",
+            "sabor": "Limpio y refrescante, con un final seco y un sutil sabor a corozo.",
+            "maridaje": "Acompaña bien platos ligeros como pollo, pescado y ensaladas."
+        },
+        "process": "Fermentada a bajas temperaturas para un perfil limpio, con una adición de pulpa de corozo en la maduración.",
+        "maridaje": [
+            { "emoji": "🍗", "name": "Pollo a la parrilla" },
+            { "emoji": "🐟", "name": "Pescado blanco" },
+            { "emoji": "🧀", "name": "Quesos suaves" }
+        ],
+        "activo": true
+    },
+    {
+        "id": "S1004",
+        "name": "Muisca Burger",
+        "inspiration": "La hamburguesa del Zipa",
+        "description": "Carne de res premium, queso cheddar artesanal, tocineta ahumada y salsa de la casa en pan brioche.",
+        "price": 26000,
+        "abv": "",
+        "ibu": "",
+        "image": "https://images.unsplash.com/photo-1568901049428-78a69632479f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#B3A269",
+        "colorName": "Dorado artesanal",
+        "temperature": "Consumir caliente",
+        "legend": "Una hamburguesa inspirada en la fuerza del territorio Muisca y el sabor artesanal de Sierra Dorada.",
+        "fullDescription": "La Muisca Burger combina carne de res premium, vegetales frescos, queso cheddar, tocineta y salsa de la casa para ofrecer una experiencia gastronómica artesanal.",
+        "characteristics": {
+            "color": "Dorado tostado con tonos frescos de vegetales.",
+            "aroma": "Carne asada, pan artesanal y notas ahumadas de la tocineta.",
+            "sabor": "Jugoso, equilibrado y con un toque único de nuestra salsa de la casa.",
+            "maridaje": "American Pale Ale o Corozo Golden Ale."
+        },
+        "process": "Preparada con carne de res sellada a la plancha, pan brioche artesanal, vegetales frescos, queso y salsa de la casa.",
+        "maridaje": [
+            { "emoji": "🍺", "name": "American Pale Ale" },
+            { "emoji": "🍟", "name": "Papas artesanales" }
+        ],
+        "activo": true
+    },
+    {
+        "id": "S1005",
+        "name": "Picada Güecha",
+        "inspiration": "Para compartir como guerreros",
+        "description": "Una selección de nuestras mejores carnes, chorizos artesanales, papas criollas y arepas de la casa.",
+        "price": 58000,
+        "abv": "",
+        "ibu": "",
+        "image": "https://images.unsplash.com/photo-1625938249400-436b155b5d18?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#B3A269",
+        "colorName": "Dorado artesanal",
+        "temperature": "Consumir caliente",
+        "legend": "Un festín para compartir, digno de los valientes guerreros Güecha, con los mejores sabores de nuestra tierra.",
+        "fullDescription": "La Picada Güecha es una abundante selección de carnes de res y cerdo, chorizo artesanal, morcilla, papas criollas, yuca frita y arepas, acompañada de ají casero y guacamole.",
+        "characteristics": {
+            "color": "Variedad de tonos dorados y tostados de las carnes y frituras.",
+            "aroma": "Ahumado, especiado y fragancia de hierbas frescas del ají.",
+            "sabor": "Mezcla de sabores intensos, salados y ahumados.",
+            "maridaje": "Ideal para compartir con una ronda de cualquiera de nuestras cervezas."
+        },
+        "process": "Selección de carnes y embutidos de alta calidad, cocinados a la parrilla y fritos al momento.",
+        "maridaje": [
+            { "emoji": "🍻", "name": "Cualquier cerveza" },
+            { "emoji": "👨‍👩‍👧‍👦", "name": "Amigos y familia" }
+        ],
+        "activo": true
+    },
+    {
+        "id": "S1006",
+        "name": "Salchipapa Chimy",
+        "inspiration": "El tesoro de los dioses",
+        "description": "Papas a la francesa, salchicha premium, queso costeño rallado y nuestra salsa de chimichurri secreta.",
+        "price": 22500,
+        "abv": "",
+        "ibu": "",
+        "image": "https://images.unsplash.com/photo-1613142194227-474d6768b167?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#B3A269",
+        "colorName": "Dorado artesanal",
+        "temperature": "Consumir caliente",
+        "legend": "Una versión elevada de un clásico, con el toque herbal y único de nuestro chimichurri artesanal.",
+        "fullDescription": "Crujientes papas a la francesa y salchicha premium, bañadas en queso costeño y nuestra inigualable salsa de chimichurri, que le aporta un sabor fresco y vibrante.",
+        "characteristics": {
+            "color": "Dorado intenso con vetas verdes del chimichurri y blanco del queso.",
+            "aroma": "Herbal, ajo y especias del chimichurri sobre la base salada.",
+            "sabor": "Combinación perfecta de salado, cremoso y un toque ácido y herbal.",
+            "maridaje": "Stout o American Pale Ale."
+        },
+        "process": "Papas fritas al momento, salchicha premium salteada y una generosa capa de queso y chimichurri fresco.",
+        "maridaje": [
+            { "emoji": "🍺", "name": "Stout" },
+            { "emoji": "🌶️", "name": "Ají de la casa" }
+        ],
+        "activo": true
+    },
+    {
+        "id": "S1007",
+        "name": "Jugo de Corozo",
+        "inspiration": "La fruta del sol",
+        "description": "Refrescante y exótico, el sabor del caribe colombiano en una bebida natural y sin alcohol.",
+        "price": 8000,
+        "abv": "",
+        "ibu": "",
+        "image": "https://images.unsplash.com/photo-1600271823993-2961582633c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#B3A269",
+        "colorName": "Rojo intenso",
+        "temperature": "Consumir frío",
+        "legend": "El sabor del caribe colombiano en un vaso. Una bebida natural y refrescante para todos.",
+        "fullDescription": "Elaborado con pulpa de corozo 100% natural, nuestro jugo es la opción perfecta para refrescarse. Su sabor agridulce y su color intenso lo convierten en una experiencia única.",
+        "characteristics": {
+            "color": "Rojo rubí intenso y brillante.",
+            "aroma": "Frutal, con notas que recuerdan a los frutos rojos del bosque.",
+            "sabor": "Agridulce, refrescante y ligeramente astringente.",
+            "maridaje": "Perfecto para acompañar cualquier plato o para disfrutar solo."
+        },
+        "process": "Pulpa de corozo natural mezclada con agua y endulzada al gusto.",
+        "maridaje": [
+            { "emoji": "🧊", "name": "Con hielo" }
+        ],
+        "activo": true
+    }
+]

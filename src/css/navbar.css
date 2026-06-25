@@ -1,5 +1,13 @@
 :root {
     --navbar-brand-spacing: 0.12em;
+    --color-dorado: #B3A269;
+    --color-negro: #222223;
+    --color-blanco-hueso: #E5E1E6;
+    --nav-bg: rgba(34, 34, 35, 0.65);
+    --nav-border: rgba(179, 162, 105, 0.25);
+    --nav-text: var(--color-blanco-hueso);
+    --nav-primary: var(--color-dorado);
+    --nav-secondary: var(--color-blanco-hueso);
 }
 
 .nav-link {
@@ -111,15 +119,16 @@
 .icon-button:hover,
 .dropdown__menu button:hover {
     transform: translateY(-1px);
-    background: rgba(179, 162, 105, 0.14);
-    border-color: rgba(179, 162, 105, 0.25);
+    background: rgba(179, 162, 105, 0.14) !important;
+    border-color: rgba(179, 162, 105, 0.25) !important;
+    color: var(--color-dorado) !important;
 }
 
 .nav-link.is-active {
-    border-color: transparent;
-    background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary));
-    color: var(--color-negro);
-    box-shadow: 0 12px 24px rgba(179, 162, 105, 0.35);
+    border-color: transparent !important;
+    background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary)) !important;
+    color: var(--color-negro) !important;
+    box-shadow: 0 12px 24px rgba(179, 162, 105, 0.35) !important;
 }
 
 .icon-button--label {
