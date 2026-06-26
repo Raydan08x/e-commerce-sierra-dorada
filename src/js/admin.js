@@ -1,5 +1,8 @@
 import { ImageModalManager } from './components/ImageModalManager.js';
 import { ConfirmModal } from './components/ConfirmModal.js';
+import { ToastManager } from './components/ToastManager.js';
+
+window.toastManager = new ToastManager();
 
 console.log('[SD-DEBUG] admin.js INICIO de ejecución');
 // Constantes para las claves de localStorage, para evitar errores de tipeo.
@@ -800,14 +803,23 @@ btnEliminarSeleccionados.addEventListener("click", () => ejecutarAccionEnLote('e
 window.editarProducto = editarProducto;
 window.eliminarProducto = eliminarProducto;
 
-window.seleccionarColorPredefinido = function(hex, name) {
+function seleccionarColorPredefinido(hex, name) {
     const colorHex = document.getElementById("colorHex");
     const colorHexPicker = document.getElementById("colorHexPicker");
     const colorName = document.getElementById("colorName");
     if (colorHex) colorHex.value = hex;
     if (colorHexPicker) colorHexPicker.value = hex;
     if (colorName) colorName.value = name;
-};
+}
+
+const contenedorColoresPredefinidos = document.getElementById("contenedorColoresPredefinidos");
+if (contenedorColoresPredefinidos) {
+    contenedorColoresPredefinidos.addEventListener("click", function(e) {
+        const btn = e.target.closest(".btn-color-predefinido");
+        if (!btn) return;
+        seleccionarColorPredefinido(btn.dataset.color, btn.dataset.nombre);
+    });
+}
 
 // Enlazar picker de color con input de texto
 {
