@@ -16,12 +16,32 @@ export class ToastManager {
      * @param {number} time - La duración en milisegundos.
      */
     show(message, type = 'info', time = 3500) {
+        const iconMap = {
+            success: 'bi-check-circle-fill',
+            error: 'bi-exclamation-circle-fill',
+            info: 'bi-info-circle-fill'
+        };
+        const iconClass = iconMap[type] || iconMap.info;
+
         const toast = document.createElement("div");
         toast.className = `toast toast--${type}`;
-        toast.innerHTML = `<p>${message}</p>`;
+        toast.innerHTML = `
+            <i class="bi ${iconClass} toast__icon"></i>
+            <p>${message}</p>
+            <button type="button" class="toast__close" aria-label="Cerrar">&times;</button>
+        `;
+
+        // Cerrar al hacer clic en la X
+        const closeBtn = toast.querySelector('.toast__close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => toast.remove());
+        }
 
         this.container.appendChild(toast);
 
-        setTimeout(() => toast.remove(), time);
+        setTimeout(() => {
+            toast.classList.add('toast--out');
+            setTimeout(() => toast.remove(), 400);
+        }, time);
     }
 }

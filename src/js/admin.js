@@ -1,8 +1,102 @@
+import { ImageModalManager } from './components/ImageModalManager.js';
+import { ConfirmModal } from './components/ConfirmModal.js';
+
+console.log('[SD-DEBUG] admin.js INICIO de ejecución');
 // Constantes para las claves de localStorage, para evitar errores de tipeo.
 const CLAVE_PRODUCTOS = "productosSierraDorada";
 const CLAVE_SESION = "sesionSierraDorada";
 
 let productos = [];
+
+// --- HELPERS PARA GALERÍA DE IMÁGENES ---
+const IMAGEN_PLACEHOLDER = "https://placehold.co/600x400/222223/B3A269?text=Imagen+Pendiente";
+
+function normalizarImagenes(producto) {
+    if (!producto) return [];
+
+    // Si ya tiene array de imágenes, usarlo
+    if (Array.isArray(producto.images) && producto.images.length > 0) {
+        const tienePrincipalExplicita = producto.images.some(img => img && img.isMain === true);
+        return producto.images.map((img, i) => ({
+            url: typeof img === 'string' ? img : (img.url || ''),
+            fit: img.fit || producto.imageFit || 'cover',
+            isMain: tienePrincipalExplicita ? (img.isMain === true) : (i === 0)
+        }));
+    }
+
+    // Compatibilidad hacia atrás: campo image individual
+    const url = producto.image || IMAGEN_PLACEHOLDER;
+    return [{
+        url: url,
+        fit: producto.imageFit || 'cover',
+        isMain: true
+    }];
+}
+
+function obtenerImagenPrincipal(producto) {
+    const imagenes = normalizarImagenes(producto);
+    const principal = imagenes.find(img => img.isMain) || imagenes[0];
+    return principal || { url: IMAGEN_PLACEHOLDER, fit: 'cover', isMain: true };
+}
+
+function obtenerUrlPrincipal(producto) {
+    return obtenerImagenPrincipal(producto).url;
+}
+
+function tieneImagenReal(producto) {
+    const url = obtenerUrlPrincipal(producto);
+    return url && !url.includes('placehold.co') && !url.includes('Imagen+Pendiente');
+}
+
+function contarImagenes(producto) {
+    return normalizarImagenes(producto).length;
+}
+
+function comprimirImagen(base64, maxAncho = 800, maxAlto = 800, calidad = 0.8) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+            let ancho = img.width;
+            let alto = img.height;
+
+            if (ancho > maxAncho || alto > maxAlto) {
+                const ratio = Math.min(maxAncho / ancho, maxAlto / alto);
+                ancho = Math.round(ancho * ratio);
+                alto = Math.round(alto * ratio);
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = ancho;
+            canvas.height = alto;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, ancho, alto);
+
+            resolve(canvas.toDataURL('image/jpeg', calidad));
+        };
+        img.onerror = reject;
+        img.src = base64;
+    });
+}
+
+function guardarImagenes(producto, imagenes) {
+    // Asegurar que solo haya una imagen principal
+    let lista = (imagenes || []).filter(img => img && img.url);
+    if (lista.length === 0) {
+        lista = [{ url: IMAGEN_PLACEHOLDER, fit: 'cover', isMain: true }];
+    }
+
+    const idxPrincipal = lista.findIndex(img => img.isMain);
+    if (idxPrincipal === -1) {
+        lista[0].isMain = true;
+    } else {
+        lista.forEach((img, i) => { img.isMain = (i === idxPrincipal); });
+    }
+
+    producto.images = lista;
+    producto.image = lista.find(img => img.isMain).url;
+    producto.imageFit = lista.find(img => img.isMain).fit;
+    return producto;
+}
 
 // --- REFERENCIAS AL DOM ---
 const formProducto = document.getElementById("formProducto");
@@ -48,28 +142,19 @@ const seleccionarTodo = document.getElementById("seleccionarTodo");
 const btnAccionesLote = document.getElementById("btnAccionesLote");
 const btnEliminarSeleccionados = document.getElementById("btnEliminarSeleccionados");
 
-// Referencias a las pestañas
-const tabGestion = new bootstrap.Tab(document.getElementById('gestion-tab'));
-const tabFormulario = new bootstrap.Tab(document.getElementById('formulario-tab'));
+// Helper functions to switch tabs safely
+function mostrarTabGestion() {
+    const el = document.getElementById('gestion-tab');
+    if (el) el.click();
+}
 
-// Referencias al modal de imagen
-const modalCambiarImagen = new bootstrap.Modal(document.getElementById('modalCambiarImagen'));
-const nombreProductoModal = document.getElementById('nombreProductoModal');
-const imagenActualModal = document.getElementById('imagenActualModal');
-const inputUrlImagenModal = document.getElementById('inputUrlImagenModal');
-const inputFileImagenModal = document.getElementById('inputFileImagenModal');
-const idProductoModal = document.getElementById('idProductoModal');
-const btnGuardarImagenModal = document.getElementById('btnGuardarImagenModal');
-const mensajeModal = document.getElementById('mensajeModal');
+function mostrarTabFormulario() {
+    const el = document.getElementById('formulario-tab');
+    if (el) el.click();
+}
 
-// Referencias al modal de confirmación
-const confirmacionModal = document.getElementById('confirmacionModal');
-const confirmacionModalTitulo = document.getElementById('confirmacionModalTitulo');
-const confirmacionModalMensaje = document.getElementById('confirmacionModalMensaje');
-const btnAceptarConfirmacion = document.getElementById('btnAceptarConfirmacion');
-const btnCancelarConfirmacion = document.getElementById('btnCancelarConfirmacion');
-
-let archivoModalBase64 = null; // Variable para la imagen codificada del MODAL
+// Los modales se gestionan a través de componentes (ImageModalManager y ConfirmModal)
+// definidos en src/js/components/ e instanciados al final de este archivo.
 
 // Diccionario inteligente para mapear comidas a emojis de maridaje
 const emojiMap = {
@@ -129,7 +214,8 @@ async function cargarProductos() {
     if (productosGuardados !== null) {
         try {
             const parsed = JSON.parse(productosGuardados);
-            if (Array.isArray(parsed) && parsed.some(p => p.id && p.id.startsWith('S'))) {
+            const tieneIdsAntiguos = Array.isArray(parsed) && parsed.some(p => p.id && p.id.startsWith('S'));
+            if (tieneIdsAntiguos) {
                 localStorage.removeItem(CLAVE_PRODUCTOS);
                 productosGuardados = null;
             } else {
@@ -143,18 +229,34 @@ async function cargarProductos() {
 
     if (productosGuardados === null) {
         try {
-            const response = await fetch('../src/data/productos.json');
-            productos = await response.json();
+            const [resCervezas, resMerch] = await Promise.all([
+                fetch('../src/data/cervezas.json'),
+                fetch('../src/data/merchandising.json')
+            ]);
+            const cervezas = await resCervezas.json();
+            const merch = await resMerch.json();
+            productos = [...cervezas, ...merch];
             guardarProductos();
         } catch (error) {
-            console.error("No se pudo cargar el archivo de productos.json", error);
+            console.error("No se pudieron cargar los archivos JSON de productos:", error);
             mensajeTabla.textContent = "Error: No se pudieron cargar los productos.";
         }
     }
 }
 
 function guardarProductos() {
-    localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(productos));
+    try {
+        localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(productos));
+        return true;
+    } catch (error) {
+        console.error('[SD-DEBUG] Error al guardar productos:', error);
+        if (error && error.name === 'QuotaExceededError') {
+            if (window.toastManager) window.toastManager.show('No hay espacio suficiente para guardar. Reduce el tamaño o cantidad de imágenes.', 'error');
+        } else {
+            if (window.toastManager) window.toastManager.show('Error al guardar los productos.', 'error');
+        }
+        return false;
+    }
 }
 
 /**
@@ -208,12 +310,14 @@ function mostrarProductos(productosAMostrar) {
     }
 
     productosOrdenados.forEach(producto => {
-        // Lógica para el icono de la imagen
-        const tieneImagenReal = producto.image && !producto.image.includes('placehold.co');
-        const claseIconoImagen = tieneImagenReal ? 'text-dorado' : 'text-secondary';
+        // Lógica para el botón de la imagen
+        const imgReal = tieneImagenReal(producto);
+        const totalImgs = contarImagenes(producto);
+        const claseBotonImagen = imgReal ? 'btn-warning text-dark' : 'btn-outline-secondary text-secondary';
+        const tituloBoton = totalImgs > 1 ? `Gestionar ${totalImgs} imágenes` : 'Gestionar imagen';
         const botonImagen = `
-            <button class="btn btn-sm btn-outline-light" onclick="abrirModalImagen('${producto.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar imagen">
-                <i class="bi bi-camera ${claseIconoImagen}"></i>
+            <button class="btn btn-sm ${claseBotonImagen}" onclick="abrirModalImagen('${producto.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="${tituloBoton}">
+                <i class="bi bi-camera"></i>${totalImgs > 1 ? `<span class="badge bg-dark ms-1" style="font-size: 0.6rem;">${totalImgs}</span>` : ''}
             </button>`;
 
         const estadoLabel = (producto.activo !== false)
@@ -302,26 +406,34 @@ function sugerirSiguienteId() {
 }
 
 function validarFormulario() {
-    const idVal = id.value.trim();
-    const nameVal = name.value.trim();
-    const priceVal = Number(price.value);
+    const idVal = id ? id.value.trim() : '';
+    const nameVal = name ? name.value.trim() : '';
+    const priceVal = price ? Number(price.value) : 0;
 
-    mensajeProducto.textContent = '';
-    mensajeProducto.className = '';
+    if (mensajeProducto) {
+        mensajeProducto.textContent = '';
+        mensajeProducto.className = '';
+    }
 
     if (!idVal || !nameVal) {
-        toastManager.show('Completa los campos obligatorios (ID, Nombre).', 'error');
+        if (window.toastManager) {
+            window.toastManager.show('Completa los campos obligatorios (ID, Nombre).', 'error');
+        }
         return false;
     }
 
     if (isNaN(priceVal) || priceVal < 0) {
-        toastManager.show('El precio debe ser un número positivo.', 'error');
+        if (window.toastManager) {
+            window.toastManager.show('El precio debe ser un número positivo.', 'error');
+        }
         return false;
     }
 
     // Si estamos agregando uno nuevo, validar que el ID no exista
-    if (modoEdicion.value !== "true" && existeProducto(idVal)) {
-        toastManager.show('El ID ingresado ya existe.', 'error');
+    if (modoEdicion && modoEdicion.value !== "true" && existeProducto(idVal)) {
+        if (window.toastManager) {
+            window.toastManager.show('El ID ingresado ya existe.', 'error');
+        }
         return false;
     }
 
@@ -329,7 +441,7 @@ function validarFormulario() {
 }
 
 function parsearMaridaje(texto) {
-    if (!texto.trim()) return [];
+    if (!texto || !texto.trim()) return [];
     return texto.split(',').map(item => {
         const name = item.trim();
         const nameLower = name.toLowerCase();
@@ -351,43 +463,52 @@ function agregarProducto() {
     const activoProd = document.getElementById("activoProducto");
 
     const nuevoProducto = {
-        id: id.value.trim(),
-        name: name.value.trim(),
+        id: id ? id.value.trim() : '',
+        name: name ? name.value.trim() : '',
         categoria: catSelector ? catSelector.value : "Cervezas",
         activo: activoProd ? activoProd.checked : true,
-        inspiration: inspiration.value.trim(),
-        description: description.value.trim(),
-        price: Number(price.value),
-        abv: abv.value.trim(),
-        ibu: ibu.value.trim(),
-        image: image.value.trim() || "https://placehold.co/600x400/222223/B3A269?text=Imagen+Pendiente",
-        colorHex: colorHex.value.trim(),
-        colorName: colorName.value.trim(),
-        temperature: temperature.value.trim(),
-        legend: legend.value.trim(),
-        fullDescription: fullDescription.value.trim(),
-        process: process.value.trim(),
+        inspiration: inspiration ? inspiration.value.trim() : '',
+        description: description ? description.value.trim() : '',
+        price: price ? Number(price.value) : 0,
+        abv: abv ? abv.value.trim() : '',
+        ibu: ibu ? ibu.value.trim() : '',
+        image: (image ? image.value.trim() : '') || IMAGEN_PLACEHOLDER,
+        colorHex: colorHex ? colorHex.value.trim() : '',
+        colorName: colorName ? colorName.value.trim() : '',
+        temperature: temperature ? temperature.value.trim() : '',
+        legend: legend ? legend.value.trim() : '',
+        fullDescription: fullDescription ? fullDescription.value.trim() : '',
+        process: process ? process.value.trim() : '',
         characteristics: {
-            color: characteristics_color.value.trim(),
-            aroma: characteristics_aroma.value.trim(),
-            sabor: characteristics_sabor.value.trim(),
-            maridaje: characteristics_maridaje.value.trim()
+            color: characteristics_color ? characteristics_color.value.trim() : '',
+            aroma: characteristics_aroma ? characteristics_aroma.value.trim() : '',
+            sabor: characteristics_sabor ? characteristics_sabor.value.trim() : '',
+            maridaje: characteristics_maridaje ? characteristics_maridaje.value.trim() : ''
         },
-        maridaje: parsearMaridaje(maridaje.value)
+        maridaje: maridaje ? parsearMaridaje(maridaje.value) : []
     };
+
+    // Normalizar imágenes para el nuevo producto
+    guardarImagenes(nuevoProducto, [{
+        url: nuevoProducto.image,
+        fit: 'cover',
+        isMain: true
+    }]);
 
     productos.push(nuevoProducto);
     guardarProductos();
     filtrarYMostrarProductos();
     limpiarFormulario();
 
-    toastManager.show("Producto agregado correctamente.", 'success');
-    tabGestion.show(); // Volver a la pestaña de gestión
+    if (window.toastManager) {
+        window.toastManager.show("Producto agregado correctamente.", 'success');
+    }
+    mostrarTabGestion(); // Volver a la pestaña de gestión
 }
 
 function actualizarProducto() { // Actualiza un producto existente.
-    const idActual = id.value.trim();
-    const idAnterior = idOriginal.value;
+    const idActual = id ? id.value.trim() : '';
+    const idAnterior = idOriginal ? idOriginal.value : '';
 
     const indice = productos.findIndex(p => p.id === idAnterior);
     if (indice === -1) return;
@@ -395,48 +516,80 @@ function actualizarProducto() { // Actualiza un producto existente.
     const catSelector = document.getElementById("categoriaSelector");
     const activoProd = document.getElementById("activoProducto");
 
+    const nuevaUrlImagen = (image ? image.value.trim() : '') || IMAGEN_PLACEHOLDER;
+    const imagenesExistentes = normalizarImagenes(productos[indice]);
+
+    // Si el campo image del formulario cambió respecto a la imagen principal actual,
+    // actualizamos la primera imagen del array; de lo contrario conservamos el array.
+    const urlPrincipalAnterior = obtenerUrlPrincipal(productos[indice]);
+    let nuevasImagenes = imagenesExistentes;
+    if (nuevaUrlImagen !== urlPrincipalAnterior) {
+        if (imagenesExistentes.length > 0) {
+            imagenesExistentes[0] = { url: nuevaUrlImagen, fit: 'cover', isMain: true };
+            nuevasImagenes = imagenesExistentes;
+        } else {
+            nuevasImagenes = [{ url: nuevaUrlImagen, fit: 'cover', isMain: true }];
+        }
+    }
+
     productos[indice] = {
         id: idActual,
-        name: name.value.trim(),
+        name: name ? name.value.trim() : '',
         categoria: catSelector ? catSelector.value : "Cervezas",
         activo: activoProd ? activoProd.checked : true,
-        inspiration: inspiration.value.trim(),
-        description: description.value.trim(),
-        price: Number(price.value),
-        abv: abv.value.trim(),
-        ibu: ibu.value.trim(),
-        image: image.value.trim() || "https://placehold.co/600x400/222223/B3A269?text=Imagen+Pendiente",
-        colorHex: colorHex.value.trim(),
-        colorName: colorName.value.trim(),
-        temperature: temperature.value.trim(),
-        legend: legend.value.trim(),
-        fullDescription: fullDescription.value.trim(),
-        process: process.value.trim(),
+        inspiration: inspiration ? inspiration.value.trim() : '',
+        description: description ? description.value.trim() : '',
+        price: price ? Number(price.value) : 0,
+        abv: abv ? abv.value.trim() : '',
+        ibu: ibu ? ibu.value.trim() : '',
+        image: nuevaUrlImagen,
+        colorHex: colorHex ? colorHex.value.trim() : '',
+        colorName: colorName ? colorName.value.trim() : '',
+        temperature: temperature ? temperature.value.trim() : '',
+        legend: legend ? legend.value.trim() : '',
+        fullDescription: fullDescription ? fullDescription.value.trim() : '',
+        process: process ? process.value.trim() : '',
         characteristics: {
-            color: characteristics_color.value.trim(),
-            aroma: characteristics_aroma.value.trim(),
-            sabor: characteristics_sabor.value.trim(),
-            maridaje: characteristics_maridaje.value.trim()
+            color: characteristics_color ? characteristics_color.value.trim() : '',
+            aroma: characteristics_aroma ? characteristics_aroma.value.trim() : '',
+            sabor: characteristics_sabor ? characteristics_sabor.value.trim() : '',
+            maridaje: characteristics_maridaje ? characteristics_maridaje.value.trim() : ''
         },
-        maridaje: parsearMaridaje(maridaje.value)
+        maridaje: maridaje ? parsearMaridaje(maridaje.value) : []
     };
+
+    // Sincronizar el array de imágenes con la imagen principal editada
+    guardarImagenes(productos[indice], nuevasImagenes);
 
     guardarProductos();
     filtrarYMostrarProductos();
     limpiarFormulario();
 
-    toastManager.show("Producto actualizado correctamente.", 'success');
-    tabGestion.show();
+    if (window.toastManager) {
+        window.toastManager.show("Producto actualizado correctamente.", 'success');
+    }
+    mostrarTabGestion();
 }
 
-function editarProducto(idProducto) {
+async function editarProducto(idProducto) {
     const productoEncontrado = productos.find(p => p.id === idProducto);
 
     if (!productoEncontrado) return;
 
-    // Llenar el formulario con los datos del producto.
-    id.value = productoEncontrado.id;
-    name.value = productoEncontrado.name;
+    const confirmado = await window.confirmacionModal.mostrar(
+        'Editar Producto',
+        `¿Estás seguro de que deseas editar el producto "${productoEncontrado.name}"?`
+    );
+
+    if (!confirmado) return;
+
+    if (window.toastManager) {
+        window.toastManager.show("Cargando datos del producto para editar...", 'info');
+    }
+
+    // Llenar el formulario con los datos del producto safely.
+    if (id) id.value = productoEncontrado.id || '';
+    if (name) name.value = productoEncontrado.name || '';
     
     const catSelector = document.getElementById("categoriaSelector");
     if (catSelector) {
@@ -448,52 +601,54 @@ function editarProducto(idProducto) {
         activoProd.checked = productoEncontrado.activo !== false;
     }
 
-    inspiration.value = productoEncontrado.inspiration || '';
-    description.value = productoEncontrado.description || '';
-    price.value = productoEncontrado.price;
-    abv.value = productoEncontrado.abv || '';
-    ibu.value = productoEncontrado.ibu || '';
-    image.value = productoEncontrado.image || '';
-    colorHex.value = productoEncontrado.colorHex || '';
+    if (inspiration) inspiration.value = productoEncontrado.inspiration || '';
+    if (description) description.value = productoEncontrado.description || '';
+    if (price) price.value = productoEncontrado.price || 0;
+    if (abv) abv.value = productoEncontrado.abv || '';
+    if (ibu) ibu.value = productoEncontrado.ibu || '';
+    if (image) image.value = productoEncontrado.image || '';
+    const imageFileSelector = document.getElementById("imageFileSelector");
+    if (imageFileSelector) imageFileSelector.value = productoEncontrado.image || '';
+    if (colorHex) colorHex.value = productoEncontrado.colorHex || '';
     const colorHexPicker = document.getElementById("colorHexPicker");
     if (colorHexPicker && productoEncontrado.colorHex && /^#[0-9A-F]{6}$/i.test(productoEncontrado.colorHex)) {
         colorHexPicker.value = productoEncontrado.colorHex;
     }
-    colorName.value = productoEncontrado.colorName || '';
-    temperature.value = productoEncontrado.temperature || '';
-    legend.value = productoEncontrado.legend || '';
-    fullDescription.value = productoEncontrado.fullDescription || '';
-    process.value = productoEncontrado.process || '';
+    if (colorName) colorName.value = productoEncontrado.colorName || '';
+    if (temperature) temperature.value = productoEncontrado.temperature || '';
+    if (legend) legend.value = productoEncontrado.legend || '';
+    if (fullDescription) fullDescription.value = productoEncontrado.fullDescription || '';
+    if (process) process.value = productoEncontrado.process || '';
     
     const chars = productoEncontrado.characteristics || {};
-    characteristics_color.value = chars.color || '';
-    characteristics_aroma.value = chars.aroma || '';
-    characteristics_sabor.value = chars.sabor || '';
-    characteristics_maridaje.value = chars.maridaje || '';
+    if (characteristics_color) characteristics_color.value = chars.color || '';
+    if (characteristics_aroma) characteristics_aroma.value = chars.aroma || '';
+    if (characteristics_sabor) characteristics_sabor.value = chars.sabor || '';
+    if (characteristics_maridaje) characteristics_maridaje.value = chars.maridaje || '';
 
     // Convertir de [{emoji, name}] de vuelta a "Comida 1, Comida 2, Comida 3" para fácil edición
-    maridaje.value = (productoEncontrado.maridaje || []).map(m => m.name).join(', ');
+    if (maridaje) maridaje.value = (productoEncontrado.maridaje || []).map(m => m.name).join(', ');
 
-    modoEdicion.value = "true";
-    idOriginal.value = productoEncontrado.id;
+    if (modoEdicion) modoEdicion.value = "true";
+    if (idOriginal) idOriginal.value = productoEncontrado.id;
 
-    tituloFormulario.textContent = "Editar producto";
-    id.disabled = true; // No se puede cambiar el ID al editar.
-    btnGuardar.textContent = "Actualizar producto";
+    if (tituloFormulario) tituloFormulario.textContent = "Editar producto";
+    if (id) id.disabled = true; // No se puede cambiar el ID al editar.
+    if (btnGuardar) btnGuardar.textContent = "Actualizar producto";
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
 
-    tabFormulario.show(); // Cambiar a la pestaña del formulario
+    mostrarTabFormulario(); // Cambiar a la pestaña del formulario
 }
 
 async function eliminarProducto(idProducto) {
     const producto = productos.find(p => p.id === idProducto);
     if (!producto) return;
 
-    const confirmado = await mostrarConfirmacion(
+    const confirmado = await window.confirmacionModal.mostrar(
         'Eliminar Producto',
         `¿Estás seguro de que deseas eliminar el producto "${producto.name}"? Esta acción no se puede deshacer.`
     );
@@ -504,88 +659,13 @@ async function eliminarProducto(idProducto) {
         guardarProductos();
         filtrarYMostrarProductos();
 
-        toastManager.show("Producto eliminado correctamente.", 'success');
+        if (window.toastManager) {
+            window.toastManager.show("Producto eliminado correctamente.", 'success');
+        }
     }
 }
 
-// --- LÓGICA DEL MODAL DE CONFIRMACIÓN ---
-function mostrarConfirmacion(titulo, mensaje) {
-    confirmacionModalTitulo.textContent = titulo;
-    confirmacionModalMensaje.textContent = mensaje;
-    confirmacionModal.showModal();
-
-    return new Promise(resolve => {
-        btnAceptarConfirmacion.onclick = () => {
-            confirmacionModal.close();
-            resolve(true);
-        };
-        btnCancelarConfirmacion.onclick = () => {
-            confirmacionModal.close();
-            resolve(false);
-        };
-    });
-}
-
-// --- LÓGICA DEL MODAL DE IMAGEN ---
-function abrirModalImagen(idProducto) {
-    const producto = productos.find(p => p.id === idProducto);
-    if (!producto) return;
-
-    nombreProductoModal.textContent = producto.name;
-    imagenActualModal.src = producto.image;
-    idProductoModal.value = producto.id;
-    inputUrlImagenModal.value = ''; // Limpiar inputs
-    inputFileImagenModal.value = '';
-    mensajeModal.textContent = '';
-    archivoModalBase64 = null;
-
-    modalCambiarImagen.show();
-}
-
-function guardarNuevaImagen() {
-    const idProducto = idProductoModal.value;
-    const indice = productos.findIndex(p => p.id === idProducto);
-    if (indice === -1) return;
-
-    if (archivoModalBase64) {
-        productos[indice].image = archivoModalBase64;
-        guardarProductos();
-        filtrarYMostrarProductos();
-        modalCambiarImagen.hide();
-        return;
-    }
-
-    const nuevaUrl = inputUrlImagenModal.value.trim();
-    if (nuevaUrl) {
-        productos[indice].image = nuevaUrl;
-        guardarProductos();
-        filtrarYMostrarProductos();
-        modalCambiarImagen.hide();
-        return;
-    }
-}
-
-function codificarImagen(evento) {
-    const archivo = evento.target.files[0];
-    if (!archivo) {
-        archivoModalBase64 = null;
-        return;
-    }
-
-    if (archivo.size > 2 * 1024 * 1024) {
-        toastManager.show('La imagen es muy grande (máx 2MB).', 'error');
-        inputFileImagenModal.value = '';
-        return;
-    }
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-        archivoModalBase64 = reader.result;
-        mensajeModal.textContent = '';
-    };
-    reader.readAsDataURL(archivo);
-}
-
+// --- LÓGICA DEL MODAL DE GALERÍA DE IMÁGENES ---
 // --- ACCIONES EN LOTE ---
 function obtenerIdsSeleccionados() {
     const checkboxes = document.querySelectorAll('#tablaProductos input[type="checkbox"]:checked');
@@ -602,7 +682,7 @@ async function ejecutarAccionEnLote(accion) {
     if (ids.length === 0) return;
 
     if (accion === 'eliminar') {
-        const confirmado = await mostrarConfirmacion(
+        const confirmado = await window.confirmacionModal.mostrar(
             'Eliminar Productos',
             `¿Seguro que deseas eliminar ${ids.length} producto(s) seleccionados?`
         );
@@ -613,7 +693,9 @@ async function ejecutarAccionEnLote(accion) {
 
     guardarProductos();
     filtrarYMostrarProductos();
-    toastManager.show(`Acción en lote '${accion}' completada.`, 'info');
+    if (window.toastManager) {
+        window.toastManager.show(`Acción en lote '${accion}' completada.`, 'info');
+    }
     seleccionarTodo.checked = false;
 }
 
@@ -649,11 +731,17 @@ function descargarJson() {
     enlace.href = URL.createObjectURL(archivo);
     enlace.download = "productos-sierra-dorada.json";
     enlace.click();
+
+    if (window.toastManager) {
+        window.toastManager.show('JSON de productos descargado correctamente.', 'success');
+    }
 }
 
 // Event listener para el envío del formulario
+console.log('[SD-DEBUG] formProducto:', formProducto);
 formProducto.addEventListener("submit", function (evento) {
     evento.preventDefault();
+    console.log('[SD-DEBUG] Form submit ejecutado');
 
     if (!validarFormulario()) {
         return;
@@ -701,13 +789,9 @@ tablaProductos.addEventListener('change', function(e) {
 });
 
 btnEliminarSeleccionados.addEventListener("click", () => ejecutarAccionEnLote('eliminar'));
-btnGuardarImagenModal.addEventListener("click", guardarNuevaImagen);
-inputFileImagenModal.addEventListener("change", codificarImagen);
-
 // Exponer funciones al objeto global
 window.editarProducto = editarProducto;
 window.eliminarProducto = eliminarProducto;
-window.abrirModalImagen = abrirModalImagen;
 
 window.seleccionarColorPredefinido = function(hex, name) {
     const colorHex = document.getElementById("colorHex");
@@ -718,92 +802,146 @@ window.seleccionarColorPredefinido = function(hex, name) {
     if (colorName) colorName.value = name;
 };
 
-// --- INICIALIZACIÓN ---
-document.addEventListener("DOMContentLoaded", async function() {
-    protegerRutaAdmin();
-    await cargarProductos();
-    mostrarProductos(productos);
-
-    // Enlazar picker de color con input de texto
-    const colorHex = document.getElementById("colorHex");
-    const colorHexPicker = document.getElementById("colorHexPicker");
-    if (colorHex && colorHexPicker) {
-        colorHexPicker.addEventListener("input", function() {
-            colorHex.value = colorHexPicker.value.toUpperCase();
+// Enlazar picker de color con input de texto
+{
+    const _colorHex = document.getElementById("colorHex");
+    const _colorHexPicker = document.getElementById("colorHexPicker");
+    if (_colorHex && _colorHexPicker) {
+        _colorHexPicker.addEventListener("input", function() {
+            _colorHex.value = _colorHexPicker.value.toUpperCase();
         });
-        colorHex.addEventListener("input", function() {
-            if (/^#[0-9A-F]{6}$/i.test(colorHex.value)) {
-                colorHexPicker.value = colorHex.value;
+        _colorHex.addEventListener("input", function() {
+            if (/^#[0-9A-F]{6}$/i.test(_colorHex.value)) {
+                _colorHexPicker.value = _colorHex.value;
             }
         });
     }
+}
 
-    // Enlazar selector de categoría para ocultar/mostrar detalles de cerveza
-    const catSelector = document.getElementById("categoriaSelector");
-    if (catSelector) {
-        catSelector.addEventListener("change", function() {
-            toggleSeccionCerveza(catSelector.value);
-        });
-    }
+// Enlazar selector de categoría para ocultar/mostrar detalles de cerveza
+const catSelector = document.getElementById("categoriaSelector");
+if (catSelector) {
+    catSelector.addEventListener("change", function() {
+        toggleSeccionCerveza(catSelector.value);
+    });
+}
 
-    // Enlazar input de archivo local para cargar imagen desde PC
-    const imageFile = document.getElementById("imageFile");
-    if (imageFile) {
-        imageFile.addEventListener("change", function(evento) {
-            const archivo = evento.target.files[0];
-            if (!archivo) return;
+// Enlazar selector de imagen local del proyecto
+const imageFileSelector = document.getElementById("imageFileSelector");
+if (imageFileSelector) {
+    imageFileSelector.addEventListener("change", function(evento) {
+        const ruta = evento.target.value;
+        if (!ruta) return;
 
-            if (archivo.size > 2 * 1024 * 1024) {
-                if (window.toastManager) {
-                    window.toastManager.show('La imagen es muy grande (máx 2MB).', 'error');
-                } else {
-                    alert('La imagen es muy grande (máx 2MB).');
-                }
-                imageFile.value = '';
-                return;
+        const imageInput = document.getElementById("image");
+        if (imageInput) {
+            imageInput.value = ruta;
+            if (window.toastManager) {
+                window.toastManager.show('Imagen local seleccionada correctamente.', 'success');
             }
+        }
+    });
+}
 
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const imageInput = document.getElementById("image");
-                if (imageInput) {
-                    imageInput.value = reader.result;
-                    if (window.toastManager) {
-                        window.toastManager.show('Imagen cargada correctamente desde la PC.', 'success');
-                    }
-                }
-            };
-            reader.readAsDataURL(archivo);
-        });
-    }
+// Enlazar input de archivo local para cargar imagen desde PC (comprimida para localStorage)
+const imageFile = document.getElementById("imageFile");
+if (imageFile) {
+    imageFile.addEventListener("change", async function(evento) {
+        const archivo = evento.target.files[0];
+        if (!archivo) return;
 
-    // Enlazar ordenamiento de columnas por clic en los encabezados
-    const sortableHeaders = document.querySelectorAll(".sortable-header");
-    sortableHeaders.forEach(header => {
-        header.addEventListener("click", () => {
-            const campo = header.getAttribute("data-sort");
-
-            if (columnaOrdenamiento === campo) {
-                ordenAscendente = !ordenAscendente;
-            } else {
-                columnaOrdenamiento = campo;
-                ordenAscendente = true;
+        if (archivo.size > 20 * 1024 * 1024) {
+            if (window.toastManager) {
+                window.toastManager.show('La imagen es muy grande (máx 20MB).', 'error');
             }
+            imageFile.value = '';
+            return;
+        }
 
-            // Actualizar iconos visuales de todos los encabezados
-            sortableHeaders.forEach(h => {
-                const icono = h.querySelector("i");
-                if (icono) {
-                    const hCampo = h.getAttribute("data-sort");
-                    if (hCampo === columnaOrdenamiento) {
-                        icono.className = ordenAscendente ? "bi bi-arrow-up ms-1" : "bi bi-arrow-down ms-1";
-                    } else {
-                        icono.className = "bi bi-arrow-down-up ms-1";
-                    }
-                }
+        try {
+            const base64Original = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(archivo);
             });
+            const base64Comprimida = await comprimirImagen(base64Original);
+            const imageInput = document.getElementById("image");
+            if (imageInput) {
+                imageInput.value = base64Comprimida;
+                if (window.toastManager) {
+                    window.toastManager.show('Imagen cargada correctamente desde la PC.', 'success');
+                }
+            }
+        } catch (error) {
+            console.error('[SD-DEBUG] Error al procesar imagen:', error);
+            if (window.toastManager) {
+                window.toastManager.show('Error al procesar la imagen.', 'error');
+            }
+        }
+        imageFile.value = '';
+    });
+}
 
-            filtrarYMostrarProductos();
+// Enlazar ordenamiento de columnas por clic en los encabezados
+const sortableHeaders = document.querySelectorAll(".sortable-header");
+sortableHeaders.forEach(header => {
+    header.addEventListener("click", () => {
+        const campo = header.getAttribute("data-sort");
+
+        if (columnaOrdenamiento === campo) {
+            ordenAscendente = !ordenAscendente;
+        } else {
+            columnaOrdenamiento = campo;
+            ordenAscendente = true;
+        }
+
+        // Actualizar iconos visuales de todos los encabezados
+        sortableHeaders.forEach(h => {
+            const icono = h.querySelector("i");
+            if (icono) {
+                const hCampo = h.getAttribute("data-sort");
+                if (hCampo === columnaOrdenamiento) {
+                    icono.className = ordenAscendente ? "bi bi-arrow-up ms-1" : "bi bi-arrow-down ms-1";
+                } else {
+                    icono.className = "bi bi-arrow-down-up ms-1";
+                }
+            }
         });
+
+        filtrarYMostrarProductos();
     });
 });
+
+// --- INICIALIZACIÓN ASÍNCRONA ---
+console.log('[SD-DEBUG] admin.js FIN de ejecución síncrona');
+
+async function inicializarAdmin() {
+    console.log('[SD-DEBUG] Inicialización disparada');
+    protegerRutaAdmin();
+    await cargarProductos();
+    console.log('[SD-DEBUG] Productos cargados:', productos.length);
+    mostrarProductos(productos);
+
+    // Inicializar componentes de modales
+    window.confirmacionModal = new ConfirmModal();
+    window.imageModalManager = new ImageModalManager({
+        getProductos: () => productos,
+        guardarProductos: guardarProductos,
+        filtrarYMostrarProductos: filtrarYMostrarProductos,
+        toastManager: window.toastManager
+    });
+
+    // Wrapper global para abrir el modal desde los botones de la tabla
+    window.abrirModalImagen = function(idProducto) {
+        if (window.imageModalManager) window.imageModalManager.abrir(idProducto);
+    };
+
+    console.log('[SD-DEBUG] Inicialización completada OK');
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inicializarAdmin);
+} else {
+    inicializarAdmin();
+}

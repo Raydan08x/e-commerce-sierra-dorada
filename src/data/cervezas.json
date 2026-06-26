@@ -1,0 +1,532 @@
+[
+    {
+        "id": "C1000",
+        "name": "APA Premium",
+        "categoria": "Cervezas",
+        "activo": true,
+        "inspiration": "Xue, dios del sol Muisca",
+        "description": "Cerveza artesanal de estilo American Pale Ale. Seca, equilibrada y refrescante.",
+        "price": 14000,
+        "abv": "4.8%",
+        "ibu": "38",
+        "image": "../src/assets/images/ale-apa.png",
+        "colorHex": "#D99A2B",
+        "colorName": "Dorado claro brillante",
+        "temperature": "8-10°C",
+        "legend": "Brillante como la luz del dios Xue, trayendo energía y fuerza en cada sorbo.",
+        "fullDescription": "Nuestra APA Premium es una cerveza American Pale Ale dorada y cristalina. Destaca por su cuerpo medio y un final agradablemente seco que invita a seguir bebiendo, ideal para refrescar el alma.",
+        "characteristics": {
+            "color": "Dorado claro y brillante.",
+            "aroma": "Predominancia de notas cítricas, flores blancas y resinas frescas.",
+            "sabor": "Lúpulo fresco y perfil maltoso perfectamente equilibrado, con final seco y amargor limpio.",
+            "maridaje": "Hamburguesas artesanales, pollo a la parrilla y quesos semiduros."
+        },
+        "process": "Elaborada con lúpulos seleccionados de la más alta calidad y un cuidadoso proceso de dry-hopping.",
+        "maridaje": [
+            {
+                "emoji": "🍔",
+                "name": "Hamburguesas artesanales"
+            },
+            {
+                "emoji": "🍗",
+                "name": "Pollo a la parrilla"
+            },
+            {
+                "emoji": "🧀",
+                "name": "Quesos semiduros"
+            }
+        ]
+    },
+    {
+        "id": "C1001",
+        "name": "Sour de Corozo",
+        "categoria": "Cervezas",
+        "activo": true,
+        "inspiration": "Biodiversidad andina y raíces colombianas",
+        "description": "Una Sour Ale exótica elaborada con corozo 100% natural, ofreciendo acidez frutal refrescante.",
+        "price": 15000,
+        "abv": "5.0%",
+        "ibu": "8",
+        "image": "../src/assets/images/corozo-sour.png",
+        "colorHex": "#8B0015",
+        "colorName": "Rubí intenso",
+        "temperature": "6-8°C",
+        "legend": "El misticismo de nuestros frutos ancestrales reunido en una pócima vibrante y frutal.",
+        "fullDescription": "Sour Ale fermentada con levaduras salvajes y madurada con corozo seleccionado a mano. Posee una acidez marcada, un perfil frutal único y un color rubí espectacular que deleita a la vista y al paladar.",
+        "characteristics": {
+            "color": "Rubí intenso y vibrante.",
+            "aroma": "Frutos rojos silvestres, toques cítricos y notas florales delicadas.",
+            "sabor": "Predominantemente ácido, refrescante, con marcada presencia del corozo natural.",
+            "maridaje": "Ceviches de la costa, mariscos y quesos de cabra."
+        },
+        "process": "Fermentación especial con levaduras salvajes y pulpa de corozo natural agregada durante la maduración.",
+        "maridaje": [
+            {
+                "emoji": "🐟",
+                "name": "Ceviches"
+            },
+            {
+                "emoji": "🍤",
+                "name": "Mariscos"
+            },
+            {
+                "emoji": "🧀",
+                "name": "Quesos de cabra"
+            }
+        ]
+    },
+    {
+        "id": "C1002",
+        "name": "Sour de Piña",
+        "categoria": "Cervezas",
+        "activo": true,
+        "inspiration": "Adaptación de Catarina Sour y tropicalidad colombiana",
+        "description": "Catarina Sour con piña 100% natural, jugosa, tropical y sumamente refrescante.",
+        "price": 15000,
+        "abv": "4.0%",
+        "ibu": "",
+        "image": "../src/assets/images/sour-pina.png",
+        "colorHex": "#F2B705",
+        "colorName": "Dorado pálido",
+        "temperature": "6-8°C",
+        "legend": "El sol del trópico colombiano capturado en un elixir refrescante y frutal.",
+        "fullDescription": "Inspirada en el estilo Catarina Sour, esta cerveza incorpora la dulzura y frescura de la piña tropical colombiana balanceada con una acidez limpia lograda mediante fermentación salvaje.",
+        "characteristics": {
+            "color": "Dorado pálido, brillante y traslúcido.",
+            "aroma": "Piña madura fresca, matices cítricos y ligeros aromas campestres.",
+            "sabor": "Frutal a piña jugosa, final limpio, seco y agradablemente ácido.",
+            "maridaje": "Ensaladas frescas, ceviches y quesos de cabra."
+        },
+        "process": "Elaborada con piña seleccionada al 100% y fermentada a temperaturas controladas con bacterias lácticas y levaduras salvajes.",
+        "maridaje": [
+            {
+                "emoji": "🥗",
+                "name": "Ensaladas frescas"
+            },
+            {
+                "emoji": "🐟",
+                "name": "Ceviches"
+            },
+            {
+                "emoji": "🧀",
+                "name": "Quesos de cabra"
+            }
+        ]
+    },
+    {
+        "id": "C1003",
+        "name": "Stout Premium",
+        "categoria": "Cervezas",
+        "activo": true,
+        "inspiration": "Profundidad de la tierra andina",
+        "description": "Una Stout robusta, noble y auténtica. Perfil oscuro y profundo con notas intensas.",
+        "price": 16000,
+        "abv": "6.1%",
+        "ibu": "45",
+        "image": "../src/assets/images/ale-stout.png",
+        "colorHex": "#080606",
+        "colorName": "Negro intenso",
+        "temperature": "10-12°C",
+        "legend": "Oscura como la noche Muisca en la sagrada cordillera, un tributo al fuego y a la tierra.",
+        "fullDescription": "Nuestra Stout Premium ofrece una experiencia de cuerpo pleno y sabor audaz. Combina maltas tostadas que evocan notas a cacao fino y café de origen, con un final equilibrado.",
+        "characteristics": {
+            "color": "Negro intenso con espuma cremosa tono canela.",
+            "aroma": "Café fresco tostado, cacao amargo y sutiles notas a madera.",
+            "sabor": "Cuerpo pleno y robusto, notas de malta tostada, café espresso y chocolate oscuro con final ligeramente dulce.",
+            "maridaje": "Carnes a la parrilla, quesos maduros y postres de chocolate."
+        },
+        "process": "Elaboración tradicional utilizando agua pura de los Andes e infusión lenta de maltas tostadas especiales.",
+        "maridaje": [
+            {
+                "emoji": "🥩",
+                "name": "Carnes asadas"
+            },
+            {
+                "emoji": "🧀",
+                "name": "Quesos maduros"
+            },
+            {
+                "emoji": "🍰",
+                "name": "Postres de chocolate"
+            }
+        ]
+    },
+    {
+        "id": "C1004",
+        "name": "Barley Wine",
+        "categoria": "Cervezas",
+        "activo": true,
+        "inspiration": "El paso del tiempo y la madurez",
+        "description": "Cerveza compleja, robusta y licorosa, madurada en roble francés e infusionada en whiskey.",
+        "price": 18000,
+        "abv": "10.0%",
+        "ibu": "50",
+        "image": "../src/assets/images/ale-barleywine.png",
+        "colorHex": "#5A1F0F",
+        "colorName": "Ámbar oscuro",
+        "temperature": "12-14°C",
+        "legend": "Madurada en el silencio de los Andes, paciencia y carácter transformados en oro líquido.",
+        "fullDescription": "Una cerveza de guarda excepcional, de carácter robusto e intensa tibieza alcohólica. Las notas de roble francés y whiskey realzan su dulzura balanceada de miel y panela.",
+        "characteristics": {
+            "color": "Ámbar oscuro con destellos cobrizos.",
+            "aroma": "Caramelo tostado, miel silvestre, panela, roble andino y notas cálidas de whiskey.",
+            "sabor": "Dulzor complejo y robusto, con recuerdos de madera, licor fino y final prolongado único.",
+            "maridaje": "Carnes asadas, quesos maduros y postres de caramelo."
+        },
+        "process": "Madurada sobre astillas de roble francés previamente infusionadas en selecto whiskey de malta.",
+        "maridaje": [
+            {
+                "emoji": "🥩",
+                "name": "Carnes asadas"
+            },
+            {
+                "emoji": "🧀",
+                "name": "Quesos maduros"
+            },
+            {
+                "emoji": "🍮",
+                "name": "Postres de caramelo"
+            }
+        ]
+    },
+    {
+        "id": "P1005",
+        "name": "4-Pack APA Premium",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Xue en manada",
+        "description": "Edición especial que contiene 4 latas de nuestra clásica American Pale Ale.",
+        "price": 50000,
+        "abv": "4.8%",
+        "ibu": "38",
+        "image": "../src/assets/images/ale-apa.png",
+        "colorHex": "#D99A2B",
+        "colorName": "Dorado claro",
+        "temperature": "8-10°C",
+        "legend": "Perfecto para llevar la luz del sol Muisca a tus reuniones.",
+        "fullDescription": "4 latas de APA Premium empacadas en una caja especial de cartón kraft reforzado con manija para transporte fácil.",
+        "characteristics": {
+            "color": "Dorado claro.",
+            "aroma": "Cítricos y flores.",
+            "sabor": "Lúpulo fresco con final seco.",
+            "maridaje": "Hamburguesas y parrilladas con amigos."
+        },
+        "process": "Empacado manual en caja eco-amigable con separadores.",
+        "maridaje": [
+            {
+                "emoji": "🍔",
+                "name": "Hamburguesas"
+            },
+            {
+                "emoji": "🍻",
+                "name": "Reunión de amigos"
+            }
+        ]
+    },
+    {
+        "id": "P1006",
+        "name": "4-Pack Sour de Corozo",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Fruto andino multiplicado",
+        "description": "Edición especial con 4 latas de nuestra Sour Ale con corozo 100% natural.",
+        "price": 54000,
+        "abv": "5.0%",
+        "ibu": "8",
+        "image": "../src/assets/images/corozo-sour.png",
+        "colorHex": "#8B0015",
+        "colorName": "Rubí intenso",
+        "temperature": "6-8°C",
+        "legend": "Acidez y frescura frutal para compartir con los que más quieres.",
+        "fullDescription": "Llega 4 latas de nuestra exótica cerveza de corozo rubí intenso en su empaque especial de colección.",
+        "characteristics": {
+            "color": "Rubí intenso.",
+            "aroma": "Frutos rojos y cítricos.",
+            "sabor": "Ácido y marcadamente refrescante.",
+            "maridaje": "Ceviche y ensaladas frescas."
+        },
+        "process": "Empacado manual en caja de cartón kraft ecológica con manija.",
+        "maridaje": [
+            {
+                "emoji": "🐟",
+                "name": "Ceviche"
+            },
+            {
+                "emoji": "🥗",
+                "name": "Ensaladas frescas"
+            }
+        ]
+    },
+    {
+        "id": "P1007",
+        "name": "4-Pack Sour de Piña",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "El sabor del trópico x4",
+        "description": "Caja especial con 4 latas de nuestra refrescante Catarina Sour de piña.",
+        "price": 54000,
+        "abv": "4.0%",
+        "ibu": "",
+        "image": "../src/assets/images/sour-pina.png",
+        "colorHex": "#F2B705",
+        "colorName": "Dorado pálido",
+        "temperature": "6-8°C",
+        "legend": "La frescura tropical de la piña multiplicada por cuatro.",
+        "fullDescription": "Disfruta de 4 latas de nuestra Catarina Sour de piña, empacadas en una caja kraft transportadora.",
+        "characteristics": {
+            "color": "Dorado pálido.",
+            "aroma": "Piña fresca tropical.",
+            "sabor": "Ácido, jugoso y frutal.",
+            "maridaje": "Mariscos, ceviche y ensaladas."
+        },
+        "process": "Seleccionado y empacado manualmente en cajas reforzadas biodegradables.",
+        "maridaje": [
+            {
+                "emoji": "🍤",
+                "name": "Mariscos"
+            },
+            {
+                "emoji": "🥗",
+                "name": "Ensaladas"
+            }
+        ]
+    },
+    {
+        "id": "P1008",
+        "name": "4-Pack Stout Premium",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Profundidad x4",
+        "description": "Caja especial de 4 latas de nuestra Stout robusta, noble y profunda.",
+        "price": 58000,
+        "abv": "6.1%",
+        "ibu": "45",
+        "image": "../src/assets/images/ale-stout.png",
+        "colorHex": "#080606",
+        "colorName": "Negro intenso",
+        "temperature": "10-12°C",
+        "legend": "Comparte el misticismo y la fuerza de la Stout Premium.",
+        "fullDescription": "Llega 4 latas de nuestra Stout Premium en una caja transportadora con manija, ideal para los amantes del chocolate y café.",
+        "characteristics": {
+            "color": "Negro intenso.",
+            "aroma": "Café y chocolate tostado.",
+            "sabor": "Cuerpo pleno, tostado y ligeramente dulce.",
+            "maridaje": "Carnes asadas y postres de chocolate."
+        },
+        "process": "Empacado manual en caja kraft biodegradable con soportes antivibración.",
+        "maridaje": [
+            {
+                "emoji": "🥩",
+                "name": "Carnes asadas"
+            },
+            {
+                "emoji": "🍫",
+                "name": "Postres de chocolate"
+            }
+        ]
+    },
+    {
+        "id": "P1009",
+        "name": "4-Pack Barley Wine",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Tiempo para compartir",
+        "description": "Caja de colección con 4 latas de nuestra Barley Wine madurada en roble y whiskey.",
+        "price": 66000,
+        "abv": "10.0%",
+        "ibu": "50",
+        "image": "../src/assets/images/ale-barleywine.png",
+        "colorHex": "#5A1F0F",
+        "colorName": "Ámbar oscuro",
+        "temperature": "12-14°C",
+        "legend": "El regalo perfecto para los paladares más exigentes.",
+        "fullDescription": "Caja premium con 4 latas de nuestra cerveza de guarda Barley Wine. Un verdadero tesoro líquido de 10.0% ABV.",
+        "characteristics": {
+            "color": "Ámbar oscuro.",
+            "aroma": "Miel, caramelo, roble y whiskey.",
+            "sabor": "Dulzor complexo, licoroso y final prolongado único.",
+            "maridaje": "Quesos maduros, carnes asadas y postres de caramelo."
+        },
+        "process": "Empacado cuidadoso a mano en caja protectora de cartón kraft.",
+        "maridaje": [
+            {
+                "emoji": "🥩",
+                "name": "Carnes asadas"
+            },
+            {
+                "emoji": "🧀",
+                "name": "Quesos maduros"
+            }
+        ]
+    },
+    {
+        "id": "P1010",
+        "name": "Caja 24 APA Premium",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Xue en Abundancia",
+        "description": "Caja de 24 latas de APA Premium. Ideal para eventos y abastecer tu reserva personal.",
+        "price": 192000,
+        "abv": "4.8%",
+        "ibu": "38",
+        "image": "../src/assets/images/ale-apa.png",
+        "colorHex": "#D99A2B",
+        "colorName": "Dorado claro",
+        "temperature": "8-10°C",
+        "legend": "Un gran tesoro para grandes celebraciones.",
+        "fullDescription": "Caja de cartón corrugado reforzado conteniendo 24 latas de nuestra American Pale Ale. La mejor forma de llevar frescura Muisca a gran escala.",
+        "characteristics": {
+            "color": "Dorado claro brillante.",
+            "aroma": "Cítricos y flores.",
+            "sabor": "Lúpulo fresco con final seco.",
+            "maridaje": "Fiestas, asados y hamburguesadas."
+        },
+        "process": "Empacado y sellado de fábrica en cajas de alta resistencia.",
+        "maridaje": [
+            {
+                "emoji": "🍔",
+                "name": "Hamburguesas"
+            },
+            {
+                "emoji": "🎉",
+                "name": "Eventos especiales"
+            }
+        ]
+    },
+    {
+        "id": "P1011",
+        "name": "Caja 24 Sour de Corozo",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Tradición Ancestral x24",
+        "description": "Caja de 24 latas de Sour de Corozo. Acidez y color rubí en abundancia para compartir.",
+        "price": 192000,
+        "abv": "5.0%",
+        "ibu": "8",
+        "image": "../src/assets/images/corozo-sour.png",
+        "colorHex": "#8B0015",
+        "colorName": "Rubí intenso",
+        "temperature": "6-8°C",
+        "legend": "Toda la biodiversidad y el sabor de nuestra tierra en tu reserva.",
+        "fullDescription": "Caja con 24 latas de Sour Ale de corozo natural. La perfecta combinación de acidez y color rubí en un empaque de gran capacidad.",
+        "characteristics": {
+            "color": "Rubí intenso.",
+            "aroma": "Frutos rojos del bosque.",
+            "sabor": "Ácido, afrutado y refrescante.",
+            "maridaje": "Ceviches, mariscos y asados veraniegos."
+        },
+        "process": "Sellado industrial en cajas protectoras de cartón rígido.",
+        "maridaje": [
+            {
+                "emoji": "🐟",
+                "name": "Ceviche"
+            },
+            {
+                "emoji": "🍤",
+                "name": "Mariscos"
+            }
+        ]
+    },
+    {
+        "id": "P1012",
+        "name": "Caja 24 Sour de Piña",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Trópico Colombiano x24",
+        "description": "Caja de 24 latas de Sour de Piña. Refrescante acidez tropical para todo momento.",
+        "price": 192000,
+        "abv": "4.0%",
+        "ibu": "",
+        "image": "../src/assets/images/sour-pina.png",
+        "colorHex": "#F2B705",
+        "colorName": "Dorado pálido",
+        "temperature": "6-8°C",
+        "legend": "El sol del trópico andino para abastecer cualquier celebración.",
+        "fullDescription": "Caja de 24 unidades de Catarina Sour con piña 100% natural, ideal para calmar la sed en grandes reuniones.",
+        "characteristics": {
+            "color": "Dorado pálido.",
+            "aroma": "Piña fresca tropical.",
+            "sabor": "Ácido, jugoso y frutal.",
+            "maridaje": "Ensaladas frescas, mariscos y pasabocas."
+        },
+        "process": "Empacado de alta protección en caja corrugada eco-amigable.",
+        "maridaje": [
+            {
+                "emoji": "🥗",
+                "name": "Ensaladas frescas"
+            },
+            {
+                "emoji": "🍤",
+                "name": "Mariscos"
+            }
+        ]
+    },
+    {
+        "id": "P1013",
+        "name": "Caja 24 Stout Premium",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Fuerza de la Tierra x24",
+        "description": "Caja de 24 latas de Stout Premium. Cuerpo robusto y notas a café para abastecer tu hogar.",
+        "price": 192000,
+        "abv": "6.1%",
+        "ibu": "45",
+        "image": "../src/assets/images/ale-stout.png",
+        "colorHex": "#080606",
+        "colorName": "Negro intenso",
+        "temperature": "10-12°C",
+        "legend": "La profundidad del cacao y café de los Andes a gran escala.",
+        "fullDescription": "Caja conteniendo 24 latas de nuestra Stout Premium. Un verdadero festín para quienes aprecian los tonos oscuros, robustos y tostados.",
+        "characteristics": {
+            "color": "Negro intenso.",
+            "aroma": "Café espresso y chocolate.",
+            "sabor": "Tostado intenso con final sedoso y balanceado.",
+            "maridaje": "Carnes a la parrilla, quesos maduros y chocolates."
+        },
+        "process": "Empacado automatizado con insertos preventivos contra impactos.",
+        "maridaje": [
+            {
+                "emoji": "🥩",
+                "name": "Carnes a la parrilla"
+            },
+            {
+                "emoji": "🧀",
+                "name": "Quesos maduros"
+            }
+        ]
+    },
+    {
+        "id": "P1014",
+        "name": "Caja 24 Barley Wine",
+        "categoria": "Packs",
+        "activo": true,
+        "inspiration": "Sabiduría Licorosa x24",
+        "description": "Caja de 24 latas de Barley Wine. Cerveza de guarda con notas de roble y whiskey.",
+        "price": 192000,
+        "abv": "10.0%",
+        "ibu": "50",
+        "image": "../src/assets/images/ale-barleywine.png",
+        "colorHex": "#5A1F0F",
+        "colorName": "Ámbar oscuro",
+        "temperature": "12-14°C",
+        "legend": "El tesoro de guarda definitivo para coleccionistas y conocedores.",
+        "fullDescription": "Caja de 24 unidades de Barley Wine. Robusta, compleja e ideal para añejar y disfrutar lentamente en grandes ocasiones.",
+        "characteristics": {
+            "color": "Ámbar oscuro.",
+            "aroma": "Miel, caramelo, roble y whiskey.",
+            "sabor": "Dulzor complejo, licoroso y final prolongado único.",
+            "maridaje": "Quesos curados, asados selectos y postres finos."
+        },
+        "process": "Empacado manual en caja protectora reforzada de gran calibre.",
+        "maridaje": [
+            {
+                "emoji": "🥩",
+                "name": "Asados selectos"
+            },
+            {
+                "emoji": "🧀",
+                "name": "Quesos curados"
+            }
+        ]
+    }
+]

@@ -1,0 +1,104 @@
+[
+    {
+        "id": "M1015",
+        "name": "Gorra Trucker Oso",
+        "categoria": "Merchandising",
+        "activo": true,
+        "inspiration": "Símbolo de los Andes",
+        "description": "Gorra premium tipo trucker con bordado dorado en alto relieve de nuestro oso de anteojos.",
+        "price": 35000,
+        "abv": "",
+        "ibu": "",
+        "image": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#222223",
+        "colorName": "Negro y Dorado",
+        "temperature": "",
+        "legend": "Lleva el guardián de los Andes con orgullo y estilo en cada aventura.",
+        "fullDescription": "Gorra de alta calidad estilo Trucker con visera curva, malla respirable y ajuste regulable. Destaca por su bordado frontal dorado del oso de anteojos, emblema de Sierra Dorada.",
+        "characteristics": {
+            "color": "Negro con detalles dorados.",
+            "aroma": "N/A",
+            "sabor": "N/A",
+            "maridaje": "Tu pinta diaria y una buena cerveza fría."
+        },
+        "process": "Confeccionada con algodón de alta resistencia y poliéster respirable, con costuras reforzadas.",
+        "maridaje": [
+            {
+                "emoji": "🧢",
+                "name": "Pinta diaria"
+            },
+            {
+                "emoji": "🍺",
+                "name": "Cerveza fría"
+            }
+        ]
+    },
+    {
+        "id": "M1016",
+        "name": "Buzo Hoodie Muisca",
+        "categoria": "Merchandising",
+        "activo": true,
+        "inspiration": "Geometría Ancestral",
+        "description": "Hoodie premium de algodón perchado con diseños geométricos inspirados en el arte Muisca.",
+        "price": 120000,
+        "abv": "",
+        "ibu": "",
+        "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#034638",
+        "colorName": "Verde Selva",
+        "temperature": "",
+        "legend": "El abrigo de la cordillera andina expresado en texturas de alta calidad.",
+        "fullDescription": "Buzo con capota y bolsillo tipo canguro, confeccionado con algodón perchado ultra suave. Lleva un grabado frontal de simbología Muisca en tinta metalizada dorada.",
+        "characteristics": {
+            "color": "Verde selva con estampado dorado.",
+            "aroma": "N/A",
+            "sabor": "N/A",
+            "maridaje": "Climas fríos andinos."
+        },
+        "process": "Elaborado con algodón 100% perchado nacional y estampado térmico de alta durabilidad.",
+        "maridaje": [
+            {
+                "emoji": "❄️",
+                "name": "Climas fríos"
+            },
+            {
+                "emoji": "🪵",
+                "name": "Fogata"
+            }
+        ]
+    },
+    {
+        "id": "M1017",
+        "name": "Suéter Sol Dorado",
+        "categoria": "Merchandising",
+        "activo": true,
+        "inspiration": "Xue y la luz eterna",
+        "description": "Camiseta (suéter) premium en algodón peinado con el isotipo de Sierra Dorada en el pecho.",
+        "price": 45000,
+        "abv": "",
+        "ibu": "",
+        "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        "colorHex": "#E5E1E6",
+        "colorName": "Blanco Hueso",
+        "temperature": "",
+        "legend": "El sol dorado Muisca para acompañar tu día a día.",
+        "fullDescription": "Camiseta de cuello redondo y manga corta, hecha en algodón peinado de tacto suave. Lleva en el pecho el sol de Sierra Dorada impreso en screen dorado de alta definición.",
+        "characteristics": {
+            "color": "Blanco hueso con screen dorado.",
+            "aroma": "N/A",
+            "sabor": "N/A",
+            "maridaje": "Comodidad andina."
+        },
+        "process": "Hilado de algodón peinado con suavizado textil y costuras invisibles.",
+        "maridaje": [
+            {
+                "emoji": "👕",
+                "name": "Estilo casual"
+            },
+            {
+                "emoji": "☀️",
+                "name": "Días soleados"
+            }
+        ]
+    }
+]

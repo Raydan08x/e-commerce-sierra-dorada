@@ -139,9 +139,21 @@
                                 </div>
                             </div>
                             <div class="mb-3">
+                                <label for="imageFileSelector" class="form-label">O seleccionar imagen del proyecto</label>
+                                <select id="imageFileSelector" class="form-select">
+                                    <option value="" selected>-- Seleccionar imagen local --</option>
+                                    <option value="../src/assets/images/ale-apa.png">APA Premium</option>
+                                    <option value="../src/assets/images/corozo-sour.png">Sour de Corozo</option>
+                                    <option value="../src/assets/images/sour-pina.png">Sour de Piña</option>
+                                    <option value="../src/assets/images/ale-stout.png">Stout Premium</option>
+                                    <option value="../src/assets/images/ale-barleywine.png">Barley Wine</option>
+                                    <option value="../src/assets/images/banner-apa.png">Banner APA</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="imageFile" class="form-label">O subir imagen desde tu PC</label>
                                 <input type="file" id="imageFile" class="form-control" accept="image/png, image/jpeg, image/webp">
-                                <small class="form-text text-white-50">Soporta formatos PNG, JPG, JPEG y WebP (máx 2MB).</small>
+                                <small class="form-text text-white-50">Soporta PNG, JPG, JPEG y WebP. Se comprime automáticamente. A futuro requiere backend/base de datos.</small>
                             </div>
                         </div>
 
@@ -252,36 +264,76 @@
         </div>
     </main>
  
-    <!-- Modal para Cambiar Imagen -->
+    <!-- Modal para Gestionar Galería de Imágenes -->
     <div class="modal fade" id="modalCambiarImagen" tabindex="-1" aria-labelledby="modalCambiarImagenLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header border-secondary">
-                    <h5 class="modal-title" id="modalCambiarImagenLabel">Cambiar Imagen del Producto</h5>
+                    <h5 class="modal-title" id="modalCambiarImagenLabel">Gestionar Imágenes del Producto</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>Producto: <strong id="nombreProductoModal"></strong></p>
-                    <img id="imagenActualModal" src="" alt="Imagen actual" class="img-fluid rounded mb-3" style="max-height: 200px; object-fit: cover; width: 100%;">
+
+                    <!-- Galería actual -->
                     <div class="mb-3">
-                        <label for="inputUrlImagenModal" class="form-label">Nueva URL de la Imagen</label>
-                        <input type="url" class="form-control" id="inputUrlImagenModal" placeholder="https://ejemplo.com/nueva-imagen.jpg">
+                        <label class="form-label">Imágenes cargadas</label>
+                        <div id="galeriaImagenesModal" class="d-flex flex-wrap gap-2">
+                            <!-- Se inyectan dinámicamente -->
+                        </div>
+                        <p id="mensajeGaleriaVacia" class="text-white-50 small mt-2" style="display: none;">No hay imágenes cargadas.</p>
                     </div>
-                    <div class="text-center my-3">O</div>
+
+                    <hr class="border-secondary">
+
+                    <!-- Agregar nueva imagen -->
                     <div class="mb-3">
-                        <label for="inputFileImagenModal" class="form-label">Subir una imagen desde tu PC</label>
+                        <label class="form-label">Agregar nueva imagen</label>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <input type="url" class="form-control" id="inputUrlImagenModal" placeholder="https://ejemplo.com/imagen.jpg">
+                            </div>
+                            <div class="col-md-6">
+                                <select id="selectImageFitModal" class="form-select bg-dark text-light border-secondary">
+                                    <option value="cover" selected>Recortar (Llenar contenedor)</option>
+                                    <option value="contain">Alejar / Ajustar (Mostrar completa)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="selectImagenLocalModal" class="form-label">O seleccionar imagen del proyecto</label>
+                        <select id="selectImagenLocalModal" class="form-select bg-dark text-light border-secondary">
+                            <option value="" selected>-- Seleccionar imagen local --</option>
+                            <option value="../src/assets/images/ale-apa.png">APA Premium</option>
+                            <option value="../src/assets/images/corozo-sour.png">Sour de Corozo</option>
+                            <option value="../src/assets/images/sour-pina.png">Sour de Piña</option>
+                            <option value="../src/assets/images/ale-stout.png">Stout Premium</option>
+                            <option value="../src/assets/images/ale-barleywine.png">Barley Wine</option>
+                            <option value="../src/assets/images/banner-apa.png">Banner APA</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputFileImagenModal" class="form-label">O subir desde tu PC</label>
                         <input class="form-control" type="file" id="inputFileImagenModal" accept="image/png, image/jpeg, image/webp">
                         <small class="form-text text-white-50">
-                            Recomendado: 600x400 píxeles (proporción 3:2) para una mejor visualización.
+                            Soporta PNG, JPG, JPEG y WebP. Se comprimen automáticamente. Por el límite de localStorage, se recomienda no subir muchas imágenes grandes.
                         </small>
                     </div>
-                    <div id="mensajeModal" class="mensaje-error"></div>
 
+                    <button type="button" id="btnAgregarImagenModal" class="btn btn-outline-dorado w-100 mb-3">
+                        <i class="bi bi-plus-lg me-1"></i>Agregar a la galería
+                    </button>
+
+                    <div id="mensajeModal" class="mensaje-error"></div>
                     <input type="hidden" id="idProductoModal">
                 </div>
-                <div class="modal-footer border-secondary">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" id="btnGuardarImagenModal" class="btn btn-dorado">Guardar Cambios</button>
+                <div class="modal-footer border-secondary justify-content-between">
+                    <button type="button" id="btnQuitarImagenModal" class="btn btn-outline-danger"><i class="bi bi-trash me-1"></i>Dejar solo la principal</button>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnGuardarImagenModal" class="btn btn-dorado">Guardar Cambios</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -304,11 +356,42 @@
 
     <script type="module" src="../src/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Importamos el nuevo ToastManager -->
+
+    <!-- ToastManager: fallback inmediato para que admin.js siempre pueda mostrar toasts -->
+    <script>
+        (function() {
+            if (window.toastManager) return;
+            window.toastManager = {
+                show: function(message, type) {
+                    var icons = { success: 'bi-check-circle-fill', error: 'bi-exclamation-circle-fill', info: 'bi-info-circle-fill' };
+                    var iconClass = icons[type] || icons.info;
+                    var container = document.getElementById('toastContainer');
+                    if (!container) {
+                        container = document.createElement('div');
+                        container.id = 'toastContainer';
+                        document.body.appendChild(container);
+                    }
+                    var toast = document.createElement('div');
+                    toast.className = 'toast toast--' + (type || 'info');
+                    toast.innerHTML = '<i class="bi ' + iconClass + ' toast__icon"></i><p>' + message + '</p><button type="button" class="toast__close" aria-label="Cerrar">&times;</button>';
+                    toast.querySelector('.toast__close').addEventListener('click', function() { toast.remove(); });
+                    container.appendChild(toast);
+                    setTimeout(function() {
+                        toast.classList.add('toast--out');
+                        setTimeout(function() { toast.remove(); }, 400);
+                    }, 3500);
+                }
+            };
+        })();
+    </script>
+
+    <!-- Importamos el ToastManager real, que reemplazará el fallback -->
     <script type="module">
-        import { ToastManager } from '../js/components/ToastManager.js';
+        import { ToastManager } from '../src/js/components/ToastManager.js';
         window.toastManager = new ToastManager();
     </script>
-    <script src="../src/js/admin.js"></script>
+
+    <!-- Admin como módulo para poder usar los componentes de modales -->
+    <script type="module" src="../src/js/admin.js"></script>
 </body>
 </html>

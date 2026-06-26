@@ -256,31 +256,101 @@ body {
     bottom: 20px;
     display: grid;
     gap: 12px;
-    z-index: 2000;
+    z-index: 9999;
+    max-width: 380px;
+    width: calc(100% - 40px);
+    pointer-events: none;
+}
+
+#toastContainer .toast {
+    pointer-events: auto;
 }
 
 .toast {
-    padding: 14px 20px;
-    border-radius: 16px;
-    background: #2a2a2b;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: rgba(34, 34, 35, 0.98);
     color: var(--color-blanco-hueso);
-    border: 1px solid rgba(179, 162, 105, 0.5);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(179, 162, 105, 0.45);
+    border-left: 5px solid var(--color-dorado);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.04);
     font-weight: 600;
+    font-size: 0.95rem;
     opacity: 0;
     transform: translateY(20px);
-    animation: toast-in 0.5s forwards;
+    animation: toast-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    backdrop-filter: blur(6px);
 }
 
-.toast p { margin: 0; }
-.toast.toast--success { border-left: 5px solid #72e6a5; }
-.toast.toast--error { border-left: 5px solid #ff8c99; }
-.toast.toast--info { border-left: 5px solid #5b9eff; }
+.toast p {
+    margin: 0;
+    flex: 1;
+    line-height: 1.35;
+}
+
+.toast__icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.toast__close {
+    background: transparent;
+    border: none;
+    color: var(--color-blanco-hueso);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 0 0 8px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.toast__close:hover {
+    opacity: 1;
+}
+
+.toast.toast--success {
+    border-left-color: #72e6a5;
+}
+
+.toast.toast--success .toast__icon {
+    color: #72e6a5;
+}
+
+.toast.toast--error {
+    border-left-color: #ff8c99;
+}
+
+.toast.toast--error .toast__icon {
+    color: #ff8c99;
+}
+
+.toast.toast--info {
+    border-left-color: #5b9eff;
+}
+
+.toast.toast--info .toast__icon {
+    color: #5b9eff;
+}
+
+.toast.toast--out {
+    animation: toast-out 0.4s ease forwards;
+}
 
 @keyframes toast-in {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes toast-out {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
     }
 }
 
@@ -291,6 +361,71 @@ body {
 
 .table .bi-camera {
     cursor: help;
+}
+
+/* --- GALERÍA DE IMÁGENES EN MODAL ADMIN --- */
+
+.galeria-item {
+    position: relative;
+    width: 120px;
+    flex-shrink: 0;
+    border: 2px solid rgba(179, 162, 105, 0.35);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #111;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.galeria-item:hover {
+    border-color: var(--color-dorado);
+    transform: translateY(-2px);
+}
+
+.galeria-item--principal {
+    border-color: var(--color-dorado);
+    box-shadow: 0 0 0 2px rgba(179, 162, 105, 0.25);
+}
+
+.galeria-item img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    display: block;
+}
+
+.galeria-item__badge {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background: var(--color-dorado);
+    color: var(--color-negro);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+.galeria-item__actions {
+    display: flex;
+    gap: 4px;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.galeria-item__actions .btn {
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.btn-outline-dorado {
+    border: 1px solid var(--color-dorado);
+    color: var(--color-dorado);
+}
+
+.btn-outline-dorado:hover {
+    background-color: var(--color-dorado);
+    color: var(--color-negro);
 }
 
 /* CATÁLOGO */
