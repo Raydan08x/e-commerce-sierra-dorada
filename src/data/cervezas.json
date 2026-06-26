@@ -238,7 +238,7 @@
         "colorName": "Rubí intenso",
         "temperature": "6-8°C",
         "legend": "Acidez y frescura frutal para compartir con los que más quieres.",
-        "fullDescription": "Llega 4 latas de nuestra exótica cerveza de corozo rubí intenso en su empaque especial de colección.",
+        "fullDescription": "Lleva 4 latas de nuestra exótica cerveza de corozo rubí intenso en su empaque especial de colección.",
         "characteristics": {
             "color": "Rubí intenso.",
             "aroma": "Frutos rojos y cítricos.",
@@ -306,7 +306,7 @@
         "colorName": "Negro intenso",
         "temperature": "10-12°C",
         "legend": "Comparte el misticismo y la fuerza de la Stout Premium.",
-        "fullDescription": "Llega 4 latas de nuestra Stout Premium en una caja transportadora con manija, ideal para los amantes del chocolate y café.",
+        "fullDescription": "Lleva 4 latas de nuestra Stout Premium en una caja transportadora con manija, ideal para los amantes del chocolate y café.",
         "characteristics": {
             "color": "Negro intenso.",
             "aroma": "Café y chocolate tostado.",
@@ -344,7 +344,7 @@
         "characteristics": {
             "color": "Ámbar oscuro.",
             "aroma": "Miel, caramelo, roble y whiskey.",
-            "sabor": "Dulzor complexo, licoroso y final prolongado único.",
+            "sabor": "Complejo, licoroso y robusto.",
             "maridaje": "Quesos maduros, carnes asadas y postres de caramelo."
         },
         "process": "Empacado cuidadoso a mano en caja protectora de cartón kraft.",
@@ -483,7 +483,7 @@
             "sabor": "Tostado intenso con final sedoso y balanceado.",
             "maridaje": "Carnes a la parrilla, quesos maduros y chocolates."
         },
-        "process": "Empacado automatizado con insertos preventivos contra impactos.",
+        "process": "Empacado automatizado con insertos protectores contra impactos.",
         "maridaje": [
             {
                 "emoji": "🥩",

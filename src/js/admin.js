@@ -4,6 +4,8 @@ import { ConfirmModal } from './components/ConfirmModal.js';
 console.log('[SD-DEBUG] admin.js INICIO de ejecución');
 // Constantes para las claves de localStorage, para evitar errores de tipeo.
 const CLAVE_PRODUCTOS = "productosSierraDorada";
+const CLAVE_VERSION = "versionProductosSierraDorada";
+const VERSION_DATOS = "2";
 const CLAVE_SESION = "sesionSierraDorada";
 
 let productos = [];
@@ -210,8 +212,9 @@ function protegerRutaAdmin() {
 // --- LÓGICA DE DATOS (PRODUCTOS) ---
 async function cargarProductos() {
     let productosGuardados = localStorage.getItem(CLAVE_PRODUCTOS);
+    const versionGuardada = localStorage.getItem(CLAVE_VERSION);
 
-    if (productosGuardados !== null) {
+    if (productosGuardados !== null && versionGuardada === VERSION_DATOS) {
         try {
             const parsed = JSON.parse(productosGuardados);
             const tieneIdsAntiguos = Array.isArray(parsed) && parsed.some(p => p.id && p.id.startsWith('S'));
@@ -225,13 +228,16 @@ async function cargarProductos() {
             localStorage.removeItem(CLAVE_PRODUCTOS);
             productosGuardados = null;
         }
+    } else {
+        localStorage.removeItem(CLAVE_PRODUCTOS);
+        productosGuardados = null;
     }
 
     if (productosGuardados === null) {
         try {
             const [resCervezas, resMerch] = await Promise.all([
-                fetch('../src/data/cervezas.json'),
-                fetch('../src/data/merchandising.json')
+                fetch('../src/data/cervezas.json?v=' + VERSION_DATOS),
+                fetch('../src/data/merchandising.json?v=' + VERSION_DATOS)
             ]);
             const cervezas = await resCervezas.json();
             const merch = await resMerch.json();
@@ -247,6 +253,7 @@ async function cargarProductos() {
 function guardarProductos() {
     try {
         localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(productos));
+        localStorage.setItem(CLAVE_VERSION, VERSION_DATOS);
         return true;
     } catch (error) {
         console.error('[SD-DEBUG] Error al guardar productos:', error);

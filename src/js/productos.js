@@ -1,6 +1,8 @@
 import { ProductDetailsModal } from './components/ProductDetailsModal.js';
 
 const CLAVE_PRODUCTOS = "productosSierraDorada";
+const CLAVE_VERSION = "versionProductosSierraDorada";
+const VERSION_DATOS = "2";
 const IMAGEN_PLACEHOLDER = "https://placehold.co/600x400/222223/B3A269?text=Imagen+Pendiente";
 
 const catalogoProductos = document.getElementById("catalogoProductos");
@@ -41,8 +43,9 @@ function obtenerImagenes(producto) {
 // y si no existen, carga los datos del archivo JSON inicial.
 async function obtenerProductos() {
     let productosGuardados = localStorage.getItem(CLAVE_PRODUCTOS);
+    const versionGuardada = localStorage.getItem(CLAVE_VERSION);
 
-    if (productosGuardados) {
+    if (productosGuardados && versionGuardada === VERSION_DATOS) {
         try {
             const parsed = JSON.parse(productosGuardados);
             const tieneIdsAntiguos = Array.isArray(parsed) && parsed.some(p => p.id && p.id.startsWith('S'));
@@ -56,12 +59,15 @@ async function obtenerProductos() {
             localStorage.removeItem(CLAVE_PRODUCTOS);
             productosGuardados = null;
         }
+    } else {
+        localStorage.removeItem(CLAVE_PRODUCTOS);
+        productosGuardados = null;
     }
 
     try {
         const [resCervezas, resMerch] = await Promise.all([
-            fetch('../src/data/cervezas.json'),
-            fetch('../src/data/merchandising.json')
+            fetch('../src/data/cervezas.json?v=' + VERSION_DATOS),
+            fetch('../src/data/merchandising.json?v=' + VERSION_DATOS)
         ]);
         const cervezas = await resCervezas.json();
         const merch = await resMerch.json();
@@ -168,7 +174,7 @@ function renderizarCatalogo() {
                             `).join('');
                             const items = imagenes.map((img, i) => `
                                 <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                    <img src="${img.url}" alt="${producto.name} - ${i + 1}" class="producto-img" style="object-fit: ${img.fit || 'cover'}; height: 220px;">
+                                    <img src="${img.url}" onerror="this.src='${IMAGEN_PLACEHOLDER}'" alt="${producto.name} - ${i + 1}" class="producto-img" style="object-fit: ${img.fit || 'cover'}; height: 220px;">
                                 </div>
                             `).join('');
                             imagenHtml = `
@@ -188,7 +194,7 @@ function renderizarCatalogo() {
                         } else {
                             imagenHtml = `
                                 <div class="producto-img-container"${imagenPrincipal.fit === 'contain' ? ' style="background-color: #111;"' : ''}>
-                                    <img src="${imagenPrincipal.url}" alt="${producto.name}" class="producto-img" style="object-fit: ${imagenPrincipal.fit || 'cover'};">
+                                    <img src="${imagenPrincipal.url}" onerror="this.src='${IMAGEN_PLACEHOLDER}'" alt="${producto.name}" class="producto-img" style="object-fit: ${imagenPrincipal.fit || 'cover'};">
                                     <div class="producto-img-overlay"></div>
                                 </div>
                             `;
