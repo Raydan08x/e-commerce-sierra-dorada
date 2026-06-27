@@ -109,7 +109,7 @@ body {
 }
 
 .admin-header h1 {
-    font-family: var(--fuente-destacados);
+    font-family: var(--fuente-titulos);
     font-weight: 700;
     color: var(--color-dorado);
     margin: 0;
