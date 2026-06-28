@@ -63,14 +63,14 @@ h3 {
 }
 
 .subtitulo {
-    font-family: var(--fuente-destacados);
+    font-family: var(--fuente-titulos);
     font-size: 1.25rem;
     letter-spacing: 0;
     font-weight: 600;
 }
 
 p {
-    font-family: var(--fuente-parrafos);
+    font-family: var(--fuente-titulos);
     font-size: 1.125rem;
     letter-spacing: 0;
     line-height: 1.6;

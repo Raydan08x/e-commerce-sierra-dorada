@@ -1,11 +1,30 @@
+:root {
+    --color-dorado: #B3A269;
+    --color-negro: #222223;
+    --color-blanco-hueso: #E5E1E6;
+    --color-blancox: #FFF8F8;
+    --color-verde: #034638;
+    --color-gris: #75787B;
+    --color-magenta: #6C1D45;
+    --fuente-titulos: 'Dorsa', 'sans-serif';
+    --fuente-parrafos: 'Barlow', Arial, Helvetica, sans-serif;
+    --fuente-destacados: 'Barlow Condensed', Arial, Helvetica, sans-serif;
+
+    --nav-bg: rgba(34, 34, 35, 0.65);
+    --nav-border: rgba(179, 162, 105, 0.25);
+    --nav-text: var(--color-blanco-hueso);
+    --nav-primary: var(--color-dorado);
+    --nav-secondary: var(--color-blanco-hueso);
+}
+
 .producto-modal__titulo {
-    font-family: var(--fuente-destacados);
+    font-family: var(--fuente-titulos);
     color: var(--color-dorado);
     font-size: 2rem;
 }
 
 .producto-modal__subtitulo {
-    font-family: var(--fuente-destacados);
+    font-family: var(--fuente-titulos);
     color: var(--color-dorado);
 }
 
