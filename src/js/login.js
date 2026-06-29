@@ -45,4 +45,25 @@ formLogin.addEventListener("submit", function (evento) {
     } else {
         window.location.href = "productos.html";
     }
+
+    });
+    // Uso del ojo de la contraseña
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('password');
+    const togglePasswordIcon = document.getElementById('togglePassword');
+  
+    const toggleContainer = togglePasswordIcon.parentElement; 
+
+    toggleContainer.addEventListener('click', () => {
+       
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+
+       
+        if (isPassword) {
+            togglePasswordIcon.classList.replace('bi-eye', 'bi-eye-slash');
+        } else {
+            togglePasswordIcon.classList.replace('bi-eye-slash', 'bi-eye');
+        }
+    });
 });
