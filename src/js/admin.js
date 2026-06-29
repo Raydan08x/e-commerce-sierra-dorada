@@ -420,6 +420,12 @@ function validarFormulario() {
     const nameVal = name ? name.value.trim() : '';
     const priceVal = price ? Number(price.value) : 0;
 
+    console.log("ID:", idVal);
+    console.log("NAME:", nameVal);
+    console.log("PRICE:", priceVal);
+    console.log("MODO:", modoEdicion ? modoEdicion.value : "no existe");
+    console.log("EXISTE:", existeProducto(idVal));
+
     if (mensajeProducto) {
         mensajeProducto.textContent = '';
         mensajeProducto.className = '';
@@ -456,7 +462,7 @@ function parsearMaridaje(texto) {
         const name = item.trim();
         const nameLower = name.toLowerCase();
         let emoji = "🍽️"; // Emoji por defecto
-        
+
         for (const key in emojiMap) {
             if (nameLower.includes(key)) {
                 emoji = emojiMap[key];
@@ -600,7 +606,7 @@ async function editarProducto(idProducto) {
     // Llenar el formulario con los datos del producto safely.
     if (id) id.value = productoEncontrado.id || '';
     if (name) name.value = productoEncontrado.name || '';
-    
+
     const catSelector = document.getElementById("categoriaSelector");
     if (catSelector) {
         catSelector.value = productoEncontrado.categoria || 'Cervezas';
@@ -629,7 +635,7 @@ async function editarProducto(idProducto) {
     if (legend) legend.value = productoEncontrado.legend || '';
     if (fullDescription) fullDescription.value = productoEncontrado.fullDescription || '';
     if (process) process.value = productoEncontrado.process || '';
-    
+
     const chars = productoEncontrado.characteristics || {};
     if (characteristics_color) characteristics_color.value = chars.color || '';
     if (characteristics_aroma) characteristics_aroma.value = chars.aroma || '';
@@ -723,8 +729,8 @@ function filtrarYMostrarProductos() {
 
     // 2. Filtrar por texto de búsqueda
     if (consulta) {
-        filtrados = filtrados.filter(p => 
-            p.id.toLowerCase().includes(consulta) || 
+        filtrados = filtrados.filter(p =>
+            p.id.toLowerCase().includes(consulta) ||
             p.name.toLowerCase().includes(consulta) ||
             (p.inspiration && p.inspiration.toLowerCase().includes(consulta))
         );
@@ -786,13 +792,13 @@ document.getElementById('formulario-tab').addEventListener('show.bs.tab', functi
 
 inputBusqueda.addEventListener("input", filtrarYMostrarProductos);
 
-seleccionarTodo.addEventListener("change", function() {
+seleccionarTodo.addEventListener("change", function () {
     const checkboxes = document.querySelectorAll('#tablaProductos input[type="checkbox"]');
     checkboxes.forEach(cb => cb.checked = seleccionarTodo.checked);
     actualizarEstadoAccionesLote();
 });
 
-tablaProductos.addEventListener('change', function(e) {
+tablaProductos.addEventListener('change', function (e) {
     if (e.target.matches('input[type="checkbox"]')) {
         actualizarEstadoAccionesLote();
     }
@@ -814,7 +820,7 @@ function seleccionarColorPredefinido(hex, name) {
 
 const contenedorColoresPredefinidos = document.getElementById("contenedorColoresPredefinidos");
 if (contenedorColoresPredefinidos) {
-    contenedorColoresPredefinidos.addEventListener("click", function(e) {
+    contenedorColoresPredefinidos.addEventListener("click", function (e) {
         const btn = e.target.closest(".btn-color-predefinido");
         if (!btn) return;
         seleccionarColorPredefinido(btn.dataset.color, btn.dataset.nombre);
@@ -826,10 +832,10 @@ if (contenedorColoresPredefinidos) {
     const _colorHex = document.getElementById("colorHex");
     const _colorHexPicker = document.getElementById("colorHexPicker");
     if (_colorHex && _colorHexPicker) {
-        _colorHexPicker.addEventListener("input", function() {
+        _colorHexPicker.addEventListener("input", function () {
             _colorHex.value = _colorHexPicker.value.toUpperCase();
         });
-        _colorHex.addEventListener("input", function() {
+        _colorHex.addEventListener("input", function () {
             if (/^#[0-9A-F]{6}$/i.test(_colorHex.value)) {
                 _colorHexPicker.value = _colorHex.value;
             }
@@ -840,7 +846,7 @@ if (contenedorColoresPredefinidos) {
 // Enlazar selector de categoría para ocultar/mostrar detalles de cerveza
 const catSelector = document.getElementById("categoriaSelector");
 if (catSelector) {
-    catSelector.addEventListener("change", function() {
+    catSelector.addEventListener("change", function () {
         toggleSeccionCerveza(catSelector.value);
     });
 }
@@ -848,7 +854,7 @@ if (catSelector) {
 // Enlazar selector de imagen local del proyecto
 const imageFileSelector = document.getElementById("imageFileSelector");
 if (imageFileSelector) {
-    imageFileSelector.addEventListener("change", function(evento) {
+    imageFileSelector.addEventListener("change", function (evento) {
         const ruta = evento.target.value;
         if (!ruta) return;
 
@@ -865,7 +871,7 @@ if (imageFileSelector) {
 // Enlazar input de archivo local para cargar imagen desde PC (comprimida para localStorage)
 const imageFile = document.getElementById("imageFile");
 if (imageFile) {
-    imageFile.addEventListener("change", async function(evento) {
+    imageFile.addEventListener("change", async function (evento) {
         const archivo = evento.target.files[0];
         if (!archivo) return;
 
@@ -952,7 +958,7 @@ async function inicializarAdmin() {
     });
 
     // Wrapper global para abrir el modal desde los botones de la tabla
-    window.abrirModalImagen = function(idProducto) {
+    window.abrirModalImagen = function (idProducto) {
         if (window.imageModalManager) window.imageModalManager.abrir(idProducto);
     };
 
