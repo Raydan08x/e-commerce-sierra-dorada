@@ -1,0 +1,222 @@
+.carrito-page{
+
+    margin-top:120px;
+    margin-bottom:90px;
+
+}
+
+/*===========================*/
+
+.carrito-card{
+
+    background:#1f1f1f;
+
+    border:1px solid rgba(179,162,105,.30);
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    margin-bottom:40px;
+
+    transition:.3s;
+
+}
+
+.carrito-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#B3A269;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.30);
+
+}
+
+/*===========================*/
+
+.carrito-imagen{
+
+    overflow:hidden;
+
+}
+
+.carrito-imagen img{
+
+    width:100%;
+
+    height:330px;
+
+    object-fit:cover;
+
+    transition:.4s;
+
+}
+
+.carrito-card:hover img{
+
+    transform:scale(1.05);
+
+}
+
+/*===========================*/
+
+.carrito-contenido{
+
+    padding:28px;
+
+    color:white;
+
+}
+
+.carrito-contenido h3{
+
+    color:#B3A269;
+
+    font-family:var(--fuente-destacados);
+
+    margin-bottom:15px;
+
+    letter-spacing:1px;
+
+}
+
+.carrito-contenido p{
+
+    color:rgba(255,255,255,.72);
+
+    line-height:1.7;
+
+}
+
+/*===========================*/
+
+.carrito-precio{
+
+    color:#d8bf67;
+
+    font-size:1.35rem;
+
+    font-weight:bold;
+
+    margin-top:18px;
+
+}
+
+/*===========================*/
+
+.carrito-controles{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin:30px 0;
+
+}
+
+.carrito-controles button{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+}
+
+.carrito-controles span{
+
+    font-size:1.3rem;
+
+    font-weight:bold;
+
+    color:white;
+
+    width:40px;
+
+    text-align:center;
+
+}
+
+/*===========================*/
+
+.carrito-subtotal{
+
+    text-align:center;
+
+    color:#B3A269;
+
+    font-size:1.2rem;
+
+    margin-bottom:25px;
+
+}
+
+/*===========================*/
+
+.btn-eliminar{
+
+    width:100%;
+
+}
+
+/*===========================*/
+
+.carrito-total{
+
+    margin-top:60px;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    background:rgba(179,162,105,.08);
+
+    border:1px solid rgba(179,162,105,.30);
+
+    text-align:center;
+
+}
+
+.carrito-total h2{
+
+    color:#B3A269;
+
+    margin-bottom:25px;
+
+    font-family:var(--fuente-destacados);
+
+}
+
+.carrito-total span{
+
+    display:block;
+
+    margin-top:12px;
+
+    font-size:2rem;
+
+    color:white;
+
+}
+
+.carrito-total .btn{
+
+    padding:12px 40px;
+
+}
+
+@media(max-width:768px){
+
+.carrito-imagen img{
+
+height:220px;
+
+}
+
+}

@@ -71,7 +71,9 @@ export class Navbar {
 
         <div class="navbar-actions">
           <button class="icon-button icon-button--outline" type="button">
-            <i class="bi bi-cart"></i> Carrito
+            <a href="${this.htmlPath}carrito.html">
+              <i class="bi bi-cart"></i> Carrito
+            </a>
           </button>
 
           ${this.getBotonSesionHTML()}

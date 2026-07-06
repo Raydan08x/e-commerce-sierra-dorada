@@ -1,4 +1,5 @@
 import { ProductDetailsModal } from './components/ProductDetailsModal.js';
+import { agregarProducto } from './carritoStorage.js';
 
 const CLAVE_PRODUCTOS = "productosSierraDorada";
 const CLAVE_VERSION = "versionProductosSierraDorada";
@@ -251,7 +252,8 @@ function renderizarCatalogo() {
  
                                         <div class="producto-actions">
                                             <button class="btn btn-outline-dorado" onclick="abrirDetallesModal('${producto.id}')">Ver Detalles</button>
-                                            <button class="btn btn-dorado"><i class="bi bi-cart-plus"></i> Agregar</button>
+                                            <button class="btn btn-dorado btn-agregar-carrito" 
+                                            data-id="${producto.id}"><i class="bi bi-cart-plus"></i> Agregar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -274,6 +276,26 @@ function renderizarCatalogo() {
             </div>
         `;
     }
+    const botonesAgregar = document.querySelectorAll(".btn-agregar-carrito");
+    botonesAgregar.forEach((boton) => {
+
+    boton.addEventListener("click", () => {
+
+        const id = boton.dataset.id;
+
+        const producto = productosGlobales.find(p => p.id === id);
+
+        if (!producto) {
+            return;
+        }
+
+        agregarProducto(producto);
+
+        alert("Producto agregado al carrito.");
+
+    });
+
+});
 }
 
 // Abrir modal premium de detalles al hacer click en "Ver Detalles"
@@ -327,4 +349,4 @@ styleButtons.forEach(btn => {
     });
 });
 
-mostrarCatalogo();
+mostrarCatalogo();
