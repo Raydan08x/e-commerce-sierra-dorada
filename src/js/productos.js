@@ -1,6 +1,9 @@
 import { ProductDetailsModal } from './components/ProductDetailsModal.js';
 import { agregarProducto } from './carritoStorage.js';
 
+// Claves utilizadas para almacenar la información
+// del catálogo en el navegador.
+
 const CLAVE_PRODUCTOS = "productosSierraDorada";
 const CLAVE_VERSION = "versionProductosSierraDorada";
 const VERSION_DATOS = "2";
@@ -39,9 +42,12 @@ function obtenerImagenes(producto) {
     return normalizarImagenes(producto);
 }
 
-// Esta función asíncrona obtiene los productos.
-// Prioriza los datos de localStorage (que pueden tener cambios del admin)
-// y si no existen, carga los datos del archivo JSON inicial.
+/**
+ * Obtiene los productos del catálogo.
+ * Primero intenta cargarlos desde localStorage para conservar
+ * los cambios realizados desde el panel de administración.
+ * Si no existen datos almacenados, utiliza los archivos JSON.
+ */
 async function obtenerProductos() {
     let productosGuardados = localStorage.getItem(CLAVE_PRODUCTOS);
     const versionGuardada = localStorage.getItem(CLAVE_VERSION);
@@ -54,6 +60,7 @@ async function obtenerProductos() {
                 localStorage.removeItem(CLAVE_PRODUCTOS);
                 productosGuardados = null;
             } else {
+                console.log("Productos cargados desde localStorage.");
                 return parsed;
             }
         } catch (e) {
@@ -72,16 +79,31 @@ async function obtenerProductos() {
         ]);
         const cervezas = await resCervezas.json();
         const merch = await resMerch.json();
-        return [...cervezas, ...merch];
+        const productos = [...cervezas, ...merch];
+
+        localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(productos));
+        localStorage.setItem(CLAVE_VERSION, VERSION_DATOS);
+
+        console.log("Productos cargados desde los archivos JSON.");
+
+        return productos;
     } catch (error) {
         console.error("Error al cargar los archivos JSON de productos:", error);
         return [];
     }
 }
 
+// Lista utilizada por todo el catálogo.
+// Se mantiene sincronizada con localStorage.
+
 let productosGlobales = [];
 let categoriaActiva = "todos";
 let estiloActivo = "todos";
+
+/**
+ * Determina si un producto pertenece
+ * al estilo seleccionado.
+ */
 
 function cumpleEstilo(producto, estilo) {
     if (estilo === 'todos') return true;
@@ -89,7 +111,7 @@ function cumpleEstilo(producto, estilo) {
     const descLower = (producto.description || "").toLowerCase();
     const isSour = nameLower.includes('sour') || descLower.includes('sour');
     const isAle = (nameLower.includes('ale') || nameLower.includes('apa') || nameLower.includes('barley') || nameLower.includes('stout') || descLower.includes('ale') || descLower.includes('pale ale') || descLower.includes('stout')) && !isSour;
-    
+
     if (estilo === 'sour') return isSour;
     if (estilo === 'ale') return isAle;
     return true;
@@ -100,6 +122,10 @@ async function mostrarCatalogo() {
     renderizarCatalogo();
 }
 
+/******************************************************
+ * Renderiza el catálogo aplicando los filtros
+ * de categoría y estilo seleccionados.
+ ******************************************************/
 function renderizarCatalogo() {
     catalogoProductos.innerHTML = "";
 
@@ -163,22 +189,22 @@ function renderizarCatalogo() {
                 </h2>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
                     ${cat.productos.map(producto => {
-                        const precioFormateado = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(producto.price);
-                        const imagenes = obtenerImagenes(producto);
-                        const imagenPrincipal = obtenerImagenPrincipal(producto);
-                        const carouselId = `carousel-${producto.id}`;
+            const precioFormateado = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(producto.price);
+            const imagenes = obtenerImagenes(producto);
+            const imagenPrincipal = obtenerImagenPrincipal(producto);
+            const carouselId = `carousel-${producto.id}`;
 
-                        let imagenHtml = '';
-                        if (imagenes.length > 1) {
-                            const indicadores = imagenes.map((img, i) => `
+            let imagenHtml = '';
+            if (imagenes.length > 1) {
+                const indicadores = imagenes.map((img, i) => `
                                 <button type="button" data-bs-target="#${carouselId}" data-bs-slide-to="${i}" ${i === 0 ? 'class="active" aria-current="true"' : ''} aria-label="Slide ${i + 1}"></button>
                             `).join('');
-                            const items = imagenes.map((img, i) => `
+                const items = imagenes.map((img, i) => `
                                 <div class="carousel-item ${i === 0 ? 'active' : ''}">
                                     <img src="${img.url}" onerror="this.src='${IMAGEN_PLACEHOLDER}'" alt="${producto.name} - ${i + 1}" class="producto-img" style="object-fit: ${img.fit || 'cover'}; height: 220px;">
                                 </div>
                             `).join('');
-                            imagenHtml = `
+                imagenHtml = `
                                 <div id="${carouselId}" class="carousel slide producto-img-container" data-bs-ride="carousel" style="background-color: #111;">
                                     <div class="carousel-indicators">${indicadores}</div>
                                     <div class="carousel-inner">${items}</div>
@@ -192,16 +218,16 @@ function renderizarCatalogo() {
                                     </button>
                                 </div>
                             `;
-                        } else {
-                            imagenHtml = `
+            } else {
+                imagenHtml = `
                                 <div class="producto-img-container"${imagenPrincipal.fit === 'contain' ? ' style="background-color: #111;"' : ''}>
                                     <img src="${imagenPrincipal.url}" onerror="this.src='${IMAGEN_PLACEHOLDER}'" alt="${producto.name}" class="producto-img" style="object-fit: ${imagenPrincipal.fit || 'cover'};">
                                     <div class="producto-img-overlay"></div>
                                 </div>
                             `;
-                        }
+            }
 
-                        const detallesHtml = (producto.abv || producto.ibu || producto.temperature) ? `
+            const detallesHtml = (producto.abv || producto.ibu || producto.temperature) ? `
                             <div class="producto-detalles-extra">
                                 <h4 class="producto-subtitulo">Detalles</h4>
                                 <div class="producto-specs">
@@ -211,10 +237,10 @@ function renderizarCatalogo() {
                                 </div>
                             </div>
                         ` : '';
- 
-                        const subtituloSeccion = producto.id.startsWith('M') ? "Estilo / Uso" : "Maridaje";
-                        const maridajeLimitado = (producto.maridaje || []).slice(0, 3);
-                        const maridajeHtml = (maridajeLimitado.length > 0) ? `
+
+            const subtituloSeccion = producto.id.startsWith('M') ? "Estilo / Uso" : "Maridaje";
+            const maridajeLimitado = (producto.maridaje || []).slice(0, 3);
+            const maridajeHtml = (maridajeLimitado.length > 0) ? `
                             <div class="producto-maridaje">
                                 <h4 class="producto-subtitulo">${subtituloSeccion}</h4>
                                 <ul>
@@ -222,18 +248,18 @@ function renderizarCatalogo() {
                                 </ul>
                             </div>
                         ` : '';
- 
-                        const extraInfoHtml = (detallesHtml || maridajeHtml) ? `
+
+            const extraInfoHtml = (detallesHtml || maridajeHtml) ? `
                             <div class="producto-extra-info">
                                 ${detallesHtml}
                                 ${maridajeHtml}
                             </div>
                         ` : '';
- 
-                        const colorSrmHtml = producto.colorHex ? 
-                            `<div class="producto-color-srm" title="${producto.colorName || ''}" style="background-color: ${producto.colorHex};"></div>` : '';
- 
-                        return `
+
+            const colorSrmHtml = producto.colorHex ?
+                `<div class="producto-color-srm" title="${producto.colorName || ''}" style="background-color: ${producto.colorHex};"></div>` : '';
+
+            return `
                             <article class="col">
                                 <div class="producto-card">
                                     ${imagenHtml}
@@ -259,11 +285,11 @@ function renderizarCatalogo() {
                                 </div>
                             </article>
                         `;
-                    }).join('')}
+        }).join('')}
                 </div>
             </section>
         `;
-        
+
         catalogoProductos.insertAdjacentHTML('beforeend', sectionHtml);
     });
 
@@ -279,27 +305,30 @@ function renderizarCatalogo() {
     const botonesAgregar = document.querySelectorAll(".btn-agregar-carrito");
     botonesAgregar.forEach((boton) => {
 
-    boton.addEventListener("click", () => {
+        boton.addEventListener("click", () => {
 
-        const id = boton.dataset.id;
+            const id = boton.dataset.id;
 
-        const producto = productosGlobales.find(p => p.id === id);
+            const producto = productosGlobales.find(p => p.id === id);
 
-        if (!producto) {
-            return;
-        }
+            if (!producto) {
+                return;
+            }
 
-        agregarProducto(producto);
+            agregarProducto(producto);
 
-        alert("Producto agregado al carrito.");
+            if (window.toastManager) {
+                window.toastManager.show("Producto agregado al carrito.", "success");
+            } else {
+                alert("Producto agregado al carrito.");
+            }
+        });
 
     });
-
-});
 }
 
 // Abrir modal premium de detalles al hacer click en "Ver Detalles"
-window.abrirDetallesModal = function(id) {
+window.abrirDetallesModal = function (id) {
     const producto = productosGlobales.find(p => p.id === id);
     if (!producto) return;
     productDetailsModal.abrir(producto);
@@ -315,7 +344,7 @@ catButtons.forEach(btn => {
         // Cambiar clase activa en botones de categoría
         catButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
-        
+
         categoriaActiva = btn.getAttribute("data-category");
 
         // Mostrar u ocultar el filtro de estilo para Cervezas
