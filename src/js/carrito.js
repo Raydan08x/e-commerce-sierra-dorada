@@ -6,6 +6,8 @@ import {
 
 const contenedorCarrito = document.getElementById("contenedorCarrito");
 const totalCarrito = document.getElementById("totalCarrito");
+const subtotalCarrito = document.getElementById("subtotalCarrito");
+const envioCarrito = document.getElementById("envioCarrito");
 
 mostrarCarrito();
 
@@ -16,24 +18,36 @@ function mostrarCarrito() {
     if (carrito.length === 0) {
 
         contenedorCarrito.innerHTML = `
-            <div class="alert alert-warning text-center">
-                Tu carrito está vacío.
-            </div>
+
+        <div class="carrito-vacio">
+            <i class="bi bi-cart-x"></i>
+            <h2>Carrito vacío</h2>
+            <div class="linea-vacia"></div>
+            <p>Agrega productos al carrito para verlos aquí.
+            <br> ¡Explora nuestra tienda y encuentra lo que necesitas!</p>
+            </p>
+            <a href="productos.html" class="btn-explorar">
+              <i class="bi bi-cup-straw"></i>
+            <span>Explorar productos</span>
+            </a>
+        </div>
         `;
 
         totalCarrito.textContent = "$0";
+        subtotalCarrito.textContent = "$0";
+        envioCarrito.textContent = "$0";
 
         return;
     }
 
     let html = "";
-    let total = 0;
+    let subtotal = 0;
 
     carrito.forEach(producto => {
 
-        const subtotal = producto.price * producto.cantidad;
+        const subProd = producto.price * producto.cantidad;
 
-        total += subtotal;
+        subtotal += subProd;
 
         html += `
 
@@ -87,7 +101,7 @@ function mostrarCarrito() {
         <div class="carrito-subtotal">
 
             Subtotal:
-            <strong>$${subtotal.toLocaleString()}</strong>
+            <strong>$${subProd.toLocaleString()}</strong>
 
         </div>
 
@@ -101,8 +115,13 @@ function mostrarCarrito() {
 
     contenedorCarrito.innerHTML = html;
 
-    totalCarrito.textContent =
-        "$" + total.toLocaleString();
+    // Actualizar subtotal, envío y total
+    const envio = 10000; // Envío gratis
+    const total = subtotal + envio;
+
+    subtotalCarrito.textContent = "$" + subtotal.toLocaleString();
+    envioCarrito.textContent = "$" + envio.toLocaleString();
+    totalCarrito.textContent = "$" + total.toLocaleString();
 
     document.querySelectorAll(".btn-aumentar").forEach(btn => {
 

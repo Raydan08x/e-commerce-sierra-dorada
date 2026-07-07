@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const ageModal = new bootstrap.Modal(ageModalElement, { backdrop: 'static', keyboard: false });
     ageModal.show();
 
-    // Do not auto-focus buttons to avoid unwanted focus styles in some browsers
-    // If accessibility requirements need it, we can set focus but also override focus styles in CSS.
+    
 
     const yesBtn = document.getElementById("sd-btn-yes");
     const noBtn = document.getElementById("sd-btn-no");
@@ -28,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (noBtn) {
         noBtn.addEventListener("click", () => {
-            // keep behavior simple: show message and redirect away
+          
             alert("Lo sentimos, debes ser mayor de 18 años para ingresar.");
             window.location.href = "/";
         });
