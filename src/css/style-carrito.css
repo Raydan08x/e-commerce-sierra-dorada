@@ -336,11 +336,12 @@ body {
 }
 
 .linea-vacia{
-    width: 450px;
+    max-width: 450px;
+    width: 90%;
     height: 1px;
     background: rgba(179,162,105,.35);
     position: relative;
-    margin-bottom: 1px ;
+    margin: 0 auto 12px;
 }
 
 .linea-vacia::after{
@@ -398,7 +399,7 @@ body {
     color: var(--color-dorado);
 }
 
-/* hasta aqui*/
+
 .beneficios {
     margin-top: 24px;
     display: flex;
