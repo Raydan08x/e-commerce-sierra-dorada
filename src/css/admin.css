@@ -38,20 +38,18 @@ body {
     align-items: center;
     padding: 40px 20px;
     min-height: calc(100vh - 100px);
-    background-color:   radial-gradient(
+    background-color: radial-gradient(
             circle at top left,
             rgba(179,162,105,.15),
             transparent 35%
         ),
-
         radial-gradient(
             circle at bottom right,
             rgba(3,70,56,.12),
             transparent 35%
         ),
-
         #B3A269;
-        }
+}
 
 .login-container {
     flex-direction: column;
@@ -64,47 +62,45 @@ body {
     margin-top: 100px;
 }
 
-.login-card  {
+.login-card {
    position: relative;
    background: rgba(34, 34, 35, 0.75);
    border: 1px solid rgba(179,162,105,.35);
    backdrop-filter: blur(20px);
    border-radius: 32px;
    padding: 60px;
-   box-shadow: 0 20 50px rgba(0, 0, 0, 0.45);
    width: 100%;
    max-width: 700px;
    text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6),
-    inset 0 1px 2px rgba(255, 255, 255, 0.15);
-  
+   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6),
+               inset 0 1px 2px rgba(255, 255, 255, 0.15);
 }
 
-.login-card .form-control::placeholder{
-    color: #e0e0e0 !important;
+.login-card .form-control::placeholder {
+    color: var(--color-blanco-hueso) !important;
     opacity: 1;
 }
 
 .login-card .form-control,
-.login-card .form-select{
+.login-card .form-select {
     background-color: transparent !important;
     background: transparent !important;
-    color: #e0e0e0 !important;
+    color: var(--color-blanco-hueso) !important;
     border: none !important;
 }
 
 .login-card .form-control:focus,
-.login-card .form-select:focus{
-     background-color: transparent !important;
+.login-card .form-select:focus {
+    background-color: transparent !important;
     background: transparent !important;
-    color: #e0e0e0 !important;
+    color: var(--color-blanco-hueso) !important;
     box-shadow: none !important;
     border: none !important;
 }
 
 .login-logo {
     width: 180px;
-    margin: 20px ;
+    margin: 20px;
 }
 
 .form-label{
@@ -119,22 +115,22 @@ body {
     margin-top: 15px;
 }
 
-.input-group{
+.input-group {
     background-color: rgba(255,255,255,0.03);
-    border: 1px solid rgba(179,162,105,0.25s);
+    border: 1px solid rgba(179,162,105,0.25);
     border-radius: 18px;
     overflow: hidden;
 }
 
-.input-group:focus-within{
-    border: #B3A269;
+.input-group:focus-within {
+    border: var(--color-dorado);
     box-shadow: 0 0 20px rgba(179, 162, 105, 0.15);
 }
 
-.input-group-text{
+.input-group-text {
     background-color: transparent;
     border: none;
-    color: #B3A269;
+    color: var(--color-dorado);
     padding-left: 18px;
 }
 
@@ -146,11 +142,13 @@ body {
     color: var(--color-blanco-hueso);
     margin-bottom: 10px;
 }
+
 .login-card h1 span {
    color: var(--color-dorado);
 }
+
 .login-card p {
-    color: #e0e0e0;
+    color: var(--color-blanco);
     font-size: 'Barlow', sans-serif;
 }
 
@@ -158,21 +156,24 @@ body {
     text-align: left;
     display: block;
 }
-.login-card:hover{  
+
+.login-card:hover {  
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(179,162,105,.25);
 }
+
 .login-info {
     margin-top: 30px;
     padding: 25px;
     border-radius: 20px;
     background: rgba(255,255,255,.03);
     border: 1px solid rgba(179,162,105,.15);
-    color: #E5E1E6;
+    color: var(--color-blanco);
     text-align: center;
 }
-.login-info strong{
-    color:#B3A269;
+
+.login-info strong {
+    color:var(--color-dorado);
 }
 
 /* BOTONES */
@@ -182,10 +183,10 @@ body {
     align-items: center !important;
     justify-content: center !important;
     width: 100% !important;
-    height: 60px; /* Ajustado a un tamaño más proporcional para la tarjeta */
+    height: 60px;
     border: none !important;
-    border-radius: 50px; /* Unificado con el estilo de óvalo de tus inputs (50px) */
-    background: #B3A269 !important;
+    border-radius: 50px;
+    background: var(--color-dorado) !important;
     color: #222223 !important;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 1.4rem;
@@ -195,7 +196,7 @@ body {
 }
 
 .btn-dorado:hover {
-    background-color: #c1b07a !important;
+    background-color: var(--color-dorado) !important;
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(179,162,105,.25);
 }
@@ -273,21 +274,151 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.form-control,
-.form-select {
-    background-color: transparent;
-    color: #e0e0e0;
-    border: none;
+/* Estilo oscuro, transparente y redondeado para TODOS los campos del panel */
+.admin-panel .form-control,
+.admin-panel .form-select {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(179, 162, 105, 0.25) !important;
+    border-radius: 50px !important;
+    color: var(--color-blanco-hueso) !important;
+    height: 48px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.form-control:focus,
-.form-select:focus {
-    border-color: transparent;
-    box-shadow: none;
-    color: #e0e0e0;
-    border: none;
-    box-shadow: none;
+/* Asegurar que los inputs comunes NO hereden flechas extra */
+.admin-panel .form-control {
+    background-image: none !important;
 }
+
+/* Aplicar la flecha dorada EXCLUSIVAMENTE a los menús desplegables */
+.admin-panel .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23B3A269' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+    background-size: 16px 12px !important;
+    background-repeat: no-repeat !important;
+    background-position: right 1.2rem center !important;
+    padding-right: 40px !important;
+}
+
+/* Estilo interno de la lista desplegable del select */
+.form-select option {
+    background-color: #222223 !important; /* Fondo oscuro */
+    color: var(--color-blanco-hueso) !important;          /* Letras claras */
+}
+
+/* Efecto iluminado al hacer click */
+.admin-panel .form-select:focus,
+.admin-panel .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border-color: var(--color-dorado) !important;
+    box-shadow: 0 0 20px rgba(179, 162, 105, 0.15) !important;
+    outline: 0 !important;
+}
+
+/* Color de los textos de ejemplo */
+.admin-panel .form-control::placeholder {
+    color: var(--color-blanco-hueso) !important;
+    opacity: 0.65 !important;
+}
+
+.admin-panel .form-control:-ms-input-placeholder {
+    color: var(--color-blanco-hueso) !important;
+    opacity: 0.65 !important;
+}
+
+.admin-panel .form-control::-ms-input-placeholder {
+    color: var(--color-blanco-hueso) !important;
+    opacity: 0.65 !important;
+}
+
+/* Engruesado del relleno visual */
+.admin-page .form-control[type="color"],
+.admin-panel input[type="color"] {
+    padding: 0 !important;
+    height: 50px;
+    width: 60px;
+    border-radius: 50px !important;
+    border: 1px solid rgba(179, 162, 105, 0.25) !important;
+    background: transparent !important;
+    cursor: pointer;
+}
+
+.admin-page .form-control[type="color"]::-webkit-color-swatch-wrapper,
+.admin-panel input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0 !important;
+    border-radius: 50px;
+}
+
+.admin-page .form-control[type="color"]::-webkit-color-swatch,
+.admin-panel input[type="color"]::-webkit-color-swatch {
+    border: none !important;
+    border-radius: 50px;
+}
+
+/* SELECCIONADOR DE ARCHIVOS NATIVOS (Quitar recuadro blanco) */
+.admin-panel .form-control::-webkit-file-upload-button,
+.admin-panel .form-select::-webkit-file-upload-button,
+.admin-panel input::-webkit-file-upload-button {
+    background-color: var(--color-dorado) !important;
+    color: var(--color-negro) !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 6px 15px !important;
+    margin-right: 10px !important;
+    font-family: var(--fuente-destacados);
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-panel .form-control::file-selector-button,
+.admin-panel .form-select::file-selector-button {
+    background-color: var(--color-dorado) !important;
+    color: var(--color-negro) !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 6px 15px !important;
+    margin-right: 10px !important;
+    font-family: var(--fuente-destacados);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Fondo oscuro y borde dorado para la caja flotante */
+.admin-panel .dropdown-menu {
+    background-color: rgba(34, 34, 35, 0.95) !important; /* Fondo oscuro sutilmente transparente */
+    border: 1px solid rgba(179, 162, 105, 0.35) !important; /* Borde dorado característico */
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    padding: 6px 0 !important;
+}
+
+/* Cambiar las letras de las opciones internas */
+.admin-panel .dropdown-item {
+    color: var(--color-dorado) !important;
+    font-family: var(--fuente-parrafos);
+    font-size: 0.95rem;
+    padding: 8px 20px !important;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* CORREGIR EL HOVER BLANCO EN ELEMENTOS DESPLEGABLES */
+
+/* Cambia el fondo blanco de Bootstrap por un fondo oscuro integrado con letras doradas */
+.admin-panel .dropdown-item:hover,
+.admin-panel .dropdown-item:focus {
+    background-color: rgba(179, 162, 105, 0.15) !important;
+    color: var(--color-dorado) !important;
+}
+
+.admin-panel .form-select option:hover,
+.admin-panel .form-select option:focus {
+    background-color: var(--color-negro) !important;
+    color: var(--color-dorado) !important;
+}
+
+/* TABLA Y ESTADOS */
 
 .estado-activo {
     display: inline-block;
@@ -302,7 +433,7 @@ body {
     display: inline-block;
     padding: 5px 10px;
     background-color: rgba(220, 53, 69, 0.18);
-    color: #ff8c99;
+    color: var(--color-rojo);
     border-radius: 999px;
     font-size: 0.85rem;
 }
@@ -327,12 +458,11 @@ body {
 }
 
 .mensaje-error {
-    color: #ff8c99;
+    color: var(--color-rojo);
     font-weight: 600;
     min-height: 1.2em; 
 }
 
-/* Icono de cámara en la tabla */
 .text-dorado {
     color: var(--color-dorado) !important;
 }
@@ -388,11 +518,11 @@ body {
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.3s ease;
-    overflow: hidden; /* Importante para contener los elementos internos */
+    overflow: hidden;
 }
 
 .producto-card:hover {
-    /* Ya no escalamos la tarjeta entera para no romper el layout del carrusel */
+        /* Ya no escalamos la tarjeta entera para no romper el layout del carrusel */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
@@ -501,7 +631,7 @@ body {
 }
 
 .producto-actions {
-    margin-top: auto; /* Empuja los botones al final */
+    margin-top: auto;
     display: flex;    
     gap: 10px;
 }
