@@ -65,16 +65,22 @@ export class Navbar {
           <span class="brand__text">Sierra Dorada</span>
         </a>
 
-        <nav class="navbar-links" aria-label="Navegacion principal">
-          ${this.getLinksHTML()}
-        </nav>
+        <button class="navbar-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navbarMenu">
+          <i class="bi bi-list"></i>
+        </button>
 
-        <div class="navbar-actions">
-          <a href="${this.htmlPath}carrito.html" class="icon-button icon-button--outline">
-            <i class="bi bi-cart"></i> Carrito
-          </a>
+        <div class="navbar-menu" id="navbarMenu">
+          <nav class="navbar-links" aria-label="Navegacion principal">
+            ${this.getLinksHTML()}
+          </nav>
 
-          ${this.getBotonSesionHTML()}
+          <div class="navbar-actions">
+            <a href="${this.htmlPath}carrito.html" class="icon-button icon-button--outline">
+              <i class="bi bi-cart"></i> Carrito
+            </a>
+
+            ${this.getBotonSesionHTML()}
+          </div>
         </div>
       </header>
     `;
@@ -87,12 +93,21 @@ export class Navbar {
 
   attachListeners() {
     const renderedLinks = document.querySelectorAll('.glass-navbar .nav-link');
+    const navbar = document.querySelector('.glass-navbar');
+    const navbarToggle = document.querySelector('.navbar-toggle');
 
     renderedLinks.forEach((link) => {
       link.addEventListener('click', () => {
         renderedLinks.forEach((item) => item.classList.remove('is-active'));
         link.classList.add('is-active');
+        navbar.classList.remove('is-open');
+        navbarToggle.setAttribute('aria-expanded', 'false');
       });
+    });
+
+    navbarToggle.addEventListener('click', () => {
+      const estaAbierto = navbar.classList.toggle('is-open');
+      navbarToggle.setAttribute('aria-expanded', estaAbierto.toString());
     });
 
     const btnNavbarLogout = document.getElementById("btnNavbarLogout");

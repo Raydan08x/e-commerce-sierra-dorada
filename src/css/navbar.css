@@ -48,6 +48,30 @@
     gap: 14px;
 }
 
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(179, 162, 105, 0.35);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-dorado);
+    cursor: pointer;
+}
+
+.navbar-toggle i {
+    font-size: 1.65rem;
+    line-height: 1;
+}
+
 .brand {
     color: inherit;
     text-decoration: none;
@@ -155,18 +179,77 @@
 
 @media (max-width: 860px) {
     .glass-navbar {
-        border-radius: 28px;
+        top: 10px;
+        width: calc(100% - 24px);
+        border-radius: 22px;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 10px 12px;
+    }
+
+    .brand {
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .brand__logo {
+        height: 42px;
+    }
+
+    .brand__text {
+        font-size: 1.55rem;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+    }
+
+    .navbar-toggle {
+        display: inline-flex;
+        flex-shrink: 0;
+    }
+
+    .navbar-menu {
+        display: none;
+        width: 100%;
+        padding-top: 10px;
+        border-top: 1px solid rgba(179, 162, 105, 0.18);
+    }
+
+    .glass-navbar.is-open .navbar-menu {
+        display: grid;
+        gap: 10px;
     }
 
     .navbar-links {
+        width: 100%;
         justify-content: center;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
 
     .navbar-actions {
         width: 100%;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .glass-navbar .nav-link,
+    .glass-navbar .icon-button {
+        width: 100%;
+        min-height: 42px;
+        padding: 9px 12px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .brand__text {
+        font-size: 1.35rem;
+    }
+
+    .brand__logo {
+        height: 38px;
     }
 }

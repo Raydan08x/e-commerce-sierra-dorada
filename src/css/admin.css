@@ -674,7 +674,7 @@ body {
 
 @media (max-width: 768px) {
     body {
-        padding-top: 90px;
+        padding: 88px 14px 24px;
     }
 
     .admin-header {
@@ -692,16 +692,34 @@ body {
 
     .admin-panel {
         padding: 18px;
+        overflow-x: auto;
+    }
+
+    .admin-page {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .admin-header h1 {
+        font-size: clamp(3rem, 16vw, 4rem);
+    }
+
+    .summary-card {
+        padding: 18px;
+    }
+
+    .summary-card h3 {
+        font-size: 2rem;
     }
 
     .login-container {
         min-height: auto;
-        margin-top: 70px;
+        margin-top: 20px;
         padding: 20px 0;
     }
 
     .login-card {
-        padding: 32px 20px;
+        padding: 28px 16px;
         border-radius: 22px;
     }
 
@@ -712,5 +730,62 @@ body {
     .login-logo {
         width: 140px;
         margin: 10px;
+    }
+
+    .login-info {
+        margin-top: 20px;
+        padding: 18px 12px;
+    }
+
+    .catalogo-header {
+        margin-bottom: 24px;
+    }
+
+    .catalogo-header h1 {
+        font-size: clamp(3rem, 18vw, 4.5rem);
+    }
+
+    .catalogo-header p {
+        font-size: 1rem;
+    }
+
+    .producto-card {
+        border-radius: 14px;
+    }
+
+    .producto-img-container {
+        height: 160px;
+    }
+
+    .producto-body {
+        padding: 18px;
+    }
+
+    .producto-header {
+        gap: 12px;
+    }
+
+    .producto-nombre {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+
+    .producto-precio {
+        font-size: 1.25rem;
+    }
+
+    .producto-extra-info {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .producto-actions {
+        flex-direction: column;
+    }
+
+    .producto-actions .btn {
+        width: 100%;
+        min-height: 44px;
     }
 }
