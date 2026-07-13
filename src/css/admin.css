@@ -481,6 +481,30 @@ body {
     color: var(--color-negro);
 }
 
+.btn-registro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    border-radius: 50px;
+    font-family: var(--fuente-destacados);
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.password-toggle {
+    cursor: pointer;
+}
+
+.registro-card {
+    max-width: 850px;
+}
+
+.login-card .alert {
+    text-align: left;
+}
+
 /* CATÁLOGO */
 
 .catalogo-page {
@@ -668,5 +692,25 @@ body {
 
     .admin-panel {
         padding: 18px;
+    }
+
+    .login-container {
+        min-height: auto;
+        margin-top: 70px;
+        padding: 20px 0;
+    }
+
+    .login-card {
+        padding: 32px 20px;
+        border-radius: 22px;
+    }
+
+    .login-card h1 {
+        font-size: clamp(3rem, 16vw, 4rem);
+    }
+
+    .login-logo {
+        width: 140px;
+        margin: 10px;
     }
 }

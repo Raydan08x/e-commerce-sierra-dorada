@@ -2,20 +2,39 @@ const formLogin = document.getElementById("formLogin");
 const usuarioInput = document.getElementById("usuario");
 const passwordInput = document.getElementById("password");
 const mensajeLogin = document.getElementById("mensajeLogin");
+const togglePassword = document.getElementById("togglePassword");
 
-// Lista de usuarios hardcodeada para la demostración.
-const usuarios = [
+const usuariosBase = [
     {
         usuario: "admin",
+        nombreCompleto: "Administrador Sierra Dorada",
+        telefono: "0000000000",
+        email: "admin@sierradorada.com",
         password: "admin123",
         rol: "admin"
     },
     {
-        usuario: "cliente",
-        password: "cliente123",
+        usuario: "user",
+        nombreCompleto: "Usuario de prueba",
+        telefono: "3001234567",
+        email: "user@sierradorada.com",
+        password: "user123",
         rol: "cliente"
     }
 ];
+
+function obtenerUsuariosRegistrados() {
+    try {
+        return JSON.parse(localStorage.getItem("usuariosSierraDorada")) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function mostrarMensaje(tipo, texto) {
+    mensajeLogin.className = `alert alert-${tipo} mt-3`;
+    mensajeLogin.textContent = texto;
+}
 
 formLogin.addEventListener("submit", function (evento) {
     evento.preventDefault();
@@ -23,47 +42,54 @@ formLogin.addEventListener("submit", function (evento) {
     const usuario = usuarioInput.value.trim();
     const password = passwordInput.value.trim();
 
-    // Usamos el método 'find' para buscar el usuario. Es más conciso y moderno.
-    const usuarioEncontrado = usuarios.find(u => u.usuario === usuario && u.password === password);
-
-    if (usuarioEncontrado === null) {
-        mensajeLogin.textContent = "Usuario o contraseña incorrectos.";
+    if (!usuario || !password) {
+        mostrarMensaje("danger", "Debes escribir el usuario/email y la contrasena.");
         return;
     }
 
-    // Creamos un objeto de sesión solo con la información necesaria.
+    const usuariosRegistrados = obtenerUsuariosRegistrados().map((usuarioRegistrado) => ({
+        usuario: usuarioRegistrado.email,
+        nombreCompleto: usuarioRegistrado.nombreCompleto,
+        telefono: usuarioRegistrado.telefono,
+        email: usuarioRegistrado.email,
+        password: usuarioRegistrado.password,
+        rol: "cliente"
+    }));
+
+    const usuarios = [...usuariosBase, ...usuariosRegistrados];
+    const usuarioEncontrado = usuarios.find((u) => {
+        const coincideUsuario = u.usuario === usuario || u.email === usuario.toLowerCase();
+        return coincideUsuario && u.password === password;
+    });
+
+    if (!usuarioEncontrado) {
+        mostrarMensaje("danger", "Usuario o contrasena incorrectos.");
+        return;
+    }
+
     const sesion = {
         usuario: usuarioEncontrado.usuario,
-        rol: usuarioEncontrado.rol
+        email: usuarioEncontrado.email,
+        rol: usuarioEncontrado.rol,
+        nombreCompleto: usuarioEncontrado.nombreCompleto,
+        telefono: usuarioEncontrado.telefono
     };
 
-    // Guardamos la sesión en localStorage como un string JSON.
     localStorage.setItem("sesionSierraDorada", JSON.stringify(sesion));
 
     if (usuarioEncontrado.rol === "admin") {
         window.location.href = "admin.html";
-    } else {
-        window.location.href = "productos.html";
+        return;
     }
 
-    });
-    // Uso del ojo de la contraseña
-document.addEventListener('DOMContentLoaded', () => {
-    const passwordInput = document.getElementById('password');
-    const togglePasswordIcon = document.getElementById('togglePassword');
-  
-    const toggleContainer = togglePasswordIcon.parentElement; 
+    window.location.href = "productos.html";
+});
 
-    toggleContainer.addEventListener('click', () => {
-       
-        const isPassword = passwordInput.type === 'password';
-        passwordInput.type = isPassword ? 'text' : 'password';
+togglePassword.addEventListener("click", () => {
+    const icono = togglePassword.querySelector("i");
+    const esPassword = passwordInput.type === "password";
 
-       
-        if (isPassword) {
-            togglePasswordIcon.classList.replace('bi-eye', 'bi-eye-slash');
-        } else {
-            togglePasswordIcon.classList.replace('bi-eye-slash', 'bi-eye');
-        }
-    });
+    passwordInput.type = esPassword ? "text" : "password";
+    icono.classList.toggle("bi-eye", !esPassword);
+    icono.classList.toggle("bi-eye-slash", esPassword);
 });
