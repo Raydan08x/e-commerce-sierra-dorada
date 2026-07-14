@@ -46,15 +46,18 @@ export function actualizarCantidad(idProducto, nuevaCantidad) {
         return;
     }
 
-    // Validación para no permitir cantidades menores a 1
-    if (nuevaCantidad < 1) {
-        alert("La cantidad no puede ser menor a 1.");
-        return;
-    }
+  // Validación para no permitir cantidades menores a 1
+if (nuevaCantidad < 1) {
+    window.toastManager.show(
+        "La cantidad no puede ser menor a 1.",
+        "error"
+    );
+    return;
+}
 
-    producto.cantidad = nuevaCantidad;
+producto.cantidad = nuevaCantidad;
 
-    guardarCarrito(carrito);
+guardarCarrito(carrito);
 }
 
 export function eliminarProducto(idProducto) {

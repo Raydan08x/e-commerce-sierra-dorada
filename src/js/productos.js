@@ -319,8 +319,6 @@ function renderizarCatalogo() {
 
             if (window.toastManager) {
                 window.toastManager.show("Producto agregado al carrito.", "success");
-            } else {
-                alert("Producto agregado al carrito.");
             }
         });
 
