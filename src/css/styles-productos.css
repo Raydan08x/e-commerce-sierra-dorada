@@ -1,3 +1,8 @@
+@import "./components/navbar.css";
+@import "./components/footer.css";
+@import "./components/ProductDetailsModal.css";
+@import "./components/ToastManager.css";
+
 :root {
     --color-dorado: #B3A269;
     --color-negro: #222223;

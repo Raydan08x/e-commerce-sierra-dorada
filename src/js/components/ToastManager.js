@@ -16,6 +16,7 @@ export class ToastManager {
      * @param {number} time - La duración en milisegundos.
      */
     show(message, type = 'info', time = 3500) {
+        console.log("Show ejecutado", message);
         const iconMap = {
             success: 'bi-check-circle-fill',
             error: 'bi-exclamation-circle-fill',
@@ -24,7 +25,7 @@ export class ToastManager {
         const iconClass = iconMap[type] || iconMap.info;
 
         const toast = document.createElement("div");
-        toast.className = `toast toast--${type}`;
+        toast.className = `sd-toast sd-toast--${type}`;
         toast.innerHTML = `
             <i class="bi ${iconClass} toast__icon"></i>
             <p>${message}</p>
@@ -38,10 +39,11 @@ export class ToastManager {
         }
 
         this.container.appendChild(toast);
+        console.log(this.container.innerHTML);
 
-        setTimeout(() => {
-            toast.classList.add('toast--out');
-            setTimeout(() => toast.remove(), 400);
-        }, time);
+        //setTimeout(() => {
+        //    toast.classList.add('toast--out'); 
+        //    setTimeout(() => toast.remove(), 400);
+        //}, time);
     }
 }
