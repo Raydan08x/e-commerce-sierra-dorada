@@ -72,7 +72,7 @@ export class Footer {
                 </li>
                 <li class="mb-0 d-flex align-items-center gap-2">
                   <i class="bi bi-envelope"></i>
-                  <a href="mailto:contacto@sierradorada.co">contacto@sierradorada.co</a>
+                  <a href="mailto:sierradoradacb@gmail.com">sierradoradacb@gmail.com</a>
                 </li>
               </ul>
             </div>

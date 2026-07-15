@@ -25,10 +25,20 @@ const usuariosBase = [
 
 function obtenerUsuariosRegistrados() {
     try {
-        return JSON.parse(localStorage.getItem("usuariosSierraDorada")) || [];
+        const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosSierraDorada"));
+        if (Array.isArray(usuariosGuardados)) return usuariosGuardados;
+        if (usuariosGuardados && typeof usuariosGuardados === "object") return [usuariosGuardados];
+        return [];
     } catch (error) {
         return [];
     }
+}
+
+const emailRegistroReciente = sessionStorage.getItem("ultimoRegistroSierraDorada");
+if (emailRegistroReciente) {
+    usuarioInput.value = emailRegistroReciente;
+    sessionStorage.removeItem("ultimoRegistroSierraDorada");
+    mostrarMensaje("success", "Cuenta creada correctamente. Ingresa tu contraseña para continuar.");
 }
 
 function mostrarMensaje(tipo, texto) {
@@ -40,7 +50,7 @@ formLogin.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
     const usuario = usuarioInput.value.trim();
-    const password = passwordInput.value.trim();
+    const password = passwordInput.value;
 
     if (!usuario || !password) {
         mostrarMensaje("danger", "Debes escribir el usuario/email y la contrasena.");

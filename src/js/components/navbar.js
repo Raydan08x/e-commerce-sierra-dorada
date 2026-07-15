@@ -30,6 +30,37 @@ export class Navbar {
     return JSON.parse(sesionTexto);
   }
 
+  obtenerCantidadCarrito() {
+    try {
+      const carrito = JSON.parse(localStorage.getItem('carritoSierraDorada')) || [];
+      return carrito.reduce(
+        (total, producto) => total + Number(producto.cantidad || 0),
+        0
+      );
+    } catch (error) {
+      return 0;
+    }
+  }
+
+  actualizarBadgeCarrito(cantidad = this.obtenerCantidadCarrito()) {
+    const badge = document.getElementById('navbarCartBadge');
+    if (!badge) return;
+
+    const cantidadSegura = Math.max(0, Number(cantidad) || 0);
+    badge.textContent = cantidadSegura > 99 ? '99+' : cantidadSegura.toString();
+    badge.hidden = cantidadSegura === 0;
+    badge.setAttribute(
+      'aria-label',
+      `${cantidadSegura} ${cantidadSegura === 1 ? 'producto' : 'productos'} en el carrito`
+    );
+
+    if (cantidadSegura > 0) {
+      badge.classList.remove('cart-badge--updated');
+      void badge.offsetWidth;
+      badge.classList.add('cart-badge--updated');
+    }
+  }
+
   getLinksHTML() {
     return this.links
       .map((link) => {
@@ -74,9 +105,10 @@ export class Navbar {
           </nav>
 
           <div class="navbar-actions">
-            <a href="${this.htmlPath}carrito.html" class="icon-button icon-button--outline">
+            <button type="button" id="navbarCartButton" class="icon-button icon-button--outline cart-button">
               <i class="bi bi-cart"></i> Carrito
-            </a>
+              <span id="navbarCartBadge" class="cart-badge" aria-live="polite" hidden>0</span>
+            </button>
 
             ${this.getBotonSesionHTML()}
           </div>
@@ -88,6 +120,7 @@ export class Navbar {
   render() {
     document.body.insertAdjacentHTML('afterbegin', this.getTemplate());
     this.attachListeners();
+    this.actualizarBadgeCarrito();
   }
 
   attachListeners() {
@@ -107,6 +140,21 @@ export class Navbar {
     navbarToggle.addEventListener('click', () => {
       const estaAbierto = navbar.classList.toggle('is-open');
       navbarToggle.setAttribute('aria-expanded', estaAbierto.toString());
+    });
+
+    window.addEventListener('sierra-dorada:carrito-actualizado', (event) => {
+      this.actualizarBadgeCarrito(event.detail?.cantidadTotal);
+    });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'carritoSierraDorada') {
+        this.actualizarBadgeCarrito();
+      }
+    });
+
+    const navbarCartButton = document.getElementById('navbarCartButton');
+    navbarCartButton?.addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('sierra-dorada:abrir-carrito'));
     });
 
     const btnNavbarLogout = document.getElementById("btnNavbarLogout");

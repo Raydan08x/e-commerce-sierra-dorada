@@ -308,6 +308,19 @@ body {
     box-shadow: 0 8px 18px rgba(179, 162, 105, 0.28);
     outline: none;
 }
+
+.carrito-total .btn-dorado:disabled,
+.carrito-total .btn-dorado[aria-disabled="true"] {
+    opacity: 0.48;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.carrito-total .btn-dorado--loading {
+    gap: 10px;
+    cursor: wait;
+}
 /* aqui va el icono de compra carrito */
 
 .carrito-vacio{

@@ -1,0 +1,25 @@
+[Unit]
+Description=Sierra Dorada Bold Signature Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sdpi
+Group=sdpi
+WorkingDirectory=/opt/sierra-dorada-bold
+Environment=NODE_ENV=production
+Environment=PORT=3102
+Environment=ALLOWED_ORIGINS=https://raydan08x.github.io,http://127.0.0.1:8765,http://localhost:8765
+LoadCredentialEncrypted=BOLD_SECRET_KEY:/etc/credstore.encrypted/sierra-dorada-bold-secret.cred
+ExecStart=/usr/bin/node /opt/sierra-dorada-bold/server.js
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=multi-user.target

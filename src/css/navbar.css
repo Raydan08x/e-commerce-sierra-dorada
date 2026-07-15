@@ -1,3 +1,6 @@
+@import "./components/ToastManager.css?v=20260715-3";
+@import "./components/CartSidebar.css?v=20260715-1";
+
 :root {
     --navbar-brand-spacing: 0.12em;
     --color-dorado: #B3A269;
@@ -122,6 +125,46 @@
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
+}
+
+.cart-button {
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border: 2px solid var(--color-negro);
+    border-radius: 999px;
+    background: var(--color-dorado);
+    color: var(--color-negro);
+    box-shadow: 0 4px 12px rgba(179, 162, 105, 0.45);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.cart-badge[hidden] {
+    display: none;
+}
+
+.cart-badge--updated {
+    animation: cart-badge-pop 0.35s ease;
+}
+
+@keyframes cart-badge-pop {
+    50% {
+        transform: scale(1.28);
+        box-shadow: 0 4px 18px rgba(179, 162, 105, 0.75);
+    }
 }
 
 .icon-button--outline {

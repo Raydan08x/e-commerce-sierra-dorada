@@ -1,5 +1,5 @@
 import { ProductDetailsModal } from './components/ProductDetailsModal.js';
-import { agregarProducto } from './carritoStorage.js';
+import { agregarProducto } from './carritoStorage.js?v=20260715-3';
 
 // Claves utilizadas para almacenar la información
 // del catálogo en el navegador.

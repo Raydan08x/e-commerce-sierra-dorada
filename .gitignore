@@ -5,3 +5,6 @@ Thumbs.db
 *.log
 dist/
 build/
+.dev.vars
+.wrangler/
+bold-worker/wrangler.toml

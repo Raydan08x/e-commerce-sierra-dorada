@@ -2,7 +2,7 @@ import {
     obtenerCarrito,
     actualizarCantidad,
     eliminarProducto
-} from "./carritoStorage.js";
+} from "./carritoStorage.js?v=20260715-3";
 
 const contenedorCarrito = document.getElementById("contenedorCarrito");
 const totalCarrito = document.getElementById("totalCarrito");

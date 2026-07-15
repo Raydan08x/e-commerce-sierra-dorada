@@ -12,6 +12,15 @@ export function obtenerCarrito() {
 
 export function guardarCarrito(carrito) {
     localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
+
+    const cantidadTotal = carrito.reduce(
+        (total, producto) => total + Number(producto.cantidad || 0),
+        0
+    );
+
+    window.dispatchEvent(new CustomEvent("sierra-dorada:carrito-actualizado", {
+        detail: { cantidadTotal }
+    }));
 }
 
 export function agregarProducto(producto) {
@@ -34,6 +43,7 @@ export function agregarProducto(producto) {
     }
 
     guardarCarrito(carrito);
+    window.dispatchEvent(new CustomEvent("sierra-dorada:abrir-carrito"));
 }
 
 export function actualizarCantidad(idProducto, nuevaCantidad) {

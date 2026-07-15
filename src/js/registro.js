@@ -18,21 +18,41 @@ const emailsReservados = ["admin@sierradorada.com", "user@sierradorada.com"];
 function obtenerFechaMaximaRegistro() {
     const hoy = new Date();
     const fechaMaxima = new Date(hoy.getFullYear() - 18, hoy.getMonth(), hoy.getDate());
-    return fechaMaxima.toISOString().split("T")[0];
+    const anio = fechaMaxima.getFullYear();
+    const mes = String(fechaMaxima.getMonth() + 1).padStart(2, "0");
+    const dia = String(fechaMaxima.getDate()).padStart(2, "0");
+    return `${anio}-${mes}-${dia}`;
 }
 
 fechaNacimientoInput.max = obtenerFechaMaximaRegistro();
 
 function obtenerUsuarios() {
     try {
-        return JSON.parse(localStorage.getItem("usuariosSierraDorada")) || [];
+        const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosSierraDorada"));
+
+        if (Array.isArray(usuariosGuardados)) {
+            return usuariosGuardados.filter((usuario) => usuario && typeof usuario === "object");
+        }
+
+        // Compatibilidad con versiones antiguas que guardaban un solo objeto.
+        if (usuariosGuardados && typeof usuariosGuardados === "object") {
+            return [usuariosGuardados];
+        }
+
+        return [];
     } catch (error) {
         return [];
     }
 }
 
 function guardarUsuarios(usuarios) {
-    localStorage.setItem("usuariosSierraDorada", JSON.stringify(usuarios));
+    try {
+        localStorage.setItem("usuariosSierraDorada", JSON.stringify(usuarios));
+        return true;
+    } catch (error) {
+        console.error("No fue posible guardar el usuario:", error);
+        return false;
+    }
 }
 
 function mostrarErrores(errores) {
@@ -56,6 +76,24 @@ telefonoInput.addEventListener("input", () => {
     telefonoInput.value = `${tieneIndicativo ? "+" : ""}${digitos}`;
 });
 
+document.querySelectorAll("[data-password-toggle]").forEach((boton) => {
+    boton.addEventListener("click", () => {
+        const campo = document.getElementById(boton.dataset.passwordToggle);
+        const icono = boton.querySelector("i");
+        if (!campo || !icono) return;
+
+        const mostrarPassword = campo.type === "password";
+        campo.type = mostrarPassword ? "text" : "password";
+        icono.classList.toggle("bi-eye", !mostrarPassword);
+        icono.classList.toggle("bi-eye-slash", mostrarPassword);
+        boton.setAttribute("aria-pressed", mostrarPassword.toString());
+        boton.setAttribute(
+            "aria-label",
+            `${mostrarPassword ? "Ocultar" : "Mostrar"} ${campo.id === "confirmarPassword" ? "confirmación de contraseña" : "contraseña"}`
+        );
+    });
+});
+
 document.getElementById("abrirTerminos").addEventListener("click", () => terminosDialog.showModal());
 document.getElementById("cerrarTerminos").addEventListener("click", () => terminosDialog.close());
 document.getElementById("entendidoTerminos").addEventListener("click", () => terminosDialog.close());
@@ -75,14 +113,14 @@ formRegistro.addEventListener("submit", (evento) => {
         direccion: direccionInput.value.trim(),
         telefono: telefonoInput.value.trim(),
         email: emailInput.value.trim().toLowerCase(),
-        password: passwordInput.value.trim(),
+        password: passwordInput.value,
         aceptaTerminos: aceptaTerminosInput.checked,
         autorizaDatos: autorizaDatosInput.checked,
         autorizaComunicaciones: autorizaComunicacionesInput.checked,
         fechaRegistro: new Date().toISOString()
     };
 
-    const confirmarPassword = confirmarPasswordInput.value.trim();
+    const confirmarPassword = confirmarPasswordInput.value;
     const errores = [];
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const telefonoValido = /^\+?\d{7,15}$/;
@@ -128,7 +166,7 @@ formRegistro.addEventListener("submit", (evento) => {
         errores.push("Debes autorizar el tratamiento de tus datos personales.");
     }
 
-    if (emailsReservados.includes(usuario.email) || usuarios.some((usuarioGuardado) => usuarioGuardado.email === usuario.email)) {
+    if (emailsReservados.includes(usuario.email) || usuarios.some((usuarioGuardado) => String(usuarioGuardado.email || "").toLowerCase() === usuario.email)) {
         errores.push("Ya existe un usuario registrado con ese correo.");
     }
 
@@ -138,7 +176,18 @@ formRegistro.addEventListener("submit", (evento) => {
     }
 
     usuarios.push(usuario);
-    guardarUsuarios(usuarios);
+    if (!guardarUsuarios(usuarios)) {
+        mostrarErrores([
+            "No fue posible guardar la cuenta. El almacenamiento del navegador puede estar lleno o bloqueado."
+        ]);
+        return;
+    }
+
+    sessionStorage.setItem("ultimoRegistroSierraDorada", usuario.email);
     formRegistro.reset();
-    mostrarExito("Usuario registrado correctamente. Ya puedes iniciar sesion con ese email.");
+    mostrarExito("Usuario registrado correctamente. Te llevaremos al inicio de sesión.");
+
+    window.setTimeout(() => {
+        window.location.href = "login.html";
+    }, 1200);
 });

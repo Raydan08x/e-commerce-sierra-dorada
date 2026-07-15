@@ -10,7 +10,7 @@
     pointer-events: none;
 }
 
-#toastContainer .toast {
+#toastContainer .sd-toast {
     pointer-events: auto;
 }
 
@@ -85,7 +85,8 @@
 }
 
 .sd-toast.sd-toast--out {
-    animation: toast-out 0.4s ease forwards;
+    pointer-events: none;
+    animation: toast-out 0.55s cubic-bezier(0.4, 0, 0.6, 1) forwards;
 }
 
 @keyframes toast-in {
@@ -96,8 +97,13 @@
 }
 
 @keyframes toast-out {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
     to {
         opacity: 0;
-        transform: translateX(100%);
+        transform: translateX(calc(100% + 40px)) scale(0.96);
     }
 }
