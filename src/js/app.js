@@ -1,5 +1,5 @@
-import { Navbar } from './components/navbar.js?v=20260715-1';
-import { Footer } from './components/footer.js?v=20260715-1';
+import { Navbar } from './components/navbar.js?v=20260715-2';
+import { Footer } from './components/footer.js?v=20260715-2';
 import { Preloader } from './components/Preloader.js?v=20260715-1';
 import { ToastManager } from './components/ToastManager.js?v=20260715-1';
 

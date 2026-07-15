@@ -2,13 +2,14 @@ export class Navbar {
   constructor() {
     this.isInHtmlFolder = window.location.pathname.includes('/html/');
     this.basePath = this.isInHtmlFolder ? '../' : '';
+    this.homePath = this.isInHtmlFolder ? '../' : './';
     this.htmlPath = this.isInHtmlFolder ? '' : 'html/';
     this.currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
     this.sesion = this.obtenerSesion();
 
     this.links = [
-      { name: 'Inicio', href: `${this.basePath}index.html`, page: 'index.html' },
+      { name: 'Inicio', href: this.homePath, page: 'index.html' },
       { name: 'Nosotros', href: `${this.htmlPath}nosotros.html`, page: 'nosotros.html' },
       { name: 'Contacto', href: `${this.htmlPath}contacto.html`, page: 'contacto.html' },
       { name: 'Productos', href: `${this.htmlPath}productos.html`, page: 'productos.html' },
@@ -56,11 +57,9 @@ export class Navbar {
 
   getTemplate() {
     const logoSrc = `${this.basePath}src/assets/icons/isotipo-dorado-y-blanco.png`;
-    const homeHref = this.isInHtmlFolder ? '../index.html' : 'index.html';
-
     return `
       <header class="glass-navbar">
-        <a href="${homeHref}" class="brand">
+        <a href="${this.homePath}" class="brand">
           <img src="${logoSrc}" alt="Logo Sierra Dorada" class="brand__logo" />
           <span class="brand__text">Sierra Dorada</span>
         </a>

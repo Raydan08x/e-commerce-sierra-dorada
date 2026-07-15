@@ -6,10 +6,10 @@ export class Footer {
   }
 
   // Calcula la ruta correcta de una pagina segun si el usuario esta
-  // navegando desde la raiz (index.html) o desde dentro de la carpeta html/.
+  // navegando desde la raíz o desde dentro de la carpeta html/.
   getPath(page) {
     if (page === 'index.html') {
-      return this.isInHtmlFolder ? '../index.html' : 'index.html';
+      return this.isInHtmlFolder ? '../' : './';
     }
     return this.isInHtmlFolder ? page : `html/${page}`;
   }
