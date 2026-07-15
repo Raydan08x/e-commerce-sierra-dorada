@@ -290,21 +290,23 @@ body {
     height: 50px;
     border: none;
     border-radius: 50px;
-    background: var(--color-dorado);
+    background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary));
     color: var(--color-negro);
     font-family: var(--fuente-destacados);
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
     letter-spacing: 1px;
 }
 
-.carrito-total .btn-dorado:hover {
-    background-color: #c1b07a;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(179, 162, 105, 0.25);
+.carrito-total .btn-dorado:hover,
+.carrito-total .btn-dorado:focus-visible {
+    background: linear-gradient(135deg, var(--color-blanco-hueso), #c8b575);
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px rgba(179, 162, 105, 0.28);
+    outline: none;
 }
 /* aqui va el icono de compra carrito */
 

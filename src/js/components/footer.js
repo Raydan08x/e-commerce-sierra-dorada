@@ -68,7 +68,7 @@ export class Footer {
                 </li>
                 <li class="mb-3 pb-3 border-bottom footer-border-main d-flex align-items-center gap-2">
                   <i class="bi bi-telephone"></i>
-                  <a href="tel:+573138718154">+57 313 871 8154</a>
+                  <a class="footer-phone-number" href="tel:+573138718154" aria-label="Llamar a Sierra Dorada al +57 313 871 8154">+57 313 871 8154</a>
                 </li>
                 <li class="mb-0 d-flex align-items-center gap-2">
                   <i class="bi bi-envelope"></i>

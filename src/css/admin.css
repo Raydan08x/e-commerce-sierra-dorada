@@ -201,6 +201,24 @@ body {
     box-shadow: 0 10px 30px rgba(179,162,105,.25);
 }
 
+.login-card .btn-login-ingresar {
+    background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary)) !important;
+    color: var(--color-negro) !important;
+    border: 0 !important;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-card .btn-login-ingresar:hover,
+.login-card .btn-login-ingresar:focus-visible {
+    background: linear-gradient(135deg, var(--color-blanco-hueso), #c8b575) !important;
+    color: var(--color-negro) !important;
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px rgba(179, 162, 105, 0.28);
+    outline: none;
+}
+
 /* ADMIN */
 
 .admin-page {
@@ -818,6 +836,26 @@ body {
     letter-spacing: 0.05em;
     border-radius: 50px;
     font-size: 0.875rem !important;
+}
+
+.producto-actions .btn-agregar-carrito {
+    min-height: 48px;
+    height: auto;
+    background: linear-gradient(135deg, var(--nav-secondary), var(--nav-primary)) !important;
+    color: var(--color-negro) !important;
+    border: 0 !important;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.producto-actions .btn-agregar-carrito:hover,
+.producto-actions .btn-agregar-carrito:focus-visible {
+    background: linear-gradient(135deg, var(--color-blanco-hueso), #c8b575) !important;
+    color: var(--color-negro) !important;
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px rgba(179, 162, 105, 0.28);
+    outline: none;
 }
 
 /* RESPONSIVE */

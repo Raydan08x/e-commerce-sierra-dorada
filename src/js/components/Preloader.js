@@ -1,5 +1,5 @@
 export class Preloader {
-  constructor({ duration = 2000 } = {}) {
+  constructor({ duration = 200 } = {}) {
     this.duration = duration;
     this.element = null;
     this.timer = null;
@@ -49,6 +49,6 @@ export class Preloader {
     };
 
     this.element.addEventListener('transitionend', remove, { once: true });
-    this.removeTimer = window.setTimeout(remove, 600);
+    this.removeTimer = window.setTimeout(remove, 50);
   }
 }
