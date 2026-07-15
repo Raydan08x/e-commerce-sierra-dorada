@@ -82,9 +82,9 @@ export class Footer {
               <h5 class="footer-section-heading text-uppercase small fw-bold mb-3">Síguenos</h5>
               <span class="footer-line-decor d-block mb-4"></span>
               <ul class="list-unstyled small p-0 m-0">
-                <li class="mb-3"><a href="#" class="d-flex align-items-center gap-2"><span class="footer-social-icon"><i class="bi bi-instagram"></i></span> Instagram</a></li>
+                <li class="mb-3"><a href="https://www.instagram.com/sierra.dorada" target="_blank" rel="noopener noreferrer" class="d-flex align-items-center gap-2"><span class="footer-social-icon"><i class="bi bi-instagram"></i></span> Instagram</a></li>
                 <li class="mb-3"><a href="#" class="d-flex align-items-center gap-2"><span class="footer-social-icon"><i class="bi bi-facebook"></i></span> Facebook</a></li>
-                <li class="mb-0"><a href="#" class="d-flex align-items-center gap-2"><span class="footer-social-icon"><i class="bi bi-whatsapp"></i></span> WhatsApp</a></li>
+                <li class="mb-0"><a href="https://wa.me/573138718154" target="_blank" rel="noopener noreferrer" class="d-flex align-items-center gap-2"><span class="footer-social-icon"><i class="bi bi-whatsapp"></i></span> WhatsApp</a></li>
               </ul>
             </div>
 
