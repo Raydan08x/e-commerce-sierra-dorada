@@ -90,6 +90,16 @@ export class Footer {
 
           </div>
 
+          <!-- Logos Institucionales -->
+          <div class="footer-institutional-logos">
+            <h5 class="footer-section-heading text-uppercase small fw-bold mb-3">Proyecto avalado por</h5>
+            <div class="footer-logos-row">
+              <img src="${this.basePath}src/assets/images/logo-presidencia.png" alt="Presidencia de la República de Colombia" class="footer-inst-logo footer-logo-presidencia">
+              <img src="${this.basePath}src/assets/images/sena-fe.webp" alt="SENA - Fondo Emprender" class="footer-inst-logo footer-logo-sena-fe">
+            </div>
+            <p class="footer-inst-description">Proyecto financiado por Fondo Emprender del SENA</p>
+          </div>
+
           <div class="d-flex flex-column align-items-center pt-2 small footer-credits-row">
             <svg class="footer-center-svg mb-3 mb-md-0" width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 2L20 12H30L22.5 18L25 28L15 22L5 28L7.5 18L0 12H10L15 2Z" fill="currentColor"/>
